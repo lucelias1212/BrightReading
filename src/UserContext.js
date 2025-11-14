@@ -141,10 +141,9 @@ export function UserProvider({ children }) {
                   circleInvites: firestoreData.circleInvites || [],
                 });
               } else {
-                setDoc(userDocRef, {
-                  ...defaultData,
-                  createdAt: new Date().toISOString()
-                }).catch(() => {});
+                // Document doesn't exist - this shouldn't happen for signed up users
+                console.warn('User document not found for authenticated user');
+                setUserData(defaultData);
               }
 
               isLoadingUserData.current = false;
@@ -188,14 +187,7 @@ export function UserProvider({ children }) {
 
   const signup = useCallback(async (email, password, username) => {
     try {
-      const usersRef = collection(db, 'users');
-      const q = query(usersRef, where('username', '==', username.toLowerCase()));
-      const querySnapshot = await getDocs(q);
-      
-      if (!querySnapshot.empty) {
-        return { success: false, error: 'Username already taken' };
-      }
-
+      // Create auth account FIRST (no permissions needed for this)
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const newUser = userCredential.user;
 
@@ -228,17 +220,31 @@ export function UserProvider({ children }) {
         messages: []
       };
       
+      // Now check username uniqueness (user is authenticated so they can read)
+      const usersRef = collection(db, 'users');
+      const q = query(usersRef, where('username', '==', username.toLowerCase()));
+      const querySnapshot = await getDocs(q);
+      
+      if (!querySnapshot.empty) {
+        // Username taken - delete the auth account we just created
+        await newUser.delete();
+        return { success: false, error: 'Username already taken' };
+      }
+
+      // Write to Firestore IMMEDIATELY
+      await setDoc(doc(db, 'users', newUser.uid), defaultUserData);
+      
       setUserData(defaultUserData);
       hasLoadedOnce.current = true;
-      
-      setTimeout(() => {
-        setDoc(doc(db, 'users', newUser.uid), defaultUserData).catch(() => {});
-      }, 500);
 
       return { success: true };
     } catch (error) {
+      console.error('Signup error details:', error);
+      console.error('Error code:', error.code);
+      console.error('Error message:', error.message);
       let errorMessage = 'Signup failed. Please try again.';
       if (error.code === 'auth/email-already-in-use') errorMessage = 'Account exists.';
+      if (error.code === 'permission-denied') errorMessage = 'Permission denied: ' + error.message;
       return { success: false, error: errorMessage };
     }
   }, []);

@@ -10,6 +10,7 @@ const LoginPage = () => {
   const [isPageLoading, setIsPageLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
@@ -47,7 +48,7 @@ const LoginPage = () => {
     setError('');
     setLoading(true);
 
-    const result = isSignUp ? await signup(email, password) : await login(email, password);
+    const result = isSignUp ? await signup(email, password, username) : await login(email, password);
 
     if (result.success) {
       if (rememberMe) {
@@ -57,7 +58,8 @@ const LoginPage = () => {
       }
       navigate('/dashboard');
     } else {
-      setError(result.error);
+      console.error('Full error details:', result);
+      setError(result.error || 'Unknown error occurred');
     }
     setLoading(false);
   };
@@ -203,6 +205,28 @@ const LoginPage = () => {
                       </div>
                     </div>
                   </div>
+
+                  {/* Username Field - Only show on signup */}
+                  {isSignUp && (
+                    <div>
+                      <label className="block text-sm font-black text-gray-700 mb-2 flex items-center gap-2">
+                        <BookOpen size={16} className="text-purple-500" />
+                        Username
+                      </label>
+                      <div className="relative group">
+                        <input
+                          type="text"
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
+                          className="w-full px-4 py-4 border-3 border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-purple-300 focus:border-purple-500 transition text-lg font-semibold group-hover:border-purple-400"
+                          placeholder="coolparent123"
+                          required
+                        />
+                        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-2xl opacity-0 group-focus-within:opacity-100 transition">
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Password Field */}
                   <div>

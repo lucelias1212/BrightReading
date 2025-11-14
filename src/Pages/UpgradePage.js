@@ -85,7 +85,7 @@ const UpgradePage = () => {
 {
   id: 'monthly',
   name: 'Monthly',
-  price: '$11.99',
+  price: '$10.99',
   period: '/month',
   savings: null,
   features: [
@@ -101,10 +101,10 @@ const UpgradePage = () => {
 {
   id: 'annual',
   name: 'Annual',
-  price: '$9.99',
+  price: '$8.99',
   period: '/month',
-  savings: 'Save 17%',
-  totalPrice: '$119.88/year',
+  savings: 'Save 18%',
+  totalPrice: '$107.88/year',
   features: [
     'All 1040 lessons unlocked',
     'All 4 phases (ages 1-5)',
