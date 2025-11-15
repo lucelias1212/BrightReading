@@ -19,6 +19,8 @@ const [activeTab, setActiveTab] = useState(location.state?.activeTab || 'home');
   const [addFriendError, setAddFriendError] = useState('');
   const [addFriendSuccess, setAddFriendSuccess] = useState('');
   const [showNewCircle, setShowNewCircle] = useState(false);
+  const [showWelcomeTour, setShowWelcomeTour] = useState(false);
+  const [tourStep, setTourStep] = useState(0);
   const [newCircleName, setNewCircleName] = useState('');
   const [newCircleDesc, setNewCircleDesc] = useState('');
 
@@ -48,6 +50,14 @@ const [activeTab, setActiveTab] = useState(location.state?.activeTab || 'home');
     const timer = setTimeout(() => setIsPageLoading(false), 50);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    // Check if this is first time user
+    const hasSeenTour = userData?.hasSeenWelcomeTour;
+    if (!hasSeenTour && !isPageLoading) {
+      setShowWelcomeTour(true);
+    }
+  }, [userData, isPageLoading]);
 
   const handleTabChange = (tab) => {
     setIsTransitioning(true);
@@ -2230,8 +2240,338 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
     </div>
   );
 
+  // Welcome Tour Component
+  const WelcomeTour = () => {
+    const [isStepTransitioning, setIsStepTransitioning] = useState(false);
+
+    const tourSteps = [
+      {
+        title: "Welcome to BrightReading! 🎉",
+        content: "We're so excited you're here! Let's take a quick tour to show you around. BrightReading is designed to make teaching your little one to read feel easy, joyful, and totally doable.",
+        position: "center",
+        emoji: "👋",
+        tab: null,
+        showContent: true
+      },
+      {
+        title: "Home - Your Daily Hub",
+        content: "This is your command center! See your current lesson, track your streak, switch between learning phases, and get personalized encouragement.",
+        position: "bottom-right",
+        emoji: "🏠",
+        tab: "home",
+        highlights: [
+          { text: "Next Lesson", description: "Start or continue your learning journey" },
+          { text: "Phase Selector", description: "Switch between age-appropriate phases" },
+          { text: "Weekly Progress", description: "See how you're doing this week" },
+          { text: "Streak Counter", description: "Keep your learning momentum going" }
+        ]
+      },
+      {
+        title: "My Progress - Celebrate Growth",
+        content: "Watch your journey unfold! Track lessons completed, unlock achievements, and see your progress across all phases and quarters.",
+        position: "bottom-right",
+        emoji: "📊",
+        tab: "progress",
+        highlights: [
+          { text: "Overall Progress Bar", description: "Your complete phase progress" },
+          { text: "Achievements Gallery", description: "Unlock badges as you learn" },
+          { text: "Quarter Breakdown", description: "Detailed progress by quarter" },
+          { text: "Statistics", description: "Lessons, weeks, and streaks" }
+        ]
+      },
+      {
+        title: "Curriculum - The Big Picture",
+        content: "Explore the full learning path! See all 52 weeks organized into 4 quarters. Each phase builds on proven research with a spiral learning model.",
+        position: "bottom-right",
+        emoji: "📚",
+        tab: "curriculum",
+        highlights: [
+          { text: "Quarter Themes", description: "Each quarter has a focus area" },
+          { text: "Week Overview", description: "See all weeks at a glance" },
+          { text: "Learning Goals", description: "Learning goals for your child" },
+          { text: "Full Curriculum Link", description: "Deep dive into the methodology" }
+        ]
+      },
+      {
+        title: "Community - Connect with other proud parents",
+        content: "Connect with other parents! Add friends, join learning circles, share achievements, and support each other.",
+        position: "bottom-right",
+        emoji: "💬",
+        tab: "community",
+        highlights: [
+          { text: "Friend Requests", description: "Connect with other parents" },
+          { text: "Direct Messaging", description: "Chat one-on-one with friends" },
+          { text: "Learning Circles", description: "Join small support groups" },
+          { text: "Share Progress", description: "Celebrate together" }
+        ],
+        note: "Available with paid subscription"
+      },
+      {
+        title: "Enrichment - Fun & Games",
+        content: "Need variety? Browse quick, playful activities that reinforce learning through games. Perfect for busy days!",
+        position: "bottom-right",
+        emoji: "🎮",
+        tab: "enrichment",
+        highlights: [
+          { text: "Educational Games", description: "Research-backed activities" },
+          { text: "No Prep Required", description: "Quick and easy to start" },
+          { text: "Skill Reinforcement", description: "Practice what you've learned" },
+          { text: "Flexible Learning", description: "Use anytime, anywhere" }
+        ],
+        note: "1 free game available • Full library with paid subscription"
+      },
+      {
+        title: "Ready to Start! 💪",
+        content: "You've got everything you need! Remember: there's no perfect way to do this. Just show up, have fun, and enjoy the journey with your child.",
+        position: "center",
+        emoji: "💕",
+        tab: "home",
+        showContent: true
+      }
+    ];
+
+    const currentStep = tourSteps[tourStep];
+    const isLastStep = tourStep === tourSteps.length - 1;
+    const isFirstStep = tourStep === 0;
+
+    // Switch tabs when step changes with smooth transition
+    useEffect(() => {
+      if (currentStep.tab && currentStep.tab !== activeTab) {
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setActiveTab(currentStep.tab);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setIsTransitioning(false);
+        }, 200);
+      }
+    }, [tourStep, currentStep.tab]);
+
+    const handleNext = () => {
+      if (isLastStep) {
+        handleFinishTour();
+      } else {
+        setIsStepTransitioning(true);
+        setTimeout(() => {
+          setTourStep(tourStep + 1);
+          setTimeout(() => setIsStepTransitioning(false), 50);
+        }, 200);
+      }
+    };
+
+    const handlePrevious = () => {
+      if (tourStep > 0) {
+        setIsStepTransitioning(true);
+        setTimeout(() => {
+          setTourStep(tourStep - 1);
+          setTimeout(() => setIsStepTransitioning(false), 50);
+        }, 200);
+      }
+    };
+
+    const handleFinishTour = async () => {
+      setShowWelcomeTour(false);
+      setTourStep(0);
+      setTimeout(async () => {
+        await updateProfile({ hasSeenWelcomeTour: true });
+      }, 300);
+    };
+
+    const handleSkip = async () => {
+      setShowWelcomeTour(false);
+      setTourStep(0);
+      setTimeout(async () => {
+        await updateProfile({ hasSeenWelcomeTour: true });
+      }, 300);
+    };
+
+    const getPositionClasses = () => {
+      if (currentStep.position === "center") {
+        return "top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2";
+      }
+      if (currentStep.position === "bottom-right") {
+        return "bottom-8 right-8 max-w-md";
+      }
+      return "";
+    };
+
+    return (
+      <>
+        {/* Overlay with reduced opacity to show content behind */}
+<div className="fixed inset-0 bg-black/0 z-[100] animate-fadeIn" />        
+        {/* Tour Modal */}
+        <div className={`fixed z-[101] transition-all duration-300 ${getPositionClasses()} ${isStepTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
+          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border-4 border-purple-200 max-w-full">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 text-white p-6 relative overflow-hidden">
+              <div className="absolute inset-0 bg-white/10"></div>
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-3">
+                    <div className="text-4xl">{currentStep.emoji}</div>
+                    <div>
+                      <h2 className="text-2xl font-black">{currentStep.title}</h2>
+                      <p className="text-white/90 font-semibold text-sm">Step {tourStep + 1} of {tourSteps.length}</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleSkip}
+                    className="text-white/80 hover:text-white font-bold text-sm underline flex-shrink-0 ml-4"
+                  >
+                    Skip Tour
+                  </button>
+                </div>
+                
+                {/* Progress Bar */}
+                <div className="bg-white/20 rounded-full h-2 mt-4 overflow-hidden">
+                  <div
+                    className="bg-white h-2 transition-all duration-300 rounded-full"
+                    style={{ width: `${((tourStep + 1) / tourSteps.length) * 100}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 bg-white">
+              {currentStep.showContent ? (
+                // Center content for intro/outro
+                <div className="text-center max-w-xl mx-auto">
+                  <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-3xl p-8 mb-6 border-4 border-purple-200">
+                    <div className="text-6xl mb-4">{currentStep.emoji}</div>
+                    <p className="text-xl text-gray-800 leading-relaxed font-semibold">
+                      {currentStep.content}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                // Compact content for feature tours
+                <div className="space-y-4">
+                  <p className="text-base text-gray-800 leading-relaxed font-semibold">
+                    {currentStep.content}
+                  </p>
+                  
+                  {currentStep.highlights && (
+                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 border-2 border-blue-200">
+                      <p className="text-sm font-black text-blue-900 mb-3 flex items-center gap-2">
+                        <span className="text-lg">✨</span>
+                        Key Features:
+                      </p>
+                      <div className="space-y-3">
+                        {currentStep.highlights.map((highlight, idx) => (
+                          <div key={idx} className="flex items-start gap-3">
+                            <div className="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5 font-black text-xs">
+                              {idx + 1}
+                            </div>
+                            <div className="flex-1">
+                              <p className="font-black text-gray-900 text-sm">{highlight.text}</p>
+                              <p className="text-xs text-gray-600 font-semibold">{highlight.description}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {currentStep.note && (
+                    <div className="bg-amber-50 rounded-xl px-4 py-3 border-2 border-amber-200">
+                      <p className="text-sm text-amber-900 font-bold text-center">
+                        💡 {currentStep.note}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Navigation */}
+              <div className="flex gap-3 mt-6">
+                {tourStep > 0 && (
+                  <button
+                    onClick={handlePrevious}
+                    disabled={isStepTransitioning}
+                    className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-black py-3 rounded-xl transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-sm flex items-center justify-center gap-2"
+                  >
+                    <ArrowRight size={18} className="rotate-180" />
+                    Previous
+                  </button>
+                )}
+                <button
+                  onClick={handleNext}
+                  disabled={isStepTransitioning}
+                  className={`${tourStep === 0 ? 'w-full' : 'flex-1'} bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-black py-3 rounded-xl transition transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-sm`}
+                >
+                  {isLastStep ? (
+                    <>
+                      Let's Get Started! 🚀
+                    </>
+                  ) : (
+                    <>
+                      Next
+                      <ArrowRight size={18} />
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {/* Step Indicators */}
+              <div className="flex justify-center gap-2 mt-4">
+                {tourSteps.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      setIsStepTransitioning(true);
+                      setTimeout(() => {
+                        setTourStep(idx);
+                        setTimeout(() => setIsStepTransitioning(false), 50);
+                      }, 200);
+                    }}
+                    className={`h-2 rounded-full transition-all ${
+                      idx === tourStep
+                        ? 'w-8 bg-gradient-to-r from-purple-600 to-pink-600'
+                        : idx < tourStep
+                        ? 'w-2 bg-purple-300 hover:bg-purple-400'
+                        : 'w-2 bg-gray-300 hover:bg-gray-400'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Spotlight effect - highlights tab navigation */}
+        {!isFirstStep && !isLastStep && (
+          <div className="fixed top-0 left-0 right-0 z-[99] pointer-events-none">
+            <div className="max-w-6xl mx-auto px-4">
+              <div className="bg-white/5 backdrop-blur-sm rounded-b-3xl border-4 border-purple-400/50 shadow-2xl animate-pulse">
+                <div className="h-2 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-t-xl" />
+              </div>
+            </div>
+          </div>
+        )}
+
+        <style>{`
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+          .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out;
+          }
+        `}</style>
+      </>
+    );
+  };
+
   return (
     <div className={`min-h-screen bg-gradient-to-b from-amber-50 via-orange-50 to-pink-50 transition-opacity duration-300 ${isPageLoading ? 'opacity-0' : 'opacity-100'}`}>
+
+      {/* Welcome Tour */}
+      {showWelcomeTour && <WelcomeTour />}
+
       {/* Navigation Bar */}
       <nav className="bg-white shadow-xl border-b-4 border-purple-200 p-4 sticky top-0 z-20">
         <div className="max-w-6xl mx-auto flex justify-between items-center">

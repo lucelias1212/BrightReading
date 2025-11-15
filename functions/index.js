@@ -84,6 +84,53 @@ exports.createCheckoutSession = functions.https.onRequest(async (req, res) => {
   });
 });
 
+// CREATE PAYMENT INTENT (NEW - ADD HERE)
+// ============================================
+exports.createPaymentIntent = functions.https.onRequest(async (req, res) => {
+  cors(corsOptions)(req, res, async () => {
+    if (req.method !== 'POST') {
+      return res.status(405).json({ error: 'Method not allowed' });
+    }
+
+    try {
+      const { userId, email, priceId, planType } = req.body;
+
+      if (!userId || !email || !priceId) {
+        return res.status(400).json({ error: 'Missing required fields' });
+      }
+
+      // Determine amount based on plan type
+      const amount = planType === 'monthly' ? 1099 : 10788; // in cents ($10.99 or $107.88)
+
+      // Create Payment Intent
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: amount,
+        currency: 'usd',
+        automatic_payment_methods: {
+          enabled: true,
+        },
+        metadata: {
+          userId: userId,
+          email: email,
+          planType: planType,
+          priceId: priceId,
+        },
+        description: `BrightReading ${planType === 'monthly' ? 'Monthly' : 'Annual'} Subscription`,
+        receipt_email: email,
+      });
+
+      return res.status(200).json({
+        clientSecret: paymentIntent.client_secret,
+        paymentIntentId: paymentIntent.id,
+      });
+
+    } catch (error) {
+      console.error('Payment Intent creation error:', error);
+      return res.status(500).json({ error: error.message });
+    }
+  });
+});
+
 // ============================================
 // STRIPE WEBHOOK
 // ============================================

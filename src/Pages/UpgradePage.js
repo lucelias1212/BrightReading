@@ -3,18 +3,40 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from '../UserContext';
 import { Check, X, Zap, Star, BookOpen, Award, Clock, Users, Shield, Sparkles, ArrowRight, Home, Mail } from 'lucide-react';
 import { sendEmailVerification } from 'firebase/auth';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+import CheckoutForm from '../components/CheckoutForm';
+
+// Initialize Stripe
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || 'pk_live_51STW1JJz6mdvQ2vp3xyPBPyNDIQqGQj3VFDv0Wtc9npIC8C5sPRWiWwxE8rrymsEN4PU4iKfGb9SACPMhR0sSQVN00BoVcEgsX');
 
 const UpgradePage = () => {
   const navigate = useNavigate();
-  const { userData, user, createCheckoutSession } = useUser();
-  const [isPageLoading, setIsPageLoading] = useState(true);
+const { userData, user, createCheckoutSession, createPaymentIntent } = useUser();  const [isPageLoading, setIsPageLoading] = useState(true);
   const [selectedPlan, setSelectedPlan] = useState('annual');
   const [isProcessing, setIsProcessing] = useState(false);
   const [showVerificationModal, setShowVerificationModal] = useState(false);
   const [verificationSent, setVerificationSent] = useState(false);
+  const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+  const [clientSecret, setClientSecret] = useState('');
+  const [selectedPlanDetails, setSelectedPlanDetails] = useState(null);
   const [verificationError, setVerificationError] = useState('');
   const [pendingPlanType, setPendingPlanType] = useState(null);
   const [checkoutError, setCheckoutError] = useState('');
+
+  // Prevent background scroll when checkout modal is open
+  useEffect(() => {
+    if (showCheckoutForm) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [showCheckoutForm]);
 
   useEffect(() => {
     // Redirect if already premium
@@ -65,21 +87,54 @@ const UpgradePage = () => {
     setCheckoutError('');
     
     try {
-      // Call Stripe checkout
-      const result = await createCheckoutSession(planType);
+      // Call Payment Intent instead of Checkout Session
+      const result = await createPaymentIntent(planType);
       
       if (!result.success) {
         setCheckoutError(result.error || 'Failed to start checkout. Please try again.');
         setIsProcessing(false);
+        return;
       }
-      // If successful, user will be redirected to Stripe
-      // isProcessing stays true during redirect
+      
+      // Store client secret and plan details
+      setClientSecret(result.clientSecret);
+      
+      // Find the plan details
+  const plan = plans.find(p => p.id === planType);
+  
+  // For display, use total price if annual, otherwise regular price
+  const displayPrice = planType === 'annual' ? '$107.88' : plan.price;
+  
+  setSelectedPlanDetails({
+    ...plan,
+    displayPrice: displayPrice
+  });
+      
+      // Show embedded checkout form
+      setShowCheckoutForm(true);
+      setIsProcessing(false);
       
     } catch (error) {
       console.error('Upgrade error:', error);
       setCheckoutError('Something went wrong. Please try again.');
       setIsProcessing(false);
     }
+  };
+
+  const handlePaymentSuccess = async (paymentIntent) => {
+    // Payment succeeded! You can add celebration UI here
+    console.log('Payment successful!', paymentIntent);
+    
+    // Wait a moment for webhook to process
+    setTimeout(() => {
+      navigate('/payment-success');
+    }, 1000);
+  };
+
+  const handleCancelCheckout = () => {
+    setShowCheckoutForm(false);
+    setClientSecret('');
+    setSelectedPlanDetails(null);
   };
 
   const handleSendVerification = async () => {
@@ -228,7 +283,7 @@ const UpgradePage = () => {
 
           <div className="flex flex-wrap justify-center gap-4">
             {[
-              { icon: Check, text: '10-Day Free Trial' },
+              { icon: Check, text: 'Lifetime Value' },
               { icon: Check, text: 'Cancel Anytime' },
               { icon: Check, text: 'Instant Access' }
             ].map((item, idx) => (
@@ -402,6 +457,24 @@ const UpgradePage = () => {
           </div>
         </div>
       </div>
+
+      {/* Embedded Checkout Modal */}
+      {showCheckoutForm && clientSecret && selectedPlanDetails && (
+        <div className="fixed inset-0 bg-black/70 z-50 backdrop-blur-sm overflow-y-auto">
+  <div className="min-h-screen flex items-center justify-center p-4 py-8">
+    <div className="my-8 w-full">
+      <Elements stripe={stripePromise} options={{ clientSecret }}>
+        <CheckoutForm
+          planName={selectedPlanDetails.name}
+          planPrice={selectedPlanDetails.displayPrice || selectedPlanDetails.price}
+          onSuccess={handlePaymentSuccess}
+          onCancel={handleCancelCheckout}
+        />
+      </Elements>
+    </div>
+  </div>
+</div>
+      )}
 
       {/* Email Verification Modal */}
       {showVerificationModal && (

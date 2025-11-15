@@ -925,6 +925,8 @@ const defaultData = {
     }
   }, [user, userData]);
 
+
+
   // STRIPE CHECKOUT - Create checkout session and redirect to Stripe
 const createCheckoutSession = useCallback(async (planType) => {
   if (!user || !userData) return { success: false, error: 'Not authenticated' };
@@ -968,6 +970,51 @@ const createCheckoutSession = useCallback(async (planType) => {
 
   } catch (error) {
     console.error('Checkout session error:', error);
+    return { success: false, error: error.message };
+  }
+}, [user, userData]);
+
+// NEW FUNCTION - Create payment intent for embedded checkout
+const createPaymentIntent = useCallback(async (planType) => {
+  if (!user || !userData) return { success: false, error: 'Not authenticated' };
+
+  try {
+    // Determine which price ID to use
+    const priceId = planType === 'monthly' 
+      ? 'price_1STa8wJz6mdvQ2vpoNfXKIzU'  // Your monthly price
+      : 'price_1STaAaJz6mdvQ2vpZf4C3SZ4'; // Your annual price
+
+    // Call Cloud Function to create payment intent
+    const createPaymentIntentUrl = 'https://us-central1-learning-app-6f8ff.cloudfunctions.net/createPaymentIntent';
+    
+    const response = await fetch(createPaymentIntentUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: user.uid,
+        email: user.email,
+        priceId: priceId,
+        planType: planType
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to create payment intent');
+    }
+
+    const data = await response.json();
+    
+    return { 
+      success: true, 
+      clientSecret: data.clientSecret,
+      paymentIntentId: data.paymentIntentId
+    };
+
+  } catch (error) {
+    console.error('Payment intent error:', error);
     return { success: false, error: error.message };
   }
 }, [user, userData]);
@@ -1060,7 +1107,8 @@ const checkSubscriptionStatus = useCallback(async () => {
     reactToCircleMessage,
     getCircleData,
     subscribeToCircle,
-    createCheckoutSession,      
+    createCheckoutSession,
+    createPaymentIntent,  
   openCustomerPortal,          
   checkSubscriptionStatus
   };
