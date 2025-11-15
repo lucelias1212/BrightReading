@@ -262,7 +262,7 @@ const HomePage = () => {
               {[
                 { num: 1, color: 'purple', title: 'Pick a Lesson', desc: 'Choose one that fits your child\'s age', icon: '📚' },
                 { num: 2, color: 'blue', title: 'Read the Guide', desc: 'Quick tips show you what to do', icon: '📖' },
-                { num: 3, color: 'green', title: 'Play Together', desc: 'Have fun with the activities', icon: '🎮' },
+                { num: 3, color: 'green', title: 'Learn Together', desc: 'Have fun with the activities', icon: '🎮' },
                 { num: 4, color: 'pink', title: 'See Progress', desc: 'Watch them learn and grow', icon: '📈' }
               ].map((step) => (
                 <div key={step.num} className="text-center group">
