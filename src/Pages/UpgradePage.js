@@ -6,7 +6,7 @@ import { sendEmailVerification } from 'firebase/auth';
 
 const UpgradePage = () => {
   const navigate = useNavigate();
-  const { userData, user } = useUser();
+  const { userData, user, createCheckoutSession } = useUser();
   const [isPageLoading, setIsPageLoading] = useState(true);
   const [selectedPlan, setSelectedPlan] = useState('annual');
   const [isProcessing, setIsProcessing] = useState(false);
@@ -14,6 +14,7 @@ const UpgradePage = () => {
   const [verificationSent, setVerificationSent] = useState(false);
   const [verificationError, setVerificationError] = useState('');
   const [pendingPlanType, setPendingPlanType] = useState(null);
+  const [checkoutError, setCheckoutError] = useState('');
 
   useEffect(() => {
     // Redirect if already premium
@@ -25,6 +26,22 @@ const UpgradePage = () => {
     const timer = setTimeout(() => setIsPageLoading(false), 50);
     return () => clearTimeout(timer);
   }, [userData, navigate]);
+
+  useEffect(() => {
+  // Check if user just verified their email
+  const urlParams = new URLSearchParams(window.location.search);
+  const justVerified = urlParams.get('verified');
+  
+  if (justVerified && user) {
+    // Reload user to get updated emailVerified status
+    user.reload().then(() => {
+      if (user.emailVerified && pendingPlanType) {
+        // Auto-trigger the upgrade they were trying to do
+        handleUpgrade(pendingPlanType);
+      }
+    });
+  }
+}, [user, pendingPlanType]);
 
   const handleNavigate = (path) => {
     setIsPageLoading(true);
@@ -45,34 +62,56 @@ const UpgradePage = () => {
     }
     
     setIsProcessing(true);
+    setCheckoutError('');
     
-    // TODO: Integrate with your payment processor (Stripe, etc.)
-    // This is where you'll:
-    // 1. Create a checkout session
-    // 2. Redirect to payment page
-    // 3. Handle payment confirmation
-    
-    console.log('Upgrading to:', planType);
-    
-    // Placeholder - replace with actual payment logic
-    setTimeout(() => {
+    try {
+      // Call Stripe checkout
+      const result = await createCheckoutSession(planType);
+      
+      if (!result.success) {
+        setCheckoutError(result.error || 'Failed to start checkout. Please try again.');
+        setIsProcessing(false);
+      }
+      // If successful, user will be redirected to Stripe
+      // isProcessing stays true during redirect
+      
+    } catch (error) {
+      console.error('Upgrade error:', error);
+      setCheckoutError('Something went wrong. Please try again.');
       setIsProcessing(false);
-      alert('Payment integration coming soon!');
-    }, 1500);
+    }
   };
 
   const handleSendVerification = async () => {
-    if (!user) return;
+  if (!user) return;
+  
+  try {
+    setVerificationError('');
     
-    try {
-      setVerificationError('');
-      await sendEmailVerification(user);
-      setVerificationSent(true);
-    } catch (error) {
-      console.error('Verification email error:', error);
-      setVerificationError('Failed to send verification email. Please try again.');
+    // Configure the verification email
+    const actionCodeSettings = {
+      url: `${window.location.origin}/upgrade?verified=true`,
+      handleCodeInApp: true,
+    };
+    
+    await sendEmailVerification(user, actionCodeSettings);
+    setVerificationSent(true);
+  } catch (error) {
+    console.error('Verification email error:', error);
+    
+    // Better error messages
+    let errorMsg = 'Failed to send verification email. Please try again.';
+    if (error.code === 'auth/too-many-requests') {
+      errorMsg = 'Too many requests. Please wait a moment before trying again.';
+    } else if (error.code === 'auth/invalid-email') {
+      errorMsg = 'Invalid email address.';
+    } else if (error.code === 'auth/user-not-found') {
+      errorMsg = 'User account not found.';
     }
-  };
+    
+    setVerificationError(errorMsg);
+  }
+};
 
   const handleVerificationClose = () => {
     setShowVerificationModal(false);
@@ -82,39 +121,39 @@ const UpgradePage = () => {
   };
 
   const plans = [
-{
-  id: 'monthly',
-  name: 'Monthly',
-  price: '$10.99',
-  period: '/month',
-  savings: null,
-  features: [
-    'All 1040 lessons unlocked',
-    'All 4 phases (ages 1-5)',
-    'Progress tracking',
-    'Achievement badges',
-    'Cancel anytime'
-  ],
-  popular: false,
-  color: 'from-blue-500 to-cyan-500'
-},
-{
-  id: 'annual',
-  name: 'Annual',
-  price: '$8.99',
-  period: '/month',
-  savings: 'Save 18%',
-  totalPrice: '$107.88/year',
-  features: [
-    'All 1040 lessons unlocked',
-    'All 4 phases (ages 1-5)',
-    'Progress tracking',
-    'Achievement badges',
-    'Cancel anytime'
-  ],
-  popular: true,
-  color: 'from-purple-500 to-pink-500'
-}
+    {
+      id: 'monthly',
+      name: 'Monthly',
+      price: '$10.99',
+      period: '/month',
+      savings: null,
+      features: [
+        'All 1040 lessons unlocked',
+        'All 4 phases (ages 1-5)',
+        'Progress tracking',
+        'Achievement badges',
+        'Cancel anytime'
+      ],
+      popular: false,
+      color: 'from-blue-500 to-cyan-500'
+    },
+    {
+      id: 'annual',
+      name: 'Annual',
+      price: '$8.99',
+      period: '/month',
+      savings: 'Save 18%',
+      totalPrice: '$107.88/year',
+      features: [
+        'All 1040 lessons unlocked',
+        'All 4 phases (ages 1-5)',
+        'Progress tracking',
+        'Achievement badges',
+        'Cancel anytime'
+      ],
+      popular: true,
+      color: 'from-purple-500 to-pink-500'
+    }
   ];
 
   const benefits = [
@@ -150,6 +189,24 @@ const UpgradePage = () => {
       </nav>
 
       <div className="max-w-7xl mx-auto px-4 py-12">
+        {/* Error Message */}
+        {checkoutError && (
+          <div className="max-w-2xl mx-auto mb-8">
+            <div className="bg-red-50 border-2 border-red-200 rounded-xl p-4 flex items-center gap-3">
+              <X className="text-red-600 flex-shrink-0" size={24} />
+              <div>
+                <p className="text-red-800 font-semibold">{checkoutError}</p>
+                <button 
+                  onClick={() => setCheckoutError('')}
+                  className="text-red-600 text-sm underline mt-1"
+                >
+                  Dismiss
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Hero Section */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-6 py-3 rounded-full font-black text-sm shadow-lg mb-6 animate-bounce" style={{ animationDuration: '2s' }}>
@@ -171,7 +228,7 @@ const UpgradePage = () => {
 
           <div className="flex flex-wrap justify-center gap-4">
             {[
-              { icon: Check, text: '10-Day Money Back Guarantee' },
+              { icon: Check, text: '10-Day Free Trial' },
               { icon: Check, text: 'Cancel Anytime' },
               { icon: Check, text: 'Instant Access' }
             ].map((item, idx) => (
@@ -244,7 +301,7 @@ const UpgradePage = () => {
                   )}
                 </div>
 
-              {/* Plan Features */}
+                {/* Plan Features */}
                 <div className="bg-white p-8 flex-1 flex flex-col">
                   <ul className="space-y-4 mb-8 flex-1">
                     {plan.features.map((feature, idx) => (
@@ -280,7 +337,7 @@ const UpgradePage = () => {
           </div>
         </div>
 
-{/* Testimonials Section - Coming Soon */}
+        {/* Testimonials Section - Coming Soon */}
         <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl shadow-xl p-8 md:p-12 mb-12 border-2 border-blue-200">
           <h2 className="text-4xl font-black text-center text-gray-900 mb-6">
             Loved by Parents Everywhere
@@ -290,7 +347,7 @@ const UpgradePage = () => {
           </p>
         </div>
 
-{/* FAQ Link */}
+        {/* FAQ Link */}
         <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 mb-12 border-4 border-pink-200 text-center">
           <h2 className="text-4xl font-black text-gray-900 mb-4">
             Have Questions?
@@ -336,7 +393,7 @@ const UpgradePage = () => {
           </p>
         </div>
 
-{/* Trust Badges */}
+        {/* Trust Badges */}
         <div className="mt-12 text-center">
           <div className="flex flex-wrap justify-center gap-8 items-center opacity-60">
             <div className="font-bold text-gray-600">🔒 Secure Checkout</div>

@@ -396,7 +396,7 @@ className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pi
               <div className="text-2xl">⏱️</div>
               <div>
                 <h4 className="font-bold text-gray-900 mb-1">Time-Efficient</h4>
-                <p className="text-gray-600 text-sm">Complete lessons in 10 minutes, 3-5 times per week</p>
+                <p className="text-gray-600 text-sm">Complete lessons in 10-15 minutes, 5 times per week</p>
               </div>
             </div>
             <div className="flex gap-3">

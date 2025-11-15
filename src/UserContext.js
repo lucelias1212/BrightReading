@@ -1,3 +1,4 @@
+//src/UserContext.js
 import React, { createContext, useState, useEffect, useContext, useCallback, useRef } from 'react';
 import { 
   createUserWithEmailAndPassword,
@@ -43,12 +44,17 @@ export function UserProvider({ children }) {
           setUser(firebaseUser);
           
           // Default data structure
-          const defaultData = {
-            email: firebaseUser.email,
-            username: '',
-            subscription: 'free',
-            subscriptionStartDate: null,
-            subscriptionEndDate: null,
+const defaultData = {
+  email: firebaseUser.email,
+  username: '',
+  subscription: 'free',
+  subscriptionStatus: null,
+  subscriptionStartDate: null,
+  subscriptionEndDate: null,
+  stripeCustomerId: null,
+  stripeSubscriptionId: null,
+  planType: null,
+  lastPaymentDate: null,
             
             currentPhase: 1,
             phaseProgress: {
@@ -192,10 +198,17 @@ export function UserProvider({ children }) {
       const newUser = userCredential.user;
 
       const defaultUserData = {
-        email: newUser.email,
-        username: username.toLowerCase(),
-        subscription: 'free',
-        createdAt: new Date().toISOString(),
+  email: newUser.email,
+  username: username.toLowerCase(),
+  subscription: 'free',
+  subscriptionStatus: null,
+  subscriptionStartDate: null,
+  subscriptionEndDate: null,
+  stripeCustomerId: null,
+  stripeSubscriptionId: null,
+  planType: null,
+  lastPaymentDate: null,
+  createdAt: new Date().toISOString(),
         currentPhase: 1,
         phaseProgress: {
           1: { completedLessons: [], lessonCompletionDates: {} },
@@ -912,6 +925,114 @@ export function UserProvider({ children }) {
     }
   }, [user, userData]);
 
+  // STRIPE CHECKOUT - Create checkout session and redirect to Stripe
+const createCheckoutSession = useCallback(async (planType) => {
+  if (!user || !userData) return { success: false, error: 'Not authenticated' };
+
+  try {
+    // Determine which price ID to use
+    const priceId = planType === 'monthly' 
+      ? 'price_1STa8wJz6mdvQ2vpoNfXKIzU'  // Your monthly price
+      : 'price_1STaAaJz6mdvQ2vpZf4C3SZ4'; // Your annual price
+
+    // Call Cloud Function to create checkout session
+    const createCheckoutUrl = 'https://us-central1-learning-app-6f8ff.cloudfunctions.net/createCheckoutSession';
+    
+    const response = await fetch(createCheckoutUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: user.uid,
+        email: user.email,
+        priceId: priceId,
+        planType: planType
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to create checkout session');
+    }
+
+    const data = await response.json();
+    
+    // Redirect to Stripe checkout
+    if (data.url) {
+      window.location.href = data.url;
+      return { success: true };
+    } else {
+      throw new Error('No checkout URL returned');
+    }
+
+  } catch (error) {
+    console.error('Checkout session error:', error);
+    return { success: false, error: error.message };
+  }
+}, [user, userData]);
+
+// CUSTOMER PORTAL - Open Stripe billing portal
+const openCustomerPortal = useCallback(async () => {
+  if (!user || !userData) return { success: false, error: 'Not authenticated' };
+
+  try {
+    const portalUrl = 'https://us-central1-learning-app-6f8ff.cloudfunctions.net/createCustomerPortal';
+    
+    const response = await fetch(portalUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: user.uid
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to create portal session');
+    }
+
+    const data = await response.json();
+    
+    // Open portal in new window
+    if (data.url) {
+      window.open(data.url, '_blank');
+      return { success: true };
+    } else {
+      throw new Error('No portal URL returned');
+    }
+
+  } catch (error) {
+    console.error('Customer portal error:', error);
+    return { success: false, error: error.message };
+  }
+}, [user, userData]);
+
+// CHECK SUBSCRIPTION STATUS (optional - for manual verification)
+const checkSubscriptionStatus = useCallback(async () => {
+  if (!user || !userData) return { success: false };
+
+  try {
+    // The real-time listener already updates subscription status
+    // This is just a manual refresh if needed
+    const userDoc = await getDoc(doc(db, 'users', user.uid));
+    if (userDoc.exists()) {
+      const data = userDoc.data();
+      return { 
+        success: true, 
+        subscription: data.subscription,
+        status: data.subscriptionStatus 
+      };
+    }
+    return { success: false };
+  } catch (error) {
+    console.error('Check subscription error:', error);
+    return { success: false, error: error.message };
+  }
+}, [user, userData]);
+
   const value = {
     user,
     userData,
@@ -938,7 +1059,10 @@ export function UserProvider({ children }) {
     sendCircleMessage,
     reactToCircleMessage,
     getCircleData,
-    subscribeToCircle
+    subscribeToCircle,
+    createCheckoutSession,      
+  openCustomerPortal,          
+  checkSubscriptionStatus
   };
 
   return (

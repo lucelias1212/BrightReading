@@ -16,6 +16,8 @@ import TermsPage from './Pages/TermsPage';
 import PrivacyPage from './Pages/PrivacyPage';
 import ContactPage from './Pages/ContactPage';
 import UpgradePage from './Pages/UpgradePage';
+import PaymentSuccess from './Pages/PaymentSuccess';
+import PaymentCancelled from './Pages/PaymentCancelled';
 import './App.css';
 
 // Protected Route wrapper
@@ -61,6 +63,24 @@ function App() {
             element={
               <ProtectedRoute>
                 <UpgradePage />
+              </ProtectedRoute>
+            } 
+          />
+          
+          {/* Payment Routes - Protected */}
+          <Route 
+            path="/payment-success" 
+            element={
+              <ProtectedRoute>
+                <PaymentSuccess />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/payment-cancelled" 
+            element={
+              <ProtectedRoute>
+                <PaymentCancelled />
               </ProtectedRoute>
             } 
           />
