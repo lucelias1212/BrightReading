@@ -8,6 +8,7 @@ const LoginPage = () => {
   const { login, signup } = useUser();
   const [isSignUp, setIsSignUp] = useState(true);
   const [isPageLoading, setIsPageLoading] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -65,8 +66,12 @@ const LoginPage = () => {
   };
 
   const handleModeSwitch = () => {
-    setIsSignUp(!isSignUp);
-    setError('');
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setIsSignUp(!isSignUp);
+      setError('');
+      setIsTransitioning(false);
+    }, 200);
   };
 
   return (
@@ -151,7 +156,7 @@ const LoginPage = () => {
               {isSignUp ? '🎉 GET STARTED FREE' : '👋 WELCOME BACK'}
             </div>
 
-            <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10 relative overflow-hidden">
+            <div className={`bg-white rounded-3xl shadow-2xl p-8 md:p-10 relative overflow-hidden transition-opacity duration-200 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
               {/* Subtle Pattern Overlay */}
               <div className="absolute inset-0 opacity-5">
                 <div className="absolute inset-0" style={{
@@ -272,7 +277,7 @@ const LoginPage = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white py-5 rounded-2xl font-black text-lg hover:shadow-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 border-4 border-white shadow-lg"
+                    className="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white py-5 rounded-2xl font-black text-lg hover:shadow-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.03] active:scale-95 flex items-center justify-center gap-2 border-4 border-white shadow-lg hover:border-purple-200"
                   >
                     {loading ? (
                       <>
@@ -300,7 +305,7 @@ const LoginPage = () => {
                   
                   <button
                     onClick={handleModeSwitch}
-                    className="mt-6 text-purple-600 hover:text-purple-700 font-black text-lg hover:underline transition"
+                    className="mt-6 text-purple-600 hover:text-purple-700 font-black text-lg hover:underline transition transform hover:scale-105 active:scale-95"
                   >
                     {isSignUp ? '👋 Already have an account? Sign in!' : "🎉 Don't have an account? Sign up!"}
                   </button>
@@ -316,7 +321,7 @@ const LoginPage = () => {
                         window.scrollTo(0, 0);
                       }, 300);
                     }}
-                    className="text-gray-600 hover:text-gray-900 font-bold text-sm inline-flex items-center gap-2 hover:gap-3 transition-all"
+                    className="text-gray-600 hover:text-gray-900 font-bold text-sm inline-flex items-center gap-2 hover:gap-3 transition-all transform hover:scale-105 active:scale-95"
                   >
                     ← Back to home
                   </button>

@@ -29,8 +29,16 @@ const LessonPage = () => {
   const completedLessonsCount = completedLessons.length;
   
   
+  // Calculate total completed lessons across ALL phases for free users
+  const totalCompletedAcrossAllPhases = !isPremium 
+    ? Object.values(userData?.phaseProgress || {}).reduce((total, phase) => {
+        return total + (phase.completedLessons?.length || 0);
+      }, 0)
+    : 0;
+  
   const isFreeTrial = currentLessonNum <= 10;
-  const userCanAccess = canAccessLesson(currentLessonNum, isPremium);
+  const hasFreeLessonsRemaining = !isPremium && totalCompletedAcrossAllPhases < 10;
+  const userCanAccess = isPremium || (isFreeTrial && (hasFreeLessonsRemaining || alreadyCompleted));
 
   const lesson = getLesson(currentLessonNum, currentPhase);
   const alreadyCompleted = completedLessons.includes(currentLessonNum);
@@ -171,13 +179,14 @@ const LessonPage = () => {
               </div>
               <h1 className="text-xl font-bold text-gray-900">Lesson Locked</h1>
             </div>
-            <button
-              onClick={() => navigate('/dashboard')}
-              className="bg-gray-100 text-gray-700 hover:bg-gray-200 p-3 rounded-xl transition font-semibold flex items-center gap-2"
-            >
-              <Home size={20} />
-              <span className="hidden sm:inline">Dashboard</span>
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => navigate('/dashboard')}
+                className="hover:opacity-80 transition transform hover:scale-105 active:scale-95"
+              >
+                <img src="/assets/HomeButton.png" alt="Home" className="h-10" />
+              </button>
+            </div>
           </div>
         </nav>
 
@@ -188,16 +197,25 @@ const LessonPage = () => {
             </div>
             <h2 className="text-4xl font-bold text-gray-900 mb-4">This Lesson is Locked</h2>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Great job completing your 10 free lessons! 🎉<br/>
-              Upgrade to unlock all 260 lessons and continue your child's reading journey.
+              You've completed your 10 free lessons! 🎉<br/>
+              Upgrade to unlock all 260 lessons across all 4 phases and continue your child's reading journey.
             </p>
-            <button
-              onClick={() => navigate('/upgrade')}
-              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-10 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition inline-flex items-center gap-2"
-            >
-              <Zap size={24} />
-              View Premium Plans
-            </button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={() => navigate('/upgrade')}
+                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-10 py-4 rounded-xl font-bold text-lg hover:shadow-xl transition inline-flex items-center justify-center gap-2 transform hover:scale-105 active:scale-95"
+              >
+                <Zap size={24} />
+                View Premium Plans
+              </button>
+              <button
+                onClick={() => navigate('/dashboard')}
+                className="bg-white text-gray-700 border-2 border-gray-300 px-10 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition inline-flex items-center justify-center gap-2 transform hover:scale-105 active:scale-95"
+              >
+                <Home size={24} />
+                Back to Dashboard
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -217,10 +235,9 @@ const LessonPage = () => {
             </div>
             <button
               onClick={() => navigate('/dashboard')}
-              className="bg-gray-100 text-gray-700 hover:bg-gray-200 p-3 rounded-xl transition font-semibold flex items-center gap-2"
+              className="hover:opacity-80 transition transform hover:scale-105 active:scale-95"
             >
-              <Home size={20} />
-              <span className="hidden sm:inline">Dashboard</span>
+              <img src="/assets/HomeButton.png" alt="Home" className="h-10" />
             </button>
           </div>
         </nav>
@@ -234,13 +251,40 @@ const LessonPage = () => {
             <p className="text-xl text-gray-600 mb-8">
               Lesson {currentLessonNum} hasn't been created yet. Check back soon!
             </p>
-            <button
-              onClick={() => navigate('/dashboard')}
-              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-10 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition inline-flex items-center gap-2"
-            >
-              <Home size={24} />
-              Back to Dashboard
-            </button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={() => navigate('/dashboard')}
+                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-10 py-4 rounded-xl font-bold text-lg hover:shadow-xl transition inline-flex items-center justify-center gap-2 transform hover:scale-105 active:scale-95"
+              >
+                <Home size={24} />
+                Back to Dashboard
+              </button>
+              <button
+                onClick={() => {
+                  // Find the nearest valid lesson
+                  let nearestLesson = currentLessonNum - 1;
+                  // Keep going back until we find a valid lesson or hit lesson 1
+                  while (nearestLesson > 0 && !getLesson(nearestLesson, currentPhase)) {
+                    nearestLesson--;
+                  }
+                  // If we found a valid lesson, go there, otherwise go to dashboard
+                  if (nearestLesson > 0 && getLesson(nearestLesson, currentPhase)) {
+                    setIsTransitioning(true);
+                    setLessonError(false);
+                    setTimeout(() => {
+                      navigate(`/lesson/${nearestLesson}`);
+                      window.scrollTo(0, 0);
+                    }, 200);
+                  } else {
+                    navigate('/dashboard');
+                  }
+                }}
+                className="bg-white text-gray-700 border-2 border-gray-300 px-10 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition inline-flex items-center justify-center gap-2 transform hover:scale-105 active:scale-95"
+              >
+                <ChevronLeft size={24} />
+                Previous Lesson
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -321,12 +365,12 @@ const LessonPage = () => {
           )}
 
           {/* Free Trial Banner */}
-          {!isPremium && isFreeTrial && (
+          {!isPremium && (hasFreeLessonsRemaining || alreadyCompleted) && (
             <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl px-4 py-3 mb-4 flex items-center justify-between">
               <div className="flex items-center gap-3 text-white">
                 <Zap size={24} className="flex-shrink-0" />
                 <p className="font-semibold">
-                  Free Trial: {currentLessonNum} of 10 • {11 - currentLessonNum} remaining
+                  Free Trial: {totalCompletedAcrossAllPhases} of 10 lessons completed • {10 - totalCompletedAcrossAllPhases} remaining across all phases
                 </p>
               </div>
             </div>
@@ -718,7 +762,7 @@ const LessonPage = () => {
                 <Zap className="text-white" size={56} />
               </div>
               <h2 className="text-4xl font-bold text-gray-900 mb-3">You Did It!</h2>
-              <p className="text-xl text-gray-600">Your 10-lesson free trial is complete 🎉</p>
+              <p className="text-xl text-gray-600">You've completed all 10 free trial lessons! 🎉</p>
             </div>
 
             <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 mb-6 text-left">

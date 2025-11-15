@@ -13029,6 +13029,518 @@ export default {
   ]
 },
 
+// ========= LESSON 55 =========
+{
+  id: 55,
+  phase: '3',
+  quarter: 1,
+  week: 11,
+  weekIndex: 10,
+  dayInWeek: 5,
+  title: 'Lesson 55: Quick Rabbit and Silly Snake',
+  theme: 'Letters Come Alive',
+  skillRecurrenceTags: ['skill-recurrence', 'Q-R-S-integration', 'story-based-learning', 'narrative-phonics'],
+  relatedToPreviousSkills: ['letter-sound-mapping', 'vocabulary-context', 'sequencing', 'Week-4-story-theater'],
+  duration: '10-15 min',
+  steps: [
+    {
+      id: 0,
+      type: 'intro',
+      title: 'Story Adventure Begins!',
+      duration: '1 min',
+      content: {
+        goal: 'Integrate Q, R, and S through an engaging narrative. Your baby experiences letters in story context!',
+        parentGuide: [
+          'Story-based learning enhances memory by creating narrative connections.',
+          'Q, R, and S appear multiple times, reinforcing letter-sound relationships.',
+          'This culminates Week 11\'s three-letter focus with celebration and synthesis.',
+          'Narrative context prepares for next week\'s final alphabet letters and Quarter 1 review.'
+        ],
+        materials: ['Letter cards Q, R, S', 'Simple character pictures (rabbit, snake, queen)', 'Props (crown, toy rabbit/snake if available)', 'Quiet/Run/Silly movement cards', 'Celebratory stickers or stamps'],
+        tip: 'Act out the story with enthusiasm—your energy makes letters memorable!',
+        researchNote: 'Whitehurst & Lonigan (1998) found that interactive storytelling significantly enhances vocabulary and phonological awareness development.'
+      }
+    },
+    {
+      id: 1,
+      type: 'activity',
+      title: 'Step 1: Meet the Characters',
+      duration: '2 min',
+      focus: 'Character Introduction with Letter Association',
+      researchBasis: 'Bus & van IJzendoorn (1995) showed that character-based stories enhance engagement and letter retention.',
+      content: {
+        goal: 'Introduce story characters linked to Q, R, S sounds.',
+        whatToSay: [
+          'Today we have three friends!',
+          'Queen Quincy! /kw/ /kw/! She\'s very quiet!',
+          'Rabbit Rosie! /rrr/ /rrr/! She loves to run!',
+          'Snake Sam! /sss/ /sss/! He\'s super silly!',
+          'Each friend has a special letter!',
+          'Q for Queen! R for Rabbit! S for Snake!',
+          'Let\'s hear their story!'
+        ],
+        whatToDo: [
+          'Show picture of Queen character.',
+          'Place Q card next to Queen.',
+          'Make /kw/ sound together.',
+          'Show Rabbit character.',
+          'Place R card next to Rabbit.',
+          'Make /r/ sound together.',
+          'Show Snake character.',
+          'Place S card next to Snake.',
+          'Make /s/ sound together.',
+          'Line up all three characters with letters.',
+          'Review: "Queen-Q-/kw/, Rabbit-R-/r/, Snake-S-/s/!"'
+        ],
+        examples: [
+          'Queen introduction: "Queen Quincy wears a crown! Q! /kw/! She speaks quietly!"',
+          'Rabbit introduction: "Rabbit Rosie has long ears! R! /rrr/! She runs everywhere!"',
+          'Snake introduction: "Snake Sam slithers! S! /sss/! He makes everyone laugh!"',
+          'Connection: "Three friends! Three letters! Three sounds! Let\'s see what happens!"'
+        ],
+        watchFor: [
+          'Connecting characters to letters.',
+          'Making correct sounds.',
+          'Excited about the story.',
+          'Remembering character names.'
+        ],
+        parentTip: 'Character associations create powerful memory anchors for abstract letters!',
+        funTwist: 'Character voices: "Can you make a quiet voice for Queen? A fast voice for Rabbit?"'
+      }
+    },
+    {
+      id: 2,
+      type: 'activity',
+      title: 'Step 2: The Story Unfolds',
+      duration: '5 min',
+      focus: 'Interactive Narrative with Letter Emphasis',
+      researchBasis: 'National Early Literacy Panel (2008) identified interactive read-alouds as highly effective for phonological awareness.',
+      content: {
+        goal: 'Tell story emphasizing Q, R, S sounds and words.',
+        whatToSay: [
+          'One day, Queen Quincy was being very QUIET in her castle.',
+          'She whispered, "/kw/ /kw/ /kw/! I need a friend!"',
+          'Rabbit Rosie came RUNNING by! /rrr/ /rrr/!',
+          '"Let\'s RACE!" said Rosie. "RUN with me!"',
+          'They RAN through the garden—so fast!',
+          'Then they heard, "/sss/ /sss/ /sss/!"',
+          'It was Snake Sam, SLITHERING SILLY!',
+          '"Let\'s be SILLY together!" hissed Sam.',
+          'So Queen Quincy quietly giggled, Rabbit Rosie ran in circles,',
+          'And Snake Sam slithered in SILLY shapes!',
+          'They had the SILLIEST, most SUPER day!',
+          'Three friends! Q, R, and S!'
+        ],
+        whatToDo: [
+          'Tell story with expressive voice.',
+          'Emphasize Q/R/S words dramatically.',
+          'Hold up corresponding letter card when sound appears.',
+          'Encourage child to make sounds with you.',
+          'Act out key moments: being quiet, running, slithering.',
+          'Pause for child to repeat key phrases.',
+          'Use props if available (crown, toy animals).',
+          'Make it interactive, not just reading.',
+          'Celebrate target sounds each time they appear.',
+          'Retell if child wants (shortened version).'
+        ],
+        examples: [
+          'Quiet moment: "(Whisper) Queen was so quiet! Can you be quiet like her? Shhhh! /kw/!"',
+          'Running moment: "Rabbit RAN! /rrr/! Stand up! Let\'s RUN in place! /rrr/!"',
+          'Silly moment: "Snake was SILLY! /sss/! Make a silly face! /sss/! Slither around!"',
+          'Integration: "Queen, Rabbit, Snake! /kw/ /rrr/ /sss/! Three friends, three sounds!"'
+        ],
+        watchFor: [
+          'Following story sequence.',
+          'Participating with sounds.',
+          'Acting out movements.',
+          'Recognizing letters in context.'
+        ],
+        parentTip: 'Repetitive story structure helps children anticipate and participate actively!',
+        funTwist: 'Story remix: "What if Snake was quiet? What if Queen ran? Let\'s be silly and change it!"'
+      }
+    },
+    {
+      id: 3,
+      type: 'activity',
+      title: 'Step 3: Story Sound Hunt',
+      duration: '3 min',
+      focus: 'Phoneme Identification in Context',
+      researchBasis: 'Lonigan et al. (2000) found that context-based phoneme activities transfer more effectively than isolated drills.',
+      content: {
+        goal: 'Identify and count Q, R, S words from the story.',
+        whatToSay: [
+          'How many Q words were in our story?',
+          'Queen! Quiet! /kw/ /kw/!',
+          'How many R words?',
+          'Rabbit! Run! Race! /rrr/ /rrr/!',
+          'How many S words?',
+          'Snake! Silly! Slithering! Super! /sss/ /sss/!',
+          'So many letter sounds in one story!',
+          'Which was your favorite word?'
+        ],
+        whatToDo: [
+          'Review story briefly.',
+          'Ask child to remember Q words.',
+          'Count on fingers together.',
+          'Ask for R words.',
+          'Count together.',
+          'Ask for S words.',
+          'Count together.',
+          'Show corresponding letter card for each word.',
+          'Child says the sound.',
+          'Celebrate: "You found all the sounds!"',
+          'Optional: Draw or act out favorite word.'
+        ],
+        examples: [
+          'Q hunt: "What did Queen Quincy do? She was quiet! Both start with /kw/!"',
+          'R hunt: "Rabbit did so many R things! Run, race—both /rrr/! Can you think of another?"',
+          'S hunt: "Snake Sam was silly! He slithered! /sss/ at the start of every word!"',
+          'Comparison: "Which letter had the most words in our story? Let\'s count!"'
+        ],
+        watchFor: [
+          'Recalling story details.',
+          'Identifying initial sounds.',
+          'Counting accurately.',
+          'Making sound-letter connections.'
+        ],
+        parentTip: 'Story recall builds comprehension alongside phonological awareness!',
+        funTwist: 'New story: "Can you make up one sentence about Queen, Rabbit, and Snake?"'
+      }
+    },
+    {
+      id: 4,
+      type: 'activity',
+      title: 'Step 4: Act It Out!',
+      duration: '3 min',
+      focus: 'Kinesthetic Story Reinforcement',
+      researchBasis: 'Cameron et al. (2012) showed that embodied learning through acting enhances memory and engagement.',
+      content: {
+        goal: 'Act out the story with movements for each character.',
+        whatToSay: [
+          'Now YOU be the characters!',
+          'When I say Queen, be quiet! /kw/!',
+          'When I say Rabbit, run in place! /rrr/!',
+          'When I say Snake, slither silly! /sss/!',
+          'Ready? Here we go!',
+          'Queen Quincy... (child is quiet)',
+          'Rabbit Rosie... (child runs)',
+          'Snake Sam... (child slithers)',
+          'All three friends together! Mix them up!',
+          'You\'re a great actor!'
+        ],
+        whatToDo: [
+          'Clear space for movement.',
+          'Explain each character\'s action.',
+          'Call out character names randomly.',
+          'Child performs corresponding action.',
+          'Make corresponding sound together.',
+          'Speed up gradually for fun.',
+          'Try combinations: "Be Rabbit and Snake!"',
+          'Celebrate creative interpretations.',
+          'Switch: parent acts, child calls out.',
+          'End with all three actions in sequence.'
+        ],
+        examples: [
+          'Quiet Queen: "(Whisper) Queen! Be quiet! /kw/! Tiptoe! Shhhh!"',
+          'Running Rabbit: "Rabbit! /rrr/! Run fast! Hop hop hop!"',
+          'Silly Snake: "Snake! /sss/! Slither in a silly way! Wiggle wiggle!"',
+          'Fast round: "Queen-Rabbit-Snake-Rabbit-Queen-Snake! Keep up! You\'re amazing!"'
+        ],
+        watchFor: [
+          'Responding to cues quickly.',
+          'Making appropriate movements.',
+          'Saying sounds during actions.',
+          'Having fun and staying engaged.'
+        ],
+        parentTip: 'Movement-based learning uses whole-body engagement for deeper memory encoding!',
+        funTwist: 'Freeze game: "When I say FREEZE, stop moving! Ready? Queen-Rabbit-FREEZE!"'
+      }
+    },
+    {
+      id: 5,
+      type: 'conclusion',
+      title: 'Week 11 Victory!',
+      duration: '1 min',
+      content: {
+        celebration: [
+          'You learned Q, R, and S this week!',
+          'You heard them in a story',
+          'You found letter sounds',
+          'You acted like the characters',
+          'You know three more letters',
+          'Week 11 is complete—you\'re amazing!'
+        ],
+        reviewQuestions: [
+          'Can they make all three sounds (Q, R, S)?',
+          'Can they remember story sequence?',
+          'Are they excited about letters in stories?'
+        ],
+        parentTakeaway: {
+          title: 'The Power of Story-Based Phonics',
+          content: 'Today\'s story-based approach represents a crucial shift from isolated letter learning to contextual literacy. Research by Whitehurst & Lonigan (1998) demonstrates that children learn letters and sounds more effectively when embedded in meaningful narratives rather than through decontextualized drills. Your child didn\'t just practice Q, R, and S—they experienced these letters as characters with personalities, actions, and relationships. This narrative memory is stronger and more durable than rote memorization. The interactive elements (acting, sound effects, story recall) engaged multiple cognitive systems simultaneously. Week 11 introduced three letters in five days, a faster pace than earlier weeks, demonstrating your child\'s growing metalinguistic awareness and learning capacity. Next week completes the alphabet with T-Z, preparing for the Quarter 1 grand finale: the Alphabet Fair in Week 13!'
+        },
+        nextSteps: [
+          'Retell the Queen-Rabbit-Snake story throughout the week.',
+          'Point out Q, R, S in books and signs.',
+          'Make up new adventures for the three characters.',
+          'Tomorrow: Week 12 begins—final alphabet letters T-Z!',
+          'The alphabet finish line is in sight!'
+        ]
+      }
+    }
+  ]
+},
+
+// ========= LESSON 56 =========
+{
+  id: 56,
+  phase: '3',
+  quarter: 1,
+  week: 12,
+  weekIndex: 11,
+  dayInWeek: 1,
+  title: 'Lesson 56: T Train Tracks',
+  theme: 'Letters Come Alive',
+  skillRecurrenceTags: ['skill-recurrence', 'letter-T', 'construction-learning', 'spatial-awareness'],
+  relatedToPreviousSkills: ['letter-formation', 'sound-articulation', 'tactile-learning', 'Week-1-letter-intro'],
+  duration: '10-15 min',
+  steps: [
+    {
+      id: 0,
+      type: 'intro',
+      title: 'Terrific T!',
+      duration: '1 min',
+      content: {
+        goal: 'Introduce letter T and its /t/ sound. Your baby begins the final alphabet stretch!',
+        parentGuide: [
+          'Letter T represents a stop consonant—brief and explosive (/t/).',
+          'Week 12 completes the alphabet (T-Z), building toward full mastery.',
+          'T\'s simple cross shape makes it visually distinctive and easy to form.',
+          'Construction theme (train tracks) engages spatial reasoning alongside phonics.'
+        ],
+        materials: ['Letter T card (uppercase and lowercase)', 'Building blocks or wooden sticks', 'Pictures of T words (train, tree, turtle, table, top)', 'Tape for making T on floor', 'Toy train (optional)', 'Paper and markers'],
+        tip: 'The /t/ sound is quick—like tapping! Demonstrate with finger taps.',
+        researchNote: 'Anthony & Francis (2005) found that teaching stop consonants requires explicit attention to their brief, non-sustained nature compared to continuous sounds.'
+      }
+    },
+    {
+      id: 1,
+      type: 'activity',
+      title: 'Step 1: Meet Tapping T',
+      duration: '2 min',
+      focus: 'Letter Introduction with Stop Consonant',
+      researchBasis: 'Ehri (2020) emphasized that teaching articulatory features of phonemes enhances phonemic awareness.',
+      content: {
+        goal: 'Introduce T shape and quick /t/ sound.',
+        whatToSay: [
+          'Meet letter T! T! /t/ /t/ /t/!',
+          'T looks like a table or train tracks!',
+          'One line across! One line down! T!',
+          'T makes a tapping sound! /t/ /t/ /t/!',
+          'Tongue taps the top of your mouth!',
+          'Quick and short! Not long like /sss/!',
+          'T is the tapping letter!'
+        ],
+        whatToDo: [
+          'Show uppercase T card.',
+          'Trace T shape: horizontal line, then vertical.',
+          'Demonstrate /t/ sound clearly.',
+          'Show tongue position (tip touches roof of mouth).',
+          'Have child practice quick /t/ bursts.',
+          'Compare to continuous sounds like /s/.',
+          'Show lowercase t.',
+          'Practice sound 5 times rapidly.',
+          'Tap table each time: /t/ tap! /t/ tap!',
+          'Make it percussive and playful.'
+        ],
+        examples: [
+          'Visual: "T stands tall! Line across the top, line going down! Like a telephone pole!"',
+          'Sound practice: "Quick! /t/ /t/ /t/! Not /ttt/—just /t/! Tap tap tap!"',
+          'Tongue position: "Touch your tongue to the top! Pop it away! /t/! Feel the air!"',
+          'Comparison: "/s/ is long: /ssss/. /t/ is quick: /t/! Different sounds!"'
+        ],
+        watchFor: [
+          'Producing quick /t/ sound.',
+          'Correct tongue position.',
+          'Recognizing T shape.',
+          'Understanding stop vs. continuous sounds.'
+        ],
+        parentTip: 'Stop consonants like /t/ are harder because they can\'t be held—practice helps!',
+        funTwist: 'Tapping contest: "How many /t/ sounds in 10 seconds? Tap the table! Ready, go!"'
+      }
+    },
+    {
+      id: 2,
+      type: 'activity',
+      title: 'Step 2: T Word Train',
+      duration: '3 min',
+      focus: 'Vocabulary Building with T Words',
+      researchBasis: 'Lonigan et al. (2000) found that vocabulary instruction with phoneme emphasis accelerates literacy.',
+      content: {
+        goal: 'Learn T words emphasizing initial /t/ sound.',
+        whatToSay: [
+          'T words are everywhere!',
+          'Train! /t/ /t/ train! Choo choo!',
+          'Tree! /t/ /t/ tree! Tall and green!',
+          'Turtle! /t/ /t/ turtle! Slow and steady!',
+          'Table! /t/ /t/ table! Where we eat!',
+          'Top! /t/ /t/ top! It spins around!',
+          'So many terrific T words!'
+        ],
+        whatToDo: [
+          'Show picture cards of T words.',
+          'Say each word with quick /t/ emphasis.',
+          'Have child repeat with strong initial /t/.',
+          'Pretend to drive a train.',
+          'Reach up high like a tree.',
+          'Move slowly like a turtle.',
+          'Pat the table.',
+          'Spin like a top.',
+          'Make /t/ sound with each word.',
+          'Connect to child\'s experience.'
+        ],
+        examples: [
+          'Train: "Train! /t/rain! Can you chug like a train? Choo choo! /t/ /t/!"',
+          'Tree: "Tree! /t/ree! Reach your arms up like branches! Tall tree!"',
+          'Turtle: "Turtle! /t/urtle! Move super slow like a turtle! /t/ /t/!"',
+          'Table: "Table! /t/able! Touch the table! What else is on the table?"'
+        ],
+        watchFor: [
+          'Identifying /t/ at word beginnings.',
+          'Making quick /t/ sound.',
+          'Acting out word meanings.',
+          'Engaged with T vocabulary.'
+        ],
+        parentTip: 'T words are common—point them out constantly to reinforce learning!',
+        funTwist: 'T or not T: "Tap the table if it starts with /t/! Train—tap! Sun—silent!"'
+      }
+    },
+    {
+      id: 3,
+      type: 'activity',
+      title: 'Step 3: Build T Train Tracks',
+      duration: '5 min',
+      focus: 'Construction-Based Letter Formation',
+      researchBasis: 'Longcamp et al. (2005) found that three-dimensional letter construction enhances recognition.',
+      content: {
+        goal: 'Build letter T using blocks, sticks, or tape.',
+        whatToSay: [
+          'Let\'s build letter T!',
+          'T looks like train tracks!',
+          'One block across the top!',
+          'One block going down!',
+          'You made a T! /t/ /t/!',
+          'Build it again! More T\'s!',
+          'Train tracks everywhere!'
+        ],
+        whatToDo: [
+          'Provide blocks, wooden sticks, or tape.',
+          'Demonstrate T formation: horizontal piece, vertical piece.',
+          'Child builds T with materials.',
+          'Say /t/ while building.',
+          'Create multiple T shapes.',
+          'Make large T on floor with tape.',
+          'Walk along T shape.',
+          'Try different sizes: tiny T, giant T.',
+          'Emphasize cross formation.',
+          'Optional: roll toy train along T tracks.'
+        ],
+        examples: [
+          'Block T: "One block this way! Now one block this way! T! You built it!"',
+          'Sound pairing: "Say /t/ when you place each block! /t/! /t/! Perfect T!"',
+          'Floor T: "Let\'s make HUGE train tracks! Walk across! Walk down! T shape!"',
+          'Size variety: "Make a tiny T! Now a GIANT T! Which is easier to build?"'
+        ],
+        watchFor: [
+          'Following T formation correctly.',
+          'Placing pieces perpendicular.',
+          'Saying /t/ while building.',
+          'Enjoying construction activity.'
+        ],
+        parentTip: 'Building letters creates spatial understanding that enhances recognition!',
+        funTwist: 'T building challenge: "How many T\'s can you build in 2 minutes? Go!"'
+      }
+    },
+    {
+      id: 4,
+      type: 'activity',
+      title: 'Step 4: T Tracing Station',
+      duration: '2 min',
+      focus: 'Fine Motor Letter Formation',
+      researchBasis: 'Treiman et al. (2015) showed that multi-method tracing significantly improves letter recognition.',
+      content: {
+        goal: 'Trace letter T with various methods.',
+        whatToSay: [
+          'Now let\'s trace letter T!',
+          'Line across! Line down! T!',
+          'Trace it in the air!',
+          'Trace it on paper!',
+          'Big T! Small T!',
+          'Say /t/ as you trace!',
+          'Perfect T!'
+        ],
+        whatToDo: [
+          'Trace T in the air with large motions.',
+          'Trace T on each other\'s backs.',
+          'Draw T on paper with markers.',
+          'Practice uppercase and lowercase.',
+          'Use different colors for each T.',
+          'Count how many T\'s child draws.',
+          'Say /t/ with each trace.',
+          'Focus on cross formation.',
+          'Celebrate all attempts.'
+        ],
+        examples: [
+          'Air T: "Big T in the sky! Across! Down! /t/! You drew it!"',
+          'Back trace: "I\'ll draw T on your back! Can you feel across then down?"',
+          'Paper T: "Make 5 T\'s! Red T! Blue T! Rainbow T\'s! /t/ /t/ /t/!"',
+          'Size practice: "Tiny T in the corner! Giant T filling the page!"'
+        ],
+        watchFor: [
+          'Correct stroke order.',
+          'Perpendicular lines.',
+          'Saying /t/ during tracing.',
+          'Improving control with practice.'
+        ],
+        parentTip: 'T is one of the easiest letters to form—great for building confidence!',
+        funTwist: 'Hidden T hunt: "I drew 10 T\'s on this paper! Can you find them all?"'
+      }
+    },
+    {
+      id: 5,
+      type: 'conclusion',
+      title: 'T is Tremendous!',
+      duration: '1 min',
+      content: {
+        celebration: [
+          'You learned letter T!',
+          'You made the tapping sound',
+          'You found T words',
+          'You built T train tracks',
+          'You traced T perfectly',
+          'T is your letter now!'
+        ],
+        reviewQuestions: [
+          'Can they make quick /t/ sound?',
+          'Can they identify T words?',
+          'Can they form T shape?'
+        ],
+        parentTakeaway: {
+          title: 'Understanding Stop Consonants',
+          content: 'Today your child learned a stop consonant, which differs fundamentally from continuous consonants like /s/ or /m/. Stop consonants (/t/, /p/, /k/, /b/, /d/, /g/) are produced by completely blocking and then releasing airflow, creating a brief burst of sound. Research by Anthony & Francis (2005) shows that stop consonants are harder for young children to isolate and manipulate because they cannot be sustained—you can hold /sss/ for five seconds, but /t/ is over instantly. This is why the tapping exercises were crucial: they helped your child perceive /t/ as a distinct, repeatable unit. The construction activity (building T train tracks) engaged spatial reasoning and fine motor skills alongside phonics. Your child has now learned 18 letters (A-T), leaving only 8 more! Week 12 accelerates through the final letters, culminating in the Alphabet Fair celebration in Week 13.'
+        },
+        nextSteps: [
+          'Point out T everywhere (tables, trees, trucks).',
+          'Build T with household items (pencils, utensils).',
+          'Play tapping games: tap when you hear /t/.',
+          'Tomorrow: Letters U and V!',
+          'Alphabet completion continues!'
+        ]
+      }
+    }
+  ]
+},
+
 // ========= LESSON 57 =========
 {
   id: 57,
@@ -14090,6 +14602,538 @@ export default {
           'Play "find the letter" games everywhere.',
           'Next week: Week 13—Alphabet Fair celebration!',
           'Quarter 1 grand finale approaches!'
+        ]
+      }
+    }
+  ]
+},
+
+// ========= LESSON 61 =========
+{
+  id: 61,
+  phase: '3',
+  quarter: 1,
+  week: 13,
+  weekIndex: 12,
+  dayInWeek: 1,
+  title: 'Lesson 61: Alphabet Parade',
+  theme: 'Alphabet Fair - Quarter Review',
+  skillRecurrenceTags: ['skill-recurrence', 'complete-alphabet-review', 'performance-learning', 'celebration-milestone'],
+  relatedToPreviousSkills: ['all-26-letters', 'sound-discrimination', 'letter-recognition', 'movement-learning'],
+  duration: '10-15 min',
+  steps: [
+    {
+      id: 0,
+      type: 'intro',
+      title: 'Welcome to Alphabet Fair!',
+      duration: '1 min',
+      content: {
+        goal: 'Begin Week 13\'s celebratory review! Your baby showcases alphabet mastery through performance!',
+        parentGuide: [
+          'Week 13 is a comprehensive review week—no new content, pure celebration and consolidation.',
+          'Performance-based activities boost confidence and retention.',
+          'Each day uses different modalities to review all 26 letters.',
+          'This week cements 12 weeks of learning into long-term memory.'
+        ],
+        materials: ['Paper and crayons/markers', 'Your body for movement', 'Your voice for sounds and cheering', 'Optional: any scarves, ribbons, or household items for "dressing up"'],
+        tip: 'This is your child\'s victory week—make it playful and celebratory!',
+        researchNote: 'Ehri (2020) found that celebratory review activities significantly enhance retention and create positive associations with learning.'
+      }
+    },
+    {
+      id: 1,
+      type: 'activity',
+      title: 'Step 1: Choose Your Letter',
+      duration: '2 min',
+      focus: 'Personal Connection and Choice',
+      researchBasis: 'Diamond (1990) showed that personal choice increases motivation and engagement.',
+      content: {
+        goal: 'Child chooses favorite letter to "become" for the parade.',
+        whatToSay: [
+          'Today is Alphabet Parade Day!',
+          'You get to BE a letter!',
+          'Which letter is your favorite?',
+          'Do you love A? Or M? Or Z?',
+          'Maybe the first letter of your name?',
+          'Choose ANY letter you want!',
+          'That\'s YOUR parade letter!'
+        ],
+        whatToDo: [
+          'Ask child to name favorite letter.',
+          'If they can\'t choose, offer 2-3 options.',
+          'Suggest their name\'s first letter.',
+          'Accept any choice enthusiastically.',
+          'Say the letter name together.',
+          'Make the letter sound together.',
+          'Think of a word that starts with it.',
+          'Example: "M! /mmm/! M for Monkey!"',
+          'This becomes their parade identity.',
+          'Build excitement around their choice.'
+        ],
+        examples: [
+          'Choice support: "Hard to pick? What about S for Snake? You loved that!"',
+          'Name connection: "Your name starts with J! Want to be J for the parade?"',
+          'Enthusiasm: "B! Great choice! /b/ /b/! B for Bear! You\'re B today!"',
+          'Identity: "You are Letter S! Whenever we see S, that\'s YOU in the parade!"'
+        ],
+        watchFor: [
+          'Making a choice (with support if needed).',
+          'Excited about their letter.',
+          'Saying letter name and sound.',
+          'Understanding they "represent" this letter.'
+        ],
+        parentTip: 'Choice creates ownership—this is THEIR letter, making review personal!',
+        funTwist: 'Letter costume: "Let\'s draw your letter on paper and hold it! You\'re Letter S!"'
+      }
+    },
+    {
+      id: 2,
+      type: 'activity',
+      title: 'Step 2: Design Your Letter Banner',
+      duration: '3 min',
+      focus: 'Creative Expression and Letter Formation',
+      researchBasis: 'Longcamp et al. (2005) found that creative letter activities enhance recognition and memory.',
+      content: {
+        goal: 'Create a simple letter banner for the parade.',
+        whatToSay: [
+          'Every parade needs a banner!',
+          'Let\'s make YOUR letter banner!',
+          'Draw your letter BIG!',
+          'Make it colorful!',
+          'Decorate it however you want!',
+          'This is your parade sign!',
+          'So beautiful!'
+        ],
+        whatToDo: [
+          'Give paper and crayons/markers.',
+          'Help child draw their chosen letter LARGE.',
+          'Uppercase is easiest for this.',
+          'Child colors it in.',
+          'Add decorations: stars, dots, patterns.',
+          'Child can draw pictures around it.',
+          'Draw things that start with that letter.',
+          'Example: S banner with snakes and suns.',
+          'Don\'t worry about perfection.',
+          'Focus on pride and creativity.',
+          'Hold up banner when complete.',
+          'Admire it together.'
+        ],
+        examples: [
+          'Drawing: "Draw giant M! Fill the whole paper! Color it your favorite color!"',
+          'Decorating: "Add stars around T! Draw a train at the bottom! Make it special!"',
+          'Sound connection: "This is your S banner! Let\'s draw snakes all around it!"',
+          'Pride: "Hold it up! Look at that! Everyone will see your beautiful letter!"'
+        ],
+        watchFor: [
+          'Drawing letter shape (with help if needed).',
+          'Creative decorating.',
+          'Proud of their creation.',
+          'Understanding banner\'s purpose.'
+        ],
+        parentTip: 'This banner becomes a tangible symbol of their learning achievement!',
+        funTwist: 'Banner name: "What should we call your banner? The Super S Sign?"'
+      }
+    },
+    {
+      id: 3,
+      type: 'activity',
+      title: 'Step 3: Learn Your Letter Chant',
+      duration: '2 min',
+      focus: 'Rhythmic Sound Practice',
+      researchBasis: 'Trainor et al. (2002) showed that rhythmic chanting enhances phonological memory.',
+      content: {
+        goal: 'Create a simple chant for their parade letter.',
+        whatToSay: [
+          'Every letter needs a chant!',
+          'Let\'s make YOUR letter chant!',
+          'Ready? Listen!',
+          '(Example for S)',
+          'S! S! /sss/ /sss/ /sss/!',
+          'S is for Snake!',
+          'S! S! /sss/ /sss/ /sss/!',
+          'Now you try!',
+          'Perfect! That\'s your parade chant!'
+        ],
+        whatToDo: [
+          'Create simple 2-line chant for their letter.',
+          'Pattern: "Letter! Letter! Sound-sound-sound!"',
+          '"Letter is for [word]!"',
+          'Use their chosen letter.',
+          'Say it with rhythm and energy.',
+          'Child repeats.',
+          'Clap or tap rhythm together.',
+          'Practice 3-4 times.',
+          'Add simple motion if desired.',
+          'Make it catchy and fun.',
+          'Keep it short and repetitive.'
+        ],
+        examples: [
+          'M chant: "M! M! /mmm/ /mmm/ /mmm/! M is for Monkey! M! M! /mmm/!"',
+          'T chant: "T! T! /t/ /t/ /t/! T is for Train! T! T! /t/!"',
+          'B chant: "B! B! /b/ /b/ /b/! B is for Bear! B! B! /b/!"',
+          'With claps: "(Clap-clap) S! (Clap-clap) S! (Clap) /sss/!"'
+        ],
+        watchFor: [
+          'Attempting to chant.',
+          'Making letter sound.',
+          'Following rhythm.',
+          'Having fun with it.'
+        ],
+        parentTip: 'Chanting creates muscle memory for sounds—powerful for retention!',
+        funTwist: 'Volume control: "Whisper chant! Now loud chant! Now medium chant!"'
+      }
+    },
+    {
+      id: 4,
+      type: 'activity',
+      title: 'Step 4: Alphabet Parade March',
+      duration: '5 min',
+      focus: 'Performance and Movement Integration',
+      researchBasis: 'Cameron et al. (2012) showed that performance activities enhance confidence and memory.',
+      content: {
+        goal: 'March in an alphabet parade, featuring their letter prominently.',
+        whatToSay: [
+          'Time for the Alphabet Parade!',
+          'Hold your banner high!',
+          'March around the room!',
+          'Chant your letter as you march!',
+          'S! S! /sss/ /sss/ /sss/!',
+          'Everyone can see Letter S!',
+          'Keep marching! Keep chanting!',
+          'What a magnificent parade!',
+          'Let\'s go through the whole alphabet!',
+          'A! /a/! B! /b/! C! /k/!',
+          'March for every letter!',
+          'Your letter is the star!'
+        ],
+        whatToDo: [
+          'Clear space for marching.',
+          'Child holds their banner.',
+          'March in a circle or path.',
+          'Child chants their letter repeatedly.',
+          'Parent joins march.',
+          'After their letter is featured, march through A-Z.',
+          'Say each letter as you march past it (imaginary).',
+          'When you reach child\'s letter, they chant loudly.',
+          'March with energy and pride.',
+          'Optional: invite family to watch.',
+          'End with cheers and applause.',
+          'Take a bow together.'
+        ],
+        examples: [
+          'Starting: "Banner up! Here we go! March march march! S! S! /sss/!"',
+          'Full alphabet: "A! (march) B! (march) C! (march)... S! (child chants loudly!)"',
+          'Celebration: "Look at you! Everyone sees your S! You\'re in the parade!"',
+          'Audience: "Grandma, watch! This is the Letter S in the parade! /sss/!"'
+        ],
+        watchFor: [
+          'Marching with enthusiasm.',
+          'Holding banner proudly.',
+          'Chanting their letter.',
+          'Engaged throughout activity.'
+        ],
+        parentTip: 'Performance solidifies learning—they\'ll remember this parade moment!',
+        funTwist: 'Different marches: "Now march like a soldier! Now march like a giant! Now like a mouse!"'
+      }
+    },
+    {
+      id: 5,
+      type: 'conclusion',
+      title: 'Parade Success!',
+      duration: '2 min',
+      content: {
+        celebration: [
+          'You were in the Alphabet Parade!',
+          'You chose your favorite letter',
+          'You made a beautiful banner',
+          'You learned your letter chant',
+          'You marched proudly',
+          'You\'re an alphabet star!'
+        ],
+        reviewQuestions: [
+          'Can they remember their chosen letter?',
+          'Can they repeat their chant?',
+          'Are they proud of their participation?'
+        ],
+        parentTakeaway: {
+          title: 'Performance-Based Learning for Retention',
+          content: 'Today\'s parade activity transformed passive review into active performance. Research by Ehri (2020) demonstrates that performance-based learning—where children "become" or embody knowledge—creates stronger memory traces than passive review. When your child chose their letter, created a banner, learned a chant, and marched proudly, they engaged emotionally and physically with alphabetic knowledge. This multi-sensory performance activated mirror neurons, motor cortex, auditory processing, and emotional centers simultaneously. The choice element was crucial: research by Diamond (1990) shows that personal agency increases intrinsic motivation and creates stronger neural pathways. Your child didn\'t just review letters today—they claimed ownership of one letter and celebrated all 26. This parade experience will be a touchstone memory for their literacy journey. Week 13 continues with different review modalities to ensure all learning styles are engaged.'
+        },
+        nextSteps: [
+          'Display the banner proudly at home.',
+          'Practice the letter chant throughout the day.',
+          'March whenever you hear your child\'s letter.',
+          'Tomorrow: Sound Match Challenge—games and sorting!',
+          'Alphabet Fair continues!'
+        ]
+      }
+    }
+  ]
+},
+
+// ========= LESSON 62 =========
+{
+  id: 62,
+  phase: '3',
+  quarter: 1,
+  week: 13,
+  weekIndex: 12,
+  dayInWeek: 2,
+  title: 'Lesson 62: Sound Match Challenge',
+  theme: 'Alphabet Fair - Quarter Review',
+  skillRecurrenceTags: ['skill-recurrence', 'phoneme-discrimination', 'letter-sound-matching', 'game-based-review'],
+  relatedToPreviousSkills: ['sound-sorting', 'letter-recognition', 'beginning-sounds', 'Week-8-review'],
+  duration: '10-15 min',
+  steps: [
+    {
+      id: 0,
+      type: 'intro',
+      title: 'Sound Detective Day!',
+      duration: '1 min',
+      content: {
+        goal: 'Review letter-sound connections through interactive matching games. Your baby becomes a sound detective!',
+        parentGuide: [
+          'Game-based review is highly effective for retention.',
+          'Matching activities assess and reinforce letter-sound knowledge.',
+          'Today focuses on auditory discrimination and visual recognition.',
+          'Multiple game formats keep engagement high.'
+        ],
+        materials: ['Paper and pencil/markers', 'Your voice for sound production', 'Your hands for pointing', 'Household objects for matching'],
+        tip: 'Make it playful—detectives use magnifying glasses (make one with your hand)!',
+        researchNote: 'National Early Literacy Panel (2008) identified phoneme-letter matching as a critical pre-reading skill.'
+      }
+    },
+    {
+      id: 1,
+      type: 'activity',
+      title: 'Step 1: Sound Mystery Warm-Up',
+      duration: '2 min',
+      focus: 'Auditory Discrimination',
+      researchBasis: 'Lonigan et al. (2000) found that auditory discrimination practice predicts reading success.',
+      content: {
+        goal: 'Identify letters from sounds only.',
+        whatToSay: [
+          'Welcome, Sound Detective!',
+          'I\'ll make a secret sound!',
+          'You guess the letter!',
+          'Ready? First mystery sound...',
+          '/mmm/! What letter is that?',
+          'Yes! M!',
+          'Next sound... /sss/!',
+          'You\'re amazing at this!',
+          'Let\'s do more mystery sounds!'
+        ],
+        whatToDo: [
+          'Make letter sounds randomly.',
+          'Start with easy, continuous sounds.',
+          '/mmm/, /sss/, /fff/, /lll/, /rrr/.',
+          'Child identifies letter.',
+          'If stuck, give hint: "Starts snake!"',
+          'Progress to stop consonants.',
+          '/t/, /p/, /k/, /b/, /d/.',
+          'Mix in vowels.',
+          '/a/, /e/, /i/, /o/, /u/.',
+          'Do 8-10 sounds total.',
+          'Celebrate each correct answer.',
+          'Provide gentle support for difficult ones.'
+        ],
+        examples: [
+          'Easy sound: "/sss/! Hissing sound! What letter? Snake starts with it! S!"',
+          'Stop sound: "/t/! Quick tap sound! What letter? Train! T!"',
+          'Vowel: "/a/! Open mouth sound! Apple starts with it! A!"',
+          'Praise: "You guessed 7 out of 10! You\'re an expert sound detective!"'
+        ],
+        watchFor: [
+          'Correctly identifying sounds.',
+          'Distinguishing similar sounds.',
+          'Thinking before answering.',
+          'Engaged and focused.'
+        ],
+        parentTip: 'This is assessment disguised as play—see which sounds they know best!',
+        funTwist: 'Role reverse: "Now YOU make a mystery sound! I\'ll guess the letter!"'
+      }
+    },
+    {
+      id: 2,
+      type: 'activity',
+      title: 'Step 2: Object Hunt Match',
+      duration: '4 min',
+      focus: 'Real-World Application',
+      researchBasis: 'Hirsh-Pasek et al. (2017) showed that connecting letters to environment enhances retention.',
+      content: {
+        goal: 'Find household objects and match to letter sounds.',
+        whatToSay: [
+          'Time for Object Hunt!',
+          'I say a letter sound!',
+          'You find something that starts with it!',
+          'Ready? /b/!',
+          'Find something that starts with /b/!',
+          'Ball! Book! Yes!',
+          'Next sound... /k/!',
+          'Cup! Car! Perfect!',
+          'You\'re matching sounds to objects!'
+        ],
+        whatToDo: [
+          'Stay in one room or area.',
+          'Say a letter sound.',
+          'Child finds object starting with that sound.',
+          'Start with easier sounds.',
+          '/b/—ball, book, bottle.',
+          '/k/—cup, car toy, cushion.',
+          '/s/—sock, spoon, shoe.',
+          '/t/—table, toy, towel.',
+          '/m/—mom, marker, mat.',
+          'Do 5-8 letter sounds.',
+          'Accept any reasonable answer.',
+          'If stuck, give hints: "Look in the toy box!"',
+          'Celebrate each find.',
+          'Count how many objects found.'
+        ],
+        examples: [
+          'Challenge: "/m/! Find something that starts with /mmm/! Look around!"',
+          'Success: "Mirror! Great job! /m/ mirror! That\'s the sound!"',
+          'Hint: "/p/! Something you write with! Pen! Or something soft! Pillow!"',
+          'Multiple: "You found 3 things for /b/! Ball, book, blanket! Amazing!"'
+        ],
+        watchFor: [
+          'Identifying correct beginning sounds.',
+          'Searching actively.',
+          'Making connections.',
+          'Enjoying the hunt.'
+        ],
+        parentTip: 'This shows they can transfer letter knowledge to real life—huge milestone!',
+        funTwist: 'Speed hunt: "Can you find 5 /s/ things in 2 minutes? Go!"'
+      }
+    },
+    {
+      id: 3,
+      type: 'activity',
+      title: 'Step 3: Draw and Match Grid',
+      duration: '4 min',
+      focus: 'Visual Letter-Sound Connection',
+      researchBasis: 'Ehri (2020) found that explicit matching exercises strengthen orthographic mapping.',
+      content: {
+        goal: 'Create simple grid matching letters to pictures.',
+        whatToSay: [
+          'Let\'s make a matching game!',
+          'Draw 4 letters on the paper!',
+          'Now draw pictures that match!',
+          'Letter S? Draw a sun!',
+          'Letter M? Draw a moon!',
+          'Match them up!',
+          'Draw a line connecting them!',
+          'You\'re making your own matching game!'
+        ],
+        whatToDo: [
+          'Give paper and crayons.',
+          'Draw 4 large letters on left side.',
+          'Choose letters child knows well.',
+          'Examples: S, M, B, T.',
+          'Draw 4 simple pictures on right side.',
+          'Sun, moon, ball, tree (matching).',
+          'Child draws lines connecting matches.',
+          'Say sound as they connect: "S! /sss/! Sun!"',
+          'If child can\'t draw, you draw, they match.',
+          'Focus on the matching thinking.',
+          'Try 2-3 rounds with different letters.',
+          'Make it colorful and fun.'
+        ],
+        examples: [
+          'Setup: "I\'ll draw S, M, B, T on this side. You draw pictures on that side!"',
+          'Matching: "Which picture starts with /sss/? Sun! Draw a line from S to sun!"',
+          'Sound practice: "Say the sound as you connect! /mmm/—moon! Perfect!"',
+          'Challenge: "Now let\'s mix them up! Can you still match them?"'
+        ],
+        watchFor: [
+          'Identifying correct matches.',
+          'Drawing connection lines.',
+          'Saying sounds during matching.',
+          'Understanding the concept.'
+        ],
+        parentTip: 'This grid format is exactly what early reading worksheets look like!',
+        funTwist: 'Trick round: "I\'ll put one wrong picture! Can you find which doesn\'t match?"'
+      }
+    },
+    {
+      id: 4,
+      type: 'activity',
+      title: 'Step 4: Speed Sound Game',
+      duration: '3 min',
+      focus: 'Rapid Recall and Fluency',
+      researchBasis: 'National Reading Panel (2000) identified automaticity as crucial for reading fluency.',
+      content: {
+        goal: 'Quick-fire letter sound practice for fluency.',
+        whatToSay: [
+          'Final challenge—Speed Sounds!',
+          'I point to a letter!',
+          'You say the sound FAST!',
+          'How many can you get in one minute?',
+          'Ready? Here we go!',
+          '(Point to random letters on paper)',
+          'S! Child: "/sss/!" Me: "Yes!"',
+          'M! Child: "/mmm/!" Me: "Great!"',
+          'Fast fast fast!',
+          'You got 15 sounds! Amazing!'
+        ],
+        whatToDo: [
+          'Write 10-15 random letters on paper.',
+          'Mix uppercase and lowercase.',
+          'Include variety: vowels, continuous, stops.',
+          'Point to each letter randomly.',
+          'Child says sound as fast as possible.',
+          'Don\'t worry about perfection.',
+          'Praise speed and effort.',
+          'Count how many they get right.',
+          'Try to beat their own score.',
+          'Keep energy high.',
+          'End with celebration of their total.',
+          'Optional: time it for extra excitement.'
+        ],
+        examples: [
+          'Setup: "I wrote 12 letters! Let\'s see how fast you can say the sounds!"',
+          'During: "T! /t/! Good! B! /b/! Fast! S! /sss/! You\'re on fire!"',
+          'Challenge: "Last time you got 10! Can you beat it? Try for 12!"',
+          'Celebration: "14 sounds in one minute! That\'s almost one every 4 seconds!"'
+        ],
+        watchFor: [
+          'Attempting sounds quickly.',
+          'Recognizing most letters.',
+          'Building confidence.',
+          'Having fun with speed.'
+        ],
+        parentTip: 'Speed builds automaticity—recognizing letters without thinking is the goal!',
+        funTwist: 'Beat the parent: "Now I\'ll try! Can I beat your score? Time me!"'
+      }
+    },
+    {
+      id: 5,
+      type: 'conclusion',
+      title: 'Sound Master!',
+      duration: '1 min',
+      content: {
+        celebration: [
+          'You solved sound mysteries!',
+          'You matched objects to sounds',
+          'You made a matching grid',
+          'You played speed sounds',
+          'You know SO many letter sounds',
+          'You\'re a Sound Match Champion!'
+        ],
+        reviewQuestions: [
+          'Can they identify most letter sounds?',
+          'Can they match objects to beginning sounds?',
+          'Are they faster than before?'
+        ],
+        parentTakeaway: {
+          title: 'Assessment Through Play',
+          content: 'Today\'s activities functioned as both review and informal assessment. Through four different game formats, you observed your child\'s letter-sound knowledge across multiple contexts: auditory only (mystery sounds), environmental application (object hunt), visual matching (grid), and rapid recall (speed game). Research by the National Early Literacy Panel (2008) shows that children who can quickly and accurately match letters to sounds are well-prepared for decoding instruction. The variety of activities today engaged different cognitive systems—auditory discrimination, visual processing, memory retrieval, and environmental connection—ensuring comprehensive review. If your child struggled with certain sounds, note them for extra practice. Most children at this stage know 18-22 letter sounds solidly, with a few still developing. The speed game specifically built automaticity, which is crucial: children need to recognize letters instantly, without conscious effort, to free cognitive resources for comprehension during reading. Tomorrow continues the Alphabet Fair with creative storytelling!'
+        },
+        nextSteps: [
+          'Play sound matching games throughout the day.',
+          'Point out letters and ask: "What sound?"',
+          'Hunt for letter sounds on walks or in the car.',
+          'Tomorrow: Storytime Remix—creative alphabet stories!',
+          'Alphabet Fair continues with fun!'
         ]
       }
     }
