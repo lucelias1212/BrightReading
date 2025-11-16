@@ -15,7 +15,7 @@ const ContactPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Paste your Google Apps Script Web App URL here (from Deploy step)
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxke11C1WZNZJAUDwOeutY2Av7DSO3BOEAPaE7AduQU6AzOFpqgUijxuCmXrywAocZ7rg/exec';
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz3cmWEd_55Ol_3gct_z4QvvcdNM94yVb8hPMiME1EA4U1DU9ViyLV3TU70V9Dv_Mfp9g/exec';
 
   const handleChange = (e) => {
     setFormData({
