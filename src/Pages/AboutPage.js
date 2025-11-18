@@ -57,7 +57,7 @@ const AboutPage = () => {
           </p>
           <div className="bg-white/20 backdrop-blur rounded-xl p-6 max-w-2xl mx-auto">
             <p className="text-lg">
-              We don't conduct research — we translate it. BrightReading brings together decades of peer-reviewed literacy studies and transforms them into practical, 10-minute daily lessons any parent can follow.
+              We don't conduct research, we translate it. BrightReading brings together decades of peer-reviewed literacy studies and transforms them into practical, 10-minute daily lessons any parent can follow.
             </p>
           </div>
         </div>
@@ -268,7 +268,7 @@ className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pi
 
           <div className="mt-6 bg-blue-50 rounded-xl p-4 border-2 border-blue-200">
             <p className="text-sm text-gray-700">
-              <strong>Note:</strong> All activities are adapted from published research studies. We provide the "how-to" — researchers provided the "why it works."
+              <strong>Note:</strong> All activities are adapted from published research studies. We provide the "how-to", researchers provided the "why it works."
             </p>
           </div>
         </div>
