@@ -12455,7 +12455,7 @@ export default {
     }
   ]
 }
-    // Lessons 21-65 will follow the exact same structure: incrementing id, week, weekIndex, dayInWeek, and mapping to Quarter 1 weeks 5-13, then Quarters 2–4 accordingly.
+    
   ]
 };
 

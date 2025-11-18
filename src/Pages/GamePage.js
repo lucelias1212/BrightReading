@@ -1550,7 +1550,10 @@ const GamePage = () => {
                 </button>
                 {previewGame.isPremium && !isPaid ? (
                   <button
-                    onClick={() => navigate('/upgrade')}
+                    onClick={() => {
+                      navigate('/upgrade');
+                      setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
+                    }}
                     className="flex-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-white font-bold py-4 px-8 rounded-xl hover:shadow-xl transition flex items-center justify-center gap-2"
                   >
                     <span>🔒 Upgrade to Premium</span>

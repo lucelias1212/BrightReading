@@ -146,7 +146,7 @@ const { userData, user, createCheckoutSession, createPaymentIntent } = useUser()
     // Configure the verification email
     const actionCodeSettings = {
       url: `${window.location.origin}/upgrade?verified=true`,
-      handleCodeInApp: true,
+      handleCodeInApp: false,
     };
     
     await sendEmailVerification(user, actionCodeSettings);

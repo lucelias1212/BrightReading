@@ -18,6 +18,7 @@ import ContactPage from './Pages/ContactPage';
 import UpgradePage from './Pages/UpgradePage';
 import PaymentSuccess from './Pages/PaymentSuccess';
 import PaymentCancelled from './Pages/PaymentCancelled';
+import AuthActionPage from './Pages/AuthActionPage';
 import './App.css';
 
 // Protected Route wrapper
@@ -47,6 +48,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/auth/action" element={<AuthActionPage />} />
           <Route path="/research" element={<ResearchPage />} />
           <Route path="/parent-guide" element={<ParentGuidePage />} />
           <Route path="/faq" element={<FAQPage />} />

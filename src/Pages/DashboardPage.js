@@ -1046,7 +1046,7 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
           </div>
 
           <button
-            onClick={() => navigate('/subscription')}
+            onClick={() => navigate('/upgrade')}
             className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-10 py-5 rounded-full font-black text-lg shadow-xl hover:shadow-2xl transition transform hover:scale-105 inline-flex items-center gap-3"
           >
             <Sparkles size={24} />
