@@ -1,6 +1,6 @@
 export default {
   quarter: 1,
-  phase: '1-2',
+  phase: '1',
   theme: 'Sounds and Senses',
   weeks: 13,
   description: 'Sound play — animal noises, rhythm claps, name sounds; Object naming and matching; Rhyming exposure',
