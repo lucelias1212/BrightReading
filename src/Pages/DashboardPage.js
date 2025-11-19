@@ -258,18 +258,6 @@ const HomeTab = () => {
                 </div>
                 <div className={`text-[10px] sm:text-xs mt-1 sm:mt-2 font-black ${currentPhase === phase.id ? 'text-white/80' : 'text-gray-500'}`}>
                   {phaseComplete}% complete
-                </div><div className="text-4xl mb-2 sm:mb-3">
-                  <img src={phase.icon} alt={phase.name} className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain mx-auto drop-shadow-lg" />
-                </div>
-                
-                <div className={`font-black text-sm sm:text-base md:text-lg ${currentPhase === phase.id ? 'text-white' : 'text-gray-900'}`}>
-                  {phase.name}
-                </div>
-                <div className={`text-xs sm:text-sm font-bold ${currentPhase === phase.id ? 'text-white/90' : 'text-gray-600'}`}>
-                  {phase.subtitle}
-                </div>
-                <div className={`text-[10px] sm:text-xs mt-1 sm:mt-2 font-black ${currentPhase === phase.id ? 'text-white/80' : 'text-gray-500'}`}>
-                  {phaseComplete}% complete
                 </div>
               </button>
             );
