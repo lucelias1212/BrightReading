@@ -207,32 +207,32 @@ const HomeTab = () => {
   return (
     <div>
 {/* Warm Welcome Banner */}
-      <div className="bg-gradient-to-br from-amber-100 via-orange-100 to-pink-100 rounded-3xl shadow-2xl p-8 md:p-12 border-4 border-white relative overflow-hidden mb-8">
+      <div className="bg-gradient-to-br from-amber-100 via-orange-100 to-pink-100 rounded-2xl sm:rounded-3xl shadow-2xl p-6 sm:p-8 md:p-12 border-3 sm:border-4 border-white relative overflow-hidden mb-6 sm:mb-8">
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-72 h-72 bg-pink-200/30 rounded-full blur-3xl"></div>
         
         <div className="relative z-10">
-          <div className="inline-flex items-center gap-2 bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-black uppercase tracking-wide mb-4 shadow-lg border-2 border-white">
-            <Sparkles size={16} />
+          <div className="inline-flex items-center gap-2 bg-orange-500 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-black uppercase tracking-wide mb-3 sm:mb-4 shadow-lg border-2 border-white">
+            <Sparkles size={14} className="sm:w-4 sm:h-4" />
             Welcome back!
           </div>
-          <h1 className="text-5xl md:text-6xl font-black text-gray-900 mb-3 leading-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-2 sm:mb-3 leading-tight">
             Hi {parentFirstName}! 👋
           </h1>
-          <p className="text-2xl text-gray-800 font-black mb-2">
+          <p className="text-lg sm:text-2xl text-gray-800 font-black mb-2">
             You're doing an amazing job with {childrenGreeting}.
           </p>
-          <p className="text-xl text-gray-700 font-semibold">
+          <p className="text-base sm:text-xl text-gray-700 font-semibold">
             Every little moment counts. Let's make today's learning fun and joyful.
           </p>
         </div>
       </div>
 
 {/* Phase Selector */}
-      <div className="bg-white rounded-3xl shadow-2xl p-8 mb-8 border-4 border-purple-200 relative overflow-hidden">
+      <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 border-3 sm:border-4 border-purple-200 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-purple-100/50 rounded-full blur-3xl"></div>
-        <h3 className="text-3xl font-black text-gray-900 mb-6 relative z-10">Learning Phase</h3>
-<div className="grid grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
+        <h3 className="text-2xl sm:text-3xl font-black text-gray-900 mb-4 sm:mb-6 relative z-10">Learning Phase</h3>
+<div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 relative z-10">
           {phases.map((phase) => {
             const phaseProgress = userData?.phaseProgress?.[phase.id] || { completedLessons: [] };
             const phaseComplete = Math.round((phaseProgress.completedLessons.length / 260) * 100);
@@ -240,79 +240,92 @@ const HomeTab = () => {
               <button
                 key={phase.id}
                 onClick={() => handleSwitchPhase(phase.id)}
-                className={`p-6 rounded-2xl border-4 transition transform hover:scale-110 active:scale-95 hover:shadow-2xl ${
+                className={`p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl border-3 sm:border-4 transition transform hover:scale-110 active:scale-95 hover:shadow-2xl ${
                   currentPhase === phase.id
                     ? `bg-gradient-to-br ${phase.color} text-white border-white shadow-2xl ring-4 ring-purple-300`
                     : 'bg-gradient-to-br from-gray-50 to-gray-100 border-gray-300 hover:border-purple-300 shadow-lg'
                 }`}
               >
-                <div className="text-4xl mb-3">
-                  <img src={phase.icon} alt={phase.name} className="w-20 h-20 object-contain mx-auto drop-shadow-lg" />
+                <div className="text-4xl mb-2 sm:mb-3">
+                  <img src={phase.icon} alt={phase.name} className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain mx-auto drop-shadow-lg" />
                 </div>
                 
-                <div className={`font-black text-lg ${currentPhase === phase.id ? 'text-white' : 'text-gray-900'}`}>
+                <div className={`font-black text-sm sm:text-base md:text-lg ${currentPhase === phase.id ? 'text-white' : 'text-gray-900'}`}>
                   {phase.name}
                 </div>
-                <div className={`text-sm font-bold ${currentPhase === phase.id ? 'text-white/90' : 'text-gray-600'}`}>
+                <div className={`text-xs sm:text-sm font-bold ${currentPhase === phase.id ? 'text-white/90' : 'text-gray-600'}`}>
                   {phase.subtitle}
                 </div>
-                <div className={`text-xs mt-2 font-black ${currentPhase === phase.id ? 'text-white/80' : 'text-gray-500'}`}>
+                <div className={`text-[10px] sm:text-xs mt-1 sm:mt-2 font-black ${currentPhase === phase.id ? 'text-white/80' : 'text-gray-500'}`}>
+                  {phaseComplete}% complete
+                </div><div className="text-4xl mb-2 sm:mb-3">
+                  <img src={phase.icon} alt={phase.name} className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain mx-auto drop-shadow-lg" />
+                </div>
+                
+                <div className={`font-black text-sm sm:text-base md:text-lg ${currentPhase === phase.id ? 'text-white' : 'text-gray-900'}`}>
+                  {phase.name}
+                </div>
+                <div className={`text-xs sm:text-sm font-bold ${currentPhase === phase.id ? 'text-white/90' : 'text-gray-600'}`}>
+                  {phase.subtitle}
+                </div>
+                <div className={`text-[10px] sm:text-xs mt-1 sm:mt-2 font-black ${currentPhase === phase.id ? 'text-white/80' : 'text-gray-500'}`}>
                   {phaseComplete}% complete
                 </div>
               </button>
             );
           })}
         </div>
-        <p className="text-sm text-gray-700 font-bold mt-6 text-center bg-gradient-to-r from-blue-100 to-cyan-100 rounded-2xl p-4 border-3 border-blue-300 shadow-md relative z-10">
+        <p className="text-xs sm:text-sm text-gray-700 font-bold mt-4 sm:mt-6 text-center bg-gradient-to-r from-blue-100 to-cyan-100 rounded-xl sm:rounded-2xl p-3 sm:p-4 border-2 sm:border-3 border-blue-300 shadow-md relative z-10">
           💡 Switch phases anytime! Your progress is saved for each phase.
         </p>
       </div>
 
       {completedLessons.length === 0 ? (
-        <div className={`bg-gradient-to-br ${currentPhaseInfo?.color} rounded-3xl p-12 text-center text-white shadow-2xl mb-8 relative overflow-hidden border-4 border-white`}>
-          <div className="absolute top-4 right-8 text-9xl opacity-20">🎈</div>
-          <div className="absolute bottom-4 left-8 text-7xl opacity-15">✨</div>
+        <div className={`bg-gradient-to-br ${currentPhaseInfo?.color} rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center text-white shadow-2xl mb-6 sm:mb-8 relative overflow-hidden border-3 sm:border-4 border-white`}>
+          <div className="absolute top-4 right-8 text-6xl sm:text-9xl opacity-20">🎈</div>
+          <div className="absolute bottom-4 left-8 text-5xl sm:text-7xl opacity-15">✨</div>
           <div className="relative z-10">
-            <h2 className="text-5xl font-black mb-4 drop-shadow-lg">Let's Get Started!</h2>
-            <p className="text-2xl mb-4 opacity-95 font-bold">Begin {childName}'s reading journey in {currentPhaseInfo?.name}</p>
-            <p className="text-xl mb-8 opacity-90 font-semibold max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-3 sm:mb-4 drop-shadow-lg">Let's Get Started!</h2>
+            <p className="text-lg sm:text-xl md:text-2xl mb-3 sm:mb-4 opacity-95 font-bold">Begin {childName}'s reading journey in {currentPhaseInfo?.name}</p>
+            <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 opacity-90 font-semibold max-w-2xl mx-auto">
               Don't worry about being perfect. You just need to show up and have fun together.
             </p>
             <button
               onClick={() => handleNavigate('/lesson/1')}
-              className="bg-white text-purple-600 px-12 py-6 rounded-full font-black text-2xl hover:bg-gray-50 transition shadow-2xl transform hover:scale-110 active:scale-95 inline-flex items-center gap-3 border-4 border-purple-200"
+              className="bg-white text-purple-600 px-6 sm:px-8 md:px-12 py-3 sm:py-4 md:py-6 rounded-full font-black text-lg sm:text-xl md:text-2xl hover:bg-gray-50 transition shadow-2xl transform hover:scale-110 active:scale-95 inline-flex items-center gap-2 sm:gap-3 border-3 sm:border-4 border-purple-200"
             >
-              <Play size={32} />
+              <Play size={24} className="sm:w-7 sm:h-7 md:w-8 md:h-8" />
               Start First Lesson
             </button>
           </div>
         </div>
       ) : (
-        <div className={`bg-gradient-to-br ${currentPhaseInfo?.color} rounded-3xl p-10 text-white shadow-2xl mb-8 relative overflow-hidden border-4 border-white`}>
+        <div className={`bg-gradient-to-br ${currentPhaseInfo?.color} rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 text-white shadow-2xl mb-6 sm:mb-8 relative overflow-hidden border-3 sm:border-4 border-white`}>
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-72 h-72 bg-black/10 rounded-full blur-3xl"></div>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
-            <div className="flex-1">
-              <div className="inline-flex items-center gap-2 bg-white/30 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-black uppercase tracking-wide mb-4 border-2 border-white/50 shadow-lg">
-                <Zap size={16} />
-                {currentPhaseInfo?.name.toUpperCase()} • CONTINUE LEARNING
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 relative z-10">
+            <div className="flex-1 text-center md:text-left">
+              <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-white/30 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-black uppercase tracking-wide mb-3 sm:mb-4 border-2 border-white/50 shadow-lg">
+                <Zap size={14} className="sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">{currentPhaseInfo?.name.toUpperCase()} • CONTINUE LEARNING</span>
+                <span className="sm:hidden">CONTINUE</span>
               </div>
-              <h2 className="text-4xl font-black mb-3 drop-shadow-lg">Week {nextLesson.week}, Lesson {nextLesson.lessonInWeek}</h2>
-              <p className="text-xl opacity-95 mb-6 font-bold">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-2 sm:mb-3 drop-shadow-lg">Week {nextLesson.week}, Lesson {nextLesson.lessonInWeek}</h2>
+              <p className="text-base sm:text-lg md:text-xl opacity-95 mb-4 sm:mb-6 font-bold">
                 You're crushing it! {childName} is learning so much from you. Let's keep the momentum going.
               </p>
               <button
                 onClick={() => handleNavigate(`/lesson/${nextLesson.lesson}`)}
-                className="bg-white text-purple-600 px-10 py-5 rounded-full font-black text-xl hover:bg-gray-50 transition shadow-2xl inline-flex items-center gap-3 border-4 border-purple-200 transform hover:scale-110 active:scale-95"
+                className="bg-white text-purple-600 px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full font-black text-base sm:text-lg md:text-xl hover:bg-gray-50 transition shadow-2xl inline-flex items-center gap-2 sm:gap-3 border-3 sm:border-4 border-purple-200 transform hover:scale-110 active:scale-95"
               >
-                <Play size={28} />
+                <Play size={20} className="sm:w-6 sm:h-6 md:w-7 md:h-7" />
                 Continue Lesson
               </button>
             </div>
-            <div className="bg-white/30 backdrop-blur-md rounded-3xl p-8 text-center min-w-[160px] border-4 border-white/50 shadow-2xl">
-              <div className="text-6xl font-black mb-2 drop-shadow-lg">{totalProgress}%</div>
-              <div className="text-base opacity-95 font-bold">{currentPhaseInfo?.name}</div>
-              <div className="text-sm opacity-80 mt-2 font-semibold">{completedLessons.length}/260</div>
+            <div className="bg-white/30 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 text-center min-w-[120px] sm:min-w-[160px] border-3 sm:border-4 border-white/50 shadow-2xl">
+              <div className="text-4xl sm:text-5xl md:text-6xl font-black mb-1 sm:mb-2 drop-shadow-lg">{totalProgress}%</div>
+              <div className="text-sm sm:text-base opacity-95 font-bold">{currentPhaseInfo?.name}</div>
+              <div className="text-xs sm:text-sm opacity-80 mt-1 sm:mt-2 font-semibold">{completedLessons.length}/260</div>
             </div>
           </div>
         </div>
@@ -320,40 +333,40 @@ const HomeTab = () => {
 
       {completedLessons.length > 0 && (
         <>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div className="bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl shadow-xl p-6 text-center border-4 border-purple-300 hover:shadow-2xl transition transform hover:scale-110 active:scale-95">
-              <div className="text-5xl font-black text-purple-600 mb-2 drop-shadow-md">{completedLessons.length}</div>
-              <div className="text-sm text-purple-900 font-black">Lessons Done</div>
-              <div className="text-2xl mt-1 ">🌟</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
+            <div className="bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl sm:rounded-2xl shadow-xl p-3 sm:p-4 md:p-6 text-center border-3 sm:border-4 border-purple-300 hover:shadow-2xl transition transform hover:scale-110 active:scale-95">
+              <div className="text-3xl sm:text-4xl md:text-5xl font-black text-purple-600 mb-1 sm:mb-2 drop-shadow-md">{completedLessons.length}</div>
+              <div className="text-xs sm:text-sm text-purple-900 font-black">Lessons Done</div>
+              <div className="text-lg sm:text-xl md:text-2xl mt-1">🌟</div>
             </div>
-            <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl shadow-xl p-6 text-center border-4 border-blue-300 hover:shadow-2xl transition transform hover:scale-110 active:scale-95">
-              <div className="text-5xl font-black text-blue-600 mb-2 drop-shadow-md">{currentWeek}</div>
-              <div className="text-sm text-blue-900 font-black">Current Week</div>
-              <div className="text-2xl mt-1 ">🎯</div>
+            <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl sm:rounded-2xl shadow-xl p-3 sm:p-4 md:p-6 text-center border-3 sm:border-4 border-blue-300 hover:shadow-2xl transition transform hover:scale-110 active:scale-95">
+              <div className="text-3xl sm:text-4xl md:text-5xl font-black text-blue-600 mb-1 sm:mb-2 drop-shadow-md">{currentWeek}</div>
+              <div className="text-xs sm:text-sm text-blue-900 font-black">Current Week</div>
+              <div className="text-lg sm:text-xl md:text-2xl mt-1">🎯</div>
             </div>
-            <div className="bg-gradient-to-br from-green-100 to-green-200 rounded-2xl shadow-xl p-6 text-center border-4 border-green-300 hover:shadow-2xl transition transform hover:scale-110 active:scale-95">
-              <div className="text-5xl font-black text-green-600 mb-2 drop-shadow-md">{weekProgress}/5</div>
-              <div className="text-sm text-green-900 font-black">This Week</div>
-              <div className="text-2xl mt-1 ">💪</div>
+            <div className="bg-gradient-to-br from-green-100 to-green-200 rounded-xl sm:rounded-2xl shadow-xl p-3 sm:p-4 md:p-6 text-center border-3 sm:border-4 border-green-300 hover:shadow-2xl transition transform hover:scale-110 active:scale-95">
+              <div className="text-3xl sm:text-4xl md:text-5xl font-black text-green-600 mb-1 sm:mb-2 drop-shadow-md">{weekProgress}/5</div>
+              <div className="text-xs sm:text-sm text-green-900 font-black">This Week</div>
+              <div className="text-lg sm:text-xl md:text-2xl mt-1">💪</div>
             </div>
-            <div className="bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl shadow-xl p-6 text-center border-4 border-orange-300 hover:shadow-2xl transition transform hover:scale-110 active:scale-95">
-              <div className="text-5xl font-black text-orange-600 mb-2 drop-shadow-md">{currentStreak}</div>
-              <div className="text-sm text-orange-900 font-black">Day Streak</div>
-              <div className="text-2xl mt-1 ">🔥</div>
+            <div className="bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl sm:rounded-2xl shadow-xl p-3 sm:p-4 md:p-6 text-center border-3 sm:border-4 border-orange-300 hover:shadow-2xl transition transform hover:scale-110 active:scale-95">
+              <div className="text-3xl sm:text-4xl md:text-5xl font-black text-orange-600 mb-1 sm:mb-2 drop-shadow-md">{currentStreak}</div>
+              <div className="text-xs sm:text-sm text-orange-900 font-black">Day Streak</div>
+              <div className="text-lg sm:text-xl md:text-2xl mt-1">🔥</div>
             </div>
           </div>
 
           {/* Reassurance Message */}
-          <div className="bg-gradient-to-r from-pink-100 via-purple-100 to-blue-100 rounded-3xl shadow-2xl p-8 border-4 border-pink-300 mb-8 relative overflow-hidden">
+          <div className="bg-gradient-to-r from-pink-100 via-purple-100 to-blue-100 rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 border-3 sm:border-4 border-pink-300 mb-6 sm:mb-8 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/30 rounded-full blur-3xl"></div>
-            <div className="flex items-start gap-4 relative z-10">
-              <div className="text-6xl flex-shrink-0 animate-pulse">💕</div>
+            <div className="flex items-start gap-3 sm:gap-4 relative z-10">
+              <div className="text-4xl sm:text-5xl md:text-6xl flex-shrink-0 animate-pulse">💕</div>
               <div>
-                <h3 className="text-3xl font-black text-gray-900 mb-3">You're Doing Great</h3>
-                <p className="text-gray-800 font-black text-lg mb-3">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-gray-900 mb-2 sm:mb-3">You're Doing Great</h3>
+                <p className="text-gray-800 font-black text-sm sm:text-base md:text-lg mb-2 sm:mb-3">
                   Remember: there's no "perfect" way to do this. Every parent feels a little nervous sometimes, and that's totally okay. You showing up today? That's what matters.
                 </p>
-                <p className="text-gray-800 font-black text-lg">
+                <p className="text-gray-800 font-black text-sm sm:text-base md:text-lg">
                   Each little lesson is a gift you're giving {childName}. Enjoy the journey together.
                 </p>
               </div>
@@ -364,34 +377,34 @@ const HomeTab = () => {
 
       {/* Current Week Lessons */}
       {completedLessons.length > 0 && (
-        <div className="bg-white rounded-3xl shadow-2xl p-8 mb-8 border-4 border-blue-200 relative overflow-hidden">
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 border-3 sm:border-4 border-blue-200 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-72 h-72 bg-blue-100/50 rounded-full blur-3xl"></div>
-          <h3 className="text-3xl font-black text-gray-900 mb-6 relative z-10">This Week's Lessons</h3>
-          <div className="space-y-3 relative z-10">
+          <h3 className="text-2xl sm:text-3xl font-black text-gray-900 mb-4 sm:mb-6 relative z-10">This Week's Lessons</h3>
+          <div className="space-y-2 sm:space-y-3 relative z-10">
 {getWeekLessons(currentWeek).map((lessonNum, idx) => {
   const lessonData = getLesson(lessonNum, currentPhase); 
   return (
-                <div
+<div
                   key={lessonNum}
-                  className={`flex items-center justify-between p-6 rounded-2xl transition transform hover:scale-105 shadow-lg border-3 ${
+                  className={`flex items-center justify-between p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl transition transform hover:scale-105 shadow-lg border-2 sm:border-3 ${
                     isLessonCompleted(lessonNum) 
                       ? 'bg-gradient-to-r from-green-100 to-teal-100 border-green-300 hover:shadow-green-200' 
                       : 'bg-gradient-to-r from-gray-50 to-gray-100 border-gray-300 hover:border-purple-400 hover:shadow-purple-200'
                   }`}
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2 sm:gap-3 md:gap-4 flex-1 min-w-0">
                     {isLessonCompleted(lessonNum) ? (
-                      <div className="bg-gradient-to-br from-green-500 to-teal-500 text-white rounded-full p-3 shadow-lg border-2 border-white">
-                        <CheckCircle size={28} />
+                      <div className="bg-gradient-to-br from-green-500 to-teal-500 text-white rounded-full p-2 sm:p-2.5 md:p-3 shadow-lg border-2 border-white flex-shrink-0">
+                        <CheckCircle size={20} className="sm:w-6 sm:h-6 md:w-7 md:h-7" />
                       </div>
                     ) : (
-                      <div className="w-14 h-14 rounded-full border-4 border-gray-400 flex items-center justify-center bg-white shadow-md">
-                        <span className="text-gray-500 font-black text-xl">{idx + 1}</span>
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border-3 sm:border-4 border-gray-400 flex items-center justify-center bg-white shadow-md flex-shrink-0">
+                        <span className="text-gray-500 font-black text-base sm:text-lg md:text-xl">{idx + 1}</span>
                       </div>
                     )}
-                    <div>
-                      <div className="font-black text-gray-900 text-xl">{lessonData?.theme || `Lesson ${idx + 1}`}</div>
-                      <div className="text-sm font-bold flex items-center gap-2">
+                    <div className="min-w-0 flex-1">
+                      <div className="font-black text-gray-900 text-sm sm:text-base md:text-xl truncate">{lessonData?.theme || `Lesson ${idx + 1}`}</div>
+                      <div className="text-xs sm:text-sm font-bold flex items-center gap-2">
                         {isLessonCompleted(lessonNum) ? (
                           <span className="text-green-700">✓ Completed</span>
                         ) : (
@@ -402,7 +415,7 @@ const HomeTab = () => {
                   </div>
                   <button
                     onClick={() => handleNavigate(`/lesson/${lessonNum}`)}
-                    className={`px-8 py-4 rounded-xl font-black transition shadow-lg transform hover:scale-110 active:scale-95 ${
+                    className={`px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-lg sm:rounded-xl font-black transition shadow-lg transform hover:scale-110 active:scale-95 text-sm sm:text-base flex-shrink-0 ml-2 ${
                       isLessonCompleted(lessonNum)
                         ? 'bg-gradient-to-r from-green-400 to-teal-400 text-white hover:from-green-500 hover:to-teal-500 border-2 border-white'
                         : `bg-gradient-to-r ${currentPhaseInfo?.color} text-white hover:shadow-2xl border-2 border-white`
@@ -411,7 +424,7 @@ const HomeTab = () => {
                     {isLessonCompleted(lessonNum) ? 'Review' : 'Start'}
                   </button>
                 </div>
-              );
+                              );
             })}
           </div>
         </div>
@@ -444,55 +457,55 @@ const ProgressTab = () => {
   return (
     <div>
       {/* Main Progress Card */}
-      <div className="bg-white rounded-3xl shadow-lg p-8 mb-8 border-4 border-purple-200">
-        <h3 className="text-3xl font-black text-gray-900 mb-2 flex items-center gap-3"><img src="/assets/PP.png" alt="progress" className="w-16 h-16 object-contain" />
+      <div className="bg-white rounded-2xl sm:rounded-3xl shadow-lg p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 border-3 sm:border-4 border-purple-200">
+        <h3 className="text-2xl sm:text-3xl font-black text-gray-900 mb-2 flex items-center gap-2 sm:gap-3"><img src="/assets/PP.png" alt="progress" className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain" />
           {currentPhaseInfo?.name} Progress
         </h3>
-        <p className="text-gray-600 font-semibold mb-8">You're on an amazing journey!</p>
+        <p className="text-sm sm:text-base text-gray-600 font-semibold mb-4 sm:mb-6 md:mb-8">You're on an amazing journey!</p>
 
-        <div className="mb-8">
-          <div className="flex justify-between text-sm text-gray-600 mb-3">
+        <div className="mb-6 sm:mb-8">
+          <div className="flex justify-between text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3">
             <span className="font-bold">Overall Progress</span>
-            <span className="font-black text-purple-600 text-lg">{totalProgress}%</span>
+            <span className="font-black text-purple-600 text-base sm:text-lg">{totalProgress}%</span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-8 overflow-hidden shadow-md">
+          <div className="w-full bg-gray-200 rounded-full h-6 sm:h-8 overflow-hidden shadow-md">
             <div
-              className={`bg-gradient-to-r ${currentPhaseInfo?.color} h-8 rounded-full transition-all duration-500 flex items-center justify-end pr-4`}
+              className={`bg-gradient-to-r ${currentPhaseInfo?.color} h-6 sm:h-8 rounded-full transition-all duration-500 flex items-center justify-end pr-2 sm:pr-4`}
               style={{ width: `${totalProgress}%` }}
             >
-              {totalProgress > 15 && <span className="text-white text-xs font-black">{totalProgress}%</span>}
+              {totalProgress > 15 && <span className="text-white text-[10px] sm:text-xs font-black">{totalProgress}%</span>}
             </div>
           </div>
-          <p className="text-center text-gray-600 mt-4 font-semibold">
+          <p className="text-center text-gray-600 mt-3 sm:mt-4 font-semibold text-xs sm:text-sm md:text-base">
             {completedLessons.length} of 260 lessons completed in {currentPhaseInfo?.name}
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="text-center p-6 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl border-3 border-purple-300">
-            <div className="text-5xl font-black text-purple-600 mb-2">{completedLessons.length}</div>
-            <div className="text-gray-700 font-bold">Total Lessons</div>
-            <div className="text-xs text-purple-600 font-semibold mt-2">in this phase</div>
+        <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+          <div className="text-center p-3 sm:p-4 md:p-6 bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl sm:rounded-2xl border-2 sm:border-3 border-purple-300">
+            <div className="text-3xl sm:text-4xl md:text-5xl font-black text-purple-600 mb-1 sm:mb-2">{completedLessons.length}</div>
+            <div className="text-xs sm:text-sm md:text-base text-gray-700 font-bold">Total Lessons</div>
+            <div className="text-[10px] sm:text-xs text-purple-600 font-semibold mt-1 sm:mt-2">in this phase</div>
           </div>
-          <div className="text-center p-6 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl border-3 border-blue-300">
-            <div className="text-5xl font-black text-blue-600 mb-2">{Math.max(0, currentWeek - 1)}</div>
-            <div className="text-gray-700 font-bold">Weeks Finished</div>
-            <div className="text-xs text-blue-600 font-semibold mt-2">keep it up!</div>
+          <div className="text-center p-3 sm:p-4 md:p-6 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl sm:rounded-2xl border-2 sm:border-3 border-blue-300">
+            <div className="text-3xl sm:text-4xl md:text-5xl font-black text-blue-600 mb-1 sm:mb-2">{Math.max(0, currentWeek - 1)}</div>
+            <div className="text-xs sm:text-sm md:text-base text-gray-700 font-bold">Weeks Finished</div>
+            <div className="text-[10px] sm:text-xs text-blue-600 font-semibold mt-1 sm:mt-2">keep it up!</div>
           </div>
-          <div className="text-center p-6 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl border-3 border-green-300">
-            <div className="text-5xl font-black text-green-600 mb-2">{currentStreak}</div>
-            <div className="text-gray-700 font-bold">Day Streak</div>
-            <div className="text-xs text-green-600 font-semibold mt-2">on fire!</div>
+          <div className="text-center p-3 sm:p-4 md:p-6 bg-gradient-to-br from-green-100 to-green-200 rounded-xl sm:rounded-2xl border-2 sm:border-3 border-green-300">
+            <div className="text-3xl sm:text-4xl md:text-5xl font-black text-green-600 mb-1 sm:mb-2">{currentStreak}</div>
+            <div className="text-xs sm:text-sm md:text-base text-gray-700 font-bold">Day Streak</div>
+            <div className="text-[10px] sm:text-xs text-green-600 font-semibold mt-1 sm:mt-2">on fire!</div>
           </div>
         </div>
       </div>
 
       {/* Progress by Quarter */}
-      <div className="bg-white rounded-3xl shadow-lg p-8 mb-8 border-4 border-blue-200">
-<h3 className="text-3xl font-black text-gray-900 mb-6 flex items-center gap-3"><img src="/assets/QP.png" alt="quarter" className="w-16 h-16 object-contain" />
+      <div className="bg-white rounded-2xl sm:rounded-3xl shadow-lg p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 border-3 sm:border-4 border-blue-200">
+<h3 className="text-2xl sm:text-3xl font-black text-gray-900 mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3"><img src="/assets/QP.png" alt="quarter" className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain" />
           Progress by Quarter
         </h3>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
           {[1, 2, 3, 4].map((quarterNum) => {
             const quarterInfo = quarterThemes[quarterNum];
             const progress = getQuarterProgress(quarterNum);
@@ -502,38 +515,38 @@ const ProgressTab = () => {
             return (
               <div
                 key={quarterNum}
-                className={`bg-gradient-to-br ${quarterInfo.color} rounded-2xl p-6 text-white border-4 border-white shadow-lg ${
-                  isCurrentQuarter ? 'ring-4 ring-purple-500 ring-offset-2' : ''
+                className={`bg-gradient-to-br ${quarterInfo.color} rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 text-white border-3 sm:border-4 border-white shadow-lg ${
+                  isCurrentQuarter ? 'ring-2 sm:ring-4 ring-purple-500 ring-offset-1 sm:ring-offset-2' : ''
                 }`}
               >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="text-5xl">
-                      <img src={quarterInfo.icon} alt={quarterInfo.name} className="w-14 h-14 object-contain" />
+                <div className="flex items-center justify-between mb-3 sm:mb-4">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="text-3xl sm:text-4xl md:text-5xl">
+                      <img src={quarterInfo.icon} alt={quarterInfo.name} className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain" />
                     </div>
                     <div>
-                      <h4 className="text-2xl font-black">{quarterInfo.name}</h4>
-                      <p className="text-sm font-semibold opacity-90">{quarterInfo.theme}</p>
+                      <h4 className="text-lg sm:text-xl md:text-2xl font-black">{quarterInfo.name}</h4>
+                      <p className="text-xs sm:text-sm font-semibold opacity-90">{quarterInfo.theme}</p>
                     </div>
                   </div>
                   {isCurrentQuarter && (
-                    <span className="bg-white/30 backdrop-blur px-4 py-2 rounded-full text-sm font-black border-2 border-white/50">
+                    <span className="bg-white/30 backdrop-blur px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-full text-xs sm:text-sm font-black border-2 border-white/50">
                       NOW
                     </span>
                   )}
                 </div>
-                <div className="mb-3">
-                  <div className="flex justify-between text-sm mb-2">
+                <div className="mb-2 sm:mb-3">
+                  <div className="flex justify-between text-xs sm:text-sm mb-1 sm:mb-2">
                     <span className="font-bold">Progress</span>
                     <span className="font-black">{progressPercent}%</span>
                   </div>
-                  <div className="w-full bg-white/30 rounded-full h-4 overflow-hidden border-2 border-white/50">
+                  <div className="w-full bg-white/30 rounded-full h-3 sm:h-4 overflow-hidden border-2 border-white/50">
                     <div
-                      className="bg-white h-4 rounded-full transition-all duration-500 font-black"
+                      className="bg-white h-3 sm:h-4 rounded-full transition-all duration-500 font-black"
                       style={{ width: `${progressPercent}%` }}
                     />
                   </div>
-                  <div className="text-xs font-bold mt-3 opacity-90">
+                  <div className="text-[10px] sm:text-xs font-bold mt-2 sm:mt-3 opacity-90">
                     {progress.completed} of 13 weeks completed
                   </div>
                 </div>
@@ -544,39 +557,39 @@ const ProgressTab = () => {
       </div>
 
       {/* Achievements Section */}
-      <div className="bg-gradient-to-br from-yellow-400 via-orange-400 to-pink-500 rounded-3xl shadow-xl p-8 text-white mb-8 border-4 border-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 text-9xl opacity-15">🏆</div>
+      <div className="bg-gradient-to-br from-yellow-400 via-orange-400 to-pink-500 rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 text-white mb-6 sm:mb-8 border-3 sm:border-4 border-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 text-6xl sm:text-8xl md:text-9xl opacity-15">🏆</div>
         
-        <div className="flex items-center justify-between mb-6 relative z-10"><div className="flex items-center gap-3"><img src="/assets/Achievements.png" alt="achievements" className="w-16 h-16 object-contain" />
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4 sm:mb-6 relative z-10"><div className="flex items-center gap-2 sm:gap-3"><img src="/assets/Achievements.png" alt="achievements" className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain" />
             <div>
-              <h3 className="text-3xl font-black">Your Achievements</h3>
-              <p className="text-white/90 text-lg font-bold">Across all learning phases</p>
+              <h3 className="text-2xl sm:text-3xl font-black">Your Achievements</h3>
+              <p className="text-white/90 text-sm sm:text-base md:text-lg font-bold">Across all learning phases</p>
             </div>
           </div>
-          <div className="bg-white/30 backdrop-blur-sm rounded-2xl px-6 py-3 text-center border-2 border-white/50">
-            <div className="text-3xl font-black">{unlockedCount}/{achievements.length}</div>
-            <div className="text-sm font-bold">Unlocked</div>
+          <div className="bg-white/30 backdrop-blur-sm rounded-xl sm:rounded-2xl px-4 sm:px-6 py-2 sm:py-3 text-center border-2 border-white/50">
+            <div className="text-2xl sm:text-3xl font-black">{unlockedCount}/{achievements.length}</div>
+            <div className="text-xs sm:text-sm font-bold">Unlocked</div>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-3 max-h-96 overflow-y-auto pr-2 relative z-10">
+        <div className="grid sm:grid-cols-2 gap-2 sm:gap-3 max-h-80 sm:max-h-96 overflow-y-auto pr-1 sm:pr-2 relative z-10">
           {achievements.map((achievement) => (
             <div
               key={achievement.id}
-              className={`rounded-2xl p-5 flex items-center gap-4 transition transform border-2 ${
+              className={`rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-5 flex items-center gap-2 sm:gap-3 md:gap-4 transition transform border-2 ${
                 achievement.unlocked
                   ? 'bg-white/30 backdrop-blur-sm hover:scale-105 shadow-lg border-white/50'
                   : 'bg-white/10 opacity-50 border-white/20'
               }`}
             >
-              <img src={achievement.icon} alt={achievement.name} className={`w-16 h-16 object-contain flex-shrink-0 ${achievement.unlocked ? '' : 'opacity-50'}`} />
+              <img src={achievement.icon} alt={achievement.name} className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain flex-shrink-0 ${achievement.unlocked ? '' : 'opacity-50'}`} />
               <div className="flex-1 min-w-0">
-                <h4 className="font-black text-lg">{achievement.name}</h4>
-                <p className="text-sm text-white/90 font-semibold">{achievement.desc}</p>
+                <h4 className="font-black text-sm sm:text-base md:text-lg">{achievement.name}</h4>
+                <p className="text-xs sm:text-sm text-white/90 font-semibold">{achievement.desc}</p>
               </div>
               {achievement.unlocked && (
-                <div className="bg-white/40 p-2 rounded-full flex-shrink-0 border-2 border-white">
-                  <CheckCircle size={24} className="text-white" />
+                <div className="bg-white/40 p-1.5 sm:p-2 rounded-full flex-shrink-0 border-2 border-white">
+                  <CheckCircle size={18} className="text-white sm:w-5 sm:h-5 md:w-6 md:h-6" />
                 </div>
               )}
             </div>
@@ -584,13 +597,13 @@ const ProgressTab = () => {
         </div>
 
         {allPhasesTotal > 0 && (
-          <div className="mt-6 text-center bg-white/25 backdrop-blur-sm rounded-2xl p-5 border-2 border-white/50 relative z-10">
-            <p className="font-black text-lg">
+          <div className="mt-4 sm:mt-6 text-center bg-white/25 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-5 border-2 border-white/50 relative z-10">
+            <p className="font-black text-base sm:text-lg">
               {unlockedCount === achievements.length 
                 ? "You got them all! Amazing!" 
                 : `${achievements.length - unlockedCount} more to unlock!`}
             </p>
-            <p className="text-sm font-bold text-white/90 mt-2">
+            <p className="text-xs sm:text-sm font-bold text-white/90 mt-1 sm:mt-2">
               Total lessons across all phases: {allPhasesTotal}
             </p>
           </div>
@@ -604,21 +617,21 @@ const ProgressTab = () => {
   const CurriculumTab = () => (
   <div>
     {/* Header with Full Curriculum Link */}
-    <div className="bg-gradient-to-br from-purple-600 via-pink-500 to-rose-500 rounded-3xl shadow-2xl p-8 mb-6 text-white relative overflow-hidden">
+    <div className="bg-gradient-to-br from-purple-600 via-pink-500 to-rose-500 rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 mb-4 sm:mb-6 text-white relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
       <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
       <div className="relative z-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
           <div className="flex-1 text-center md:text-left">
-            <h3 className="text-3xl md:text-4xl font-bold mb-3">{currentPhaseInfo?.name} Curriculum</h3>
-            <p className="text-xl opacity-95 mb-2">52 weeks organized into 4 quarters</p>
-            <p className="text-sm opacity-80">Quick overview of your learning path</p>
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3">{currentPhaseInfo?.name} Curriculum</h3>
+            <p className="text-base sm:text-lg md:text-xl opacity-95 mb-1 sm:mb-2">52 weeks organized into 4 quarters</p>
+            <p className="text-xs sm:text-sm opacity-80">Quick overview of your learning path</p>
           </div>
           <button
             onClick={() => handleNavigate('/curriculum')}
-            className="bg-white text-purple-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-50 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105 inline-flex items-center gap-3 whitespace-nowrap"
+            className="bg-white text-purple-600 px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-full font-bold text-sm sm:text-base md:text-lg hover:bg-gray-50 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105 inline-flex items-center gap-2 sm:gap-3 whitespace-nowrap w-full md:w-auto justify-center"
           >
-            <BookOpen size={24} />
+            <BookOpen size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
             View Full Curriculum
           </button>
         </div>
@@ -626,27 +639,27 @@ const ProgressTab = () => {
     </div>
 
     {/* Quick Stats */}
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-      <div className="bg-white rounded-xl shadow-md p-4 text-center border-2 border-purple-200">
-        <div className="text-3xl font-bold text-purple-600 mb-1">{currentWeek}</div>
-        <div className="text-xs text-gray-600 font-medium">Current Week</div>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6">
+      <div className="bg-white rounded-lg sm:rounded-xl shadow-md p-2 sm:p-3 md:p-4 text-center border-2 border-purple-200">
+        <div className="text-2xl sm:text-3xl font-bold text-purple-600 mb-0.5 sm:mb-1">{currentWeek}</div>
+        <div className="text-[10px] sm:text-xs text-gray-600 font-medium">Current Week</div>
       </div>
-      <div className="bg-white rounded-xl shadow-md p-4 text-center border-2 border-blue-200">
-        <div className="text-3xl font-bold text-blue-600 mb-1">{getCurrentQuarter()}</div>
-        <div className="text-xs text-gray-600 font-medium">Current Quarter</div>
+      <div className="bg-white rounded-lg sm:rounded-xl shadow-md p-2 sm:p-3 md:p-4 text-center border-2 border-blue-200">
+        <div className="text-2xl sm:text-3xl font-bold text-blue-600 mb-0.5 sm:mb-1">{getCurrentQuarter()}</div>
+        <div className="text-[10px] sm:text-xs text-gray-600 font-medium">Current Quarter</div>
       </div>
-      <div className="bg-white rounded-xl shadow-md p-4 text-center border-2 border-green-200">
-        <div className="text-3xl font-bold text-green-600 mb-1">{completedLessons.length}</div>
-        <div className="text-xs text-gray-600 font-medium">Lessons Done</div>
+      <div className="bg-white rounded-lg sm:rounded-xl shadow-md p-2 sm:p-3 md:p-4 text-center border-2 border-green-200">
+        <div className="text-2xl sm:text-3xl font-bold text-green-600 mb-0.5 sm:mb-1">{completedLessons.length}</div>
+        <div className="text-[10px] sm:text-xs text-gray-600 font-medium">Lessons Done</div>
       </div>
-      <div className="bg-white rounded-xl shadow-md p-4 text-center border-2 border-orange-200">
-        <div className="text-3xl font-bold text-orange-600 mb-1">{52 - currentWeek + 1}</div>
-        <div className="text-xs text-gray-600 font-medium">Weeks Left</div>
+      <div className="bg-white rounded-lg sm:rounded-xl shadow-md p-2 sm:p-3 md:p-4 text-center border-2 border-orange-200">
+        <div className="text-2xl sm:text-3xl font-bold text-orange-600 mb-0.5 sm:mb-1">{52 - currentWeek + 1}</div>
+        <div className="text-[10px] sm:text-xs text-gray-600 font-medium">Weeks Left</div>
       </div>
     </div>
 
     {/* Quarters Overview */}
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {[1, 2, 3, 4].map((quarterNum) => {
         const quarterInfo = quarterThemes[quarterNum];
         const startWeek = (quarterNum - 1) * 13 + 1;
@@ -674,35 +687,35 @@ const ProgressTab = () => {
                   setExpandedQuarter(quarterNum);
                 }
               }}
-              className={`w-full bg-gradient-to-r ${quarterInfo.color} p-6 text-white text-left hover:opacity-95 transition`}
+              className={`w-full bg-gradient-to-r ${quarterInfo.color} p-3 sm:p-4 md:p-6 text-white text-left hover:opacity-95 transition`}
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="text-5xl">
-                    <img src={quarterInfo.icon} alt={quarterInfo.name} className="w-16 h-16 object-contain" />
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 sm:gap-3 md:gap-4 flex-1 min-w-0">
+                  <div className="text-3xl sm:text-4xl md:text-5xl flex-shrink-0">
+                    <img src={quarterInfo.icon} alt={quarterInfo.name} className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 object-contain" />
                   </div>
-                  <div>
-                    <div className="flex items-center gap-3 mb-1">
-                      <h4 className="text-2xl font-bold">{quarterInfo.name}</h4>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mb-1">
+                      <h4 className="text-lg sm:text-xl md:text-2xl font-bold truncate">{quarterInfo.name}</h4>
                       {isCurrentQuarter && (
-                        <span className="bg-white/30 backdrop-blur px-3 py-1 rounded-full text-xs font-bold">
+                        <span className="bg-white/30 backdrop-blur px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold inline-block w-fit">
                           Current Quarter
                         </span>
                       )}
                     </div>
-                    <p className="text-lg opacity-90">{quarterInfo.theme}</p>
-                    <p className="text-sm opacity-75 mt-1">Weeks {startWeek}-{endWeek}</p>
+                    <p className="text-sm sm:text-base md:text-lg opacity-90 truncate">{quarterInfo.theme}</p>
+                    <p className="text-xs sm:text-sm opacity-75 mt-0.5 sm:mt-1">Weeks {startWeek}-{endWeek}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-2 sm:gap-4 md:gap-6 flex-shrink-0">
                   <div className="text-right">
-                    <div className="text-3xl font-bold">{progressPercent}%</div>
-                    <div className="text-xs opacity-75">{progress.completed}/13 weeks</div>
+                    <div className="text-xl sm:text-2xl md:text-3xl font-bold">{progressPercent}%</div>
+                    <div className="text-[10px] sm:text-xs opacity-75">{progress.completed}/13</div>
                   </div>
                   {isExpanded ? (
-                    <ChevronUp size={32} className="flex-shrink-0" />
+                    <ChevronUp size={24} className="flex-shrink-0 sm:w-7 sm:h-7 md:w-8 md:h-8" />
                   ) : (
-                    <ChevronDown size={32} className="flex-shrink-0" />
+                    <ChevronDown size={24} className="flex-shrink-0 sm:w-7 sm:h-7 md:w-8 md:h-8" />
                   )}
                 </div>
               </div>
@@ -711,13 +724,13 @@ const ProgressTab = () => {
             {(isExpanded || closingQuarter === quarterNum) && (
               <div className={`p-6 bg-gray-50 ${closingQuarter === quarterNum ? 'animate-slideUp' : 'animate-slideDown'}`}>
                 {/* Quarter Overview - Phase & Quarter Specific Goals */}
-                <div className="mb-6 grid md:grid-cols-2 gap-4">
-                  <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-5 border-2 border-purple-200">
-                    <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-                      <span className="text-2xl">👶</span>
+                <div className="mb-4 sm:mb-6 grid md:grid-cols-2 gap-3 sm:gap-4">
+                  <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 border-2 border-purple-200">
+                    <h4 className="font-bold text-gray-900 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+                      <span className="text-xl sm:text-2xl">👶</span>
                       Goals For Your Baby
                     </h4>
-                    <p className="text-gray-700 text-sm leading-relaxed">
+                    <p className="text-gray-700 text-xs sm:text-sm leading-relaxed">
                       {/* Phase 1 Goals */}
                       {currentPhase === 1 && quarterNum === 1 && "Attend to sounds and rhythms, recognize familiar voices and animal sounds, respond to name and basic cues, and develop sensory curiosity through touch, sound, and motion"}
                       {currentPhase === 1 && quarterNum === 2 && "Recognize and label familiar people, objects, and body parts. Point to objects when named, increase verbal imitation, and begin using first words"}
@@ -743,12 +756,12 @@ const ProgressTab = () => {
                       {currentPhase === 4 && quarterNum === 4 && "Read short paragraphs or early readers independently. Write 3-5 sentence stories with structure, express ideas and experiences in written form, and demonstrate comprehension, emotion, and creativity"}
                     </p>
                   </div>
-                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border-2 border-blue-200">
-                    <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-                      <span className="text-2xl">👨‍👩‍👧</span>
+                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 border-2 border-blue-200">
+                    <h4 className="font-bold text-gray-900 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+                      <span className="text-xl sm:text-2xl">👨‍👩‍👧</span>
                       Your Role as Parent
                     </h4>
-                    <p className="text-gray-700 text-sm leading-relaxed">
+                    <p className="text-gray-700 text-xs sm:text-sm leading-relaxed">
                       {/* Phase 1 Parent Goals */}
                       {currentPhase === 1 && quarterNum === 1 && "Build consistent sound-rich routines with songs and naming games. Model enthusiasm and repetition, narrate sensory play, and create daily opportunities for listening and imitation"}
                       {currentPhase === 1 && quarterNum === 2 && "Label everything naturally in conversation. Encourage pointing, gesturing, and early turn-taking. Use books and routines to reinforce naming and celebrate small speech attempts"}
@@ -777,7 +790,7 @@ const ProgressTab = () => {
                 </div>
 
                 {/* Existing week cards */}
-                <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
                   {weeks.map((weekNum) => {
                     const lessons = getWeekLessons(weekNum);
                     const completedCount = lessons.filter(l => isLessonCompleted(l)).length;
@@ -787,44 +800,44 @@ const ProgressTab = () => {
                     return (
                       <div
                         key={weekNum}
-                        className={`bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-all border-2 ${
-                          isCurrent ? 'ring-4 ring-purple-500 border-purple-400' : 
+                        className={`bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-4 shadow-md hover:shadow-lg transition-all border-2 ${
+                          isCurrent ? 'ring-2 sm:ring-4 ring-purple-500 border-purple-400' : 
                           isCompleted ? 'border-green-400' : 'border-gray-200'
                         }`}
                       >
-                        <div className="flex items-center justify-between mb-3">
-                          <div className="text-lg font-bold text-gray-900">Week {weekNum}</div>
+                        <div className="flex items-center justify-between mb-2 sm:mb-3">
+                          <div className="text-sm sm:text-base md:text-lg font-bold text-gray-900">Week {weekNum}</div>
                           {isCompleted && (
-                            <div className="bg-green-500 text-white rounded-full p-1">
-                              <CheckCircle size={18} />
+                            <div className="bg-green-500 text-white rounded-full p-0.5 sm:p-1">
+                              <CheckCircle size={14} className="sm:w-4 sm:h-4 md:w-[18px] md:h-[18px]" />
                             </div>
                           )}
                           {isCurrent && !isCompleted && (
-                            <div className="bg-purple-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                            <div className="bg-purple-500 text-white text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full font-bold">
                               Now
                             </div>
                           )}
                         </div>
 
-                        <div className="mb-3">
-                          <div className="flex gap-1">
+                        <div className="mb-2 sm:mb-3">
+                          <div className="flex gap-0.5 sm:gap-1">
                             {lessons.map((lessonNum) => (
                               <div
                                 key={lessonNum}
-                                className={`h-2 flex-1 rounded ${
+                                className={`h-1.5 sm:h-2 flex-1 rounded ${
                                   isLessonCompleted(lessonNum) ? 'bg-green-500' : 'bg-gray-200'
                                 }`}
                               />
                             ))}
                           </div>
-                          <div className="text-xs text-gray-600 mt-2 text-center">
+                          <div className="text-[10px] sm:text-xs text-gray-600 mt-1 sm:mt-2 text-center">
                             {completedCount}/5 lessons
                           </div>
                         </div>
 
                         <button
                           onClick={() => handleNavigate(`/lesson/${lessons[0]}`)}
-                          className={`w-full py-2 rounded-lg font-bold transition text-sm ${
+                          className={`w-full py-1.5 sm:py-2 rounded-lg font-bold transition text-xs sm:text-sm ${
                             isCompleted
                               ? 'bg-green-100 text-green-700 hover:bg-green-200'
                               : `bg-gradient-to-r ${currentPhaseInfo?.color} text-white hover:shadow-lg`
@@ -844,21 +857,22 @@ const ProgressTab = () => {
     </div>
 
     {/* Bottom CTA to Full Curriculum */}
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-8 mt-8 border-2 border-blue-200 text-center">
-      <div className="inline-block bg-blue-100 p-4 rounded-full mb-4">
-  <img src="/assets/Curriculum.png" alt="Curriculum" className="w-16 h-16 object-contain" />
+    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 mt-6 sm:mt-8 border-2 border-blue-200 text-center">
+      <div className="inline-block bg-blue-100 p-3 sm:p-4 rounded-full mb-3 sm:mb-4">
+  <img src="/assets/Curriculum.png" alt="Curriculum" className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain" />
 </div>
-      <h3 className="text-2xl font-bold text-gray-900 mb-3">Want to See the Complete Picture?</h3>
-      <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
+      <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">Want to See the Complete Picture?</h3>
+      <p className="text-sm sm:text-base text-gray-700 mb-4 sm:mb-6 max-w-2xl mx-auto">
         Explore the full BrightReading curriculum with detailed breakdowns, learning principles, and what your baby should achieve in each phase.
       </p>
       <button
         onClick={() => handleNavigate('/curriculum')}
-        className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:shadow-xl transition-all transform hover:scale-105 inline-flex items-center gap-3"
+        className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 md:py-4 rounded-full font-bold text-sm sm:text-base md:text-lg hover:shadow-xl transition-all transform hover:scale-105 inline-flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center"
       >
-        <BookOpen size={24} />
-        View Complete Curriculum Guide
-        <ArrowRight size={24} />
+        <BookOpen size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
+        <span className="hidden sm:inline">View Complete Curriculum Guide</span>
+        <span className="sm:hidden">View Full Guide</span>
+        <ArrowRight size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
       </button>
     </div>
   </div>
@@ -995,65 +1009,65 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
   // PAID FEATURE WALL
   if (!isPaid) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="bg-white rounded-3xl shadow-2xl border-4 border-purple-200 p-12 max-w-2xl text-center">
-          <div className="text-6xl mb-6">🔒</div>
+      <div className="min-h-screen flex items-center justify-center p-3 sm:p-4">
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl border-3 sm:border-4 border-purple-200 p-6 sm:p-8 md:p-12 max-w-2xl text-center">
+          <div className="text-4xl sm:text-5xl md:text-6xl mb-4 sm:mb-6">🔒</div>
           
-          <h2 className="text-4xl font-black text-gray-900 mb-4">Community Features</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 mb-3 sm:mb-4">Community Features</h2>
           
-          <p className="text-xl text-gray-700 font-semibold mb-8">
+          <p className="text-base sm:text-lg md:text-xl text-gray-700 font-semibold mb-6 sm:mb-8">
             Connect with other parents, join learning circles, and build your support network with our exclusive community features.
           </p>
 
-          <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 mb-8 border-2 border-purple-200">
-            <h3 className="text-2xl font-black text-gray-900 mb-6">What You'll Get:</h3>
-            <div className="space-y-4 text-left">
-              <div className="flex items-start gap-4">
-                <span className="text-3xl">👥</span>
-                <div>
-                  <p className="font-bold text-gray-900">Connect with Friends</p>
-                  <p className="text-sm text-gray-600">Send friend requests and build your parent community</p>
+          <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 border-2 border-purple-200">
+            <h3 className="text-xl sm:text-2xl font-black text-gray-900 mb-4 sm:mb-6">What You'll Get:</h3>
+            <div className="space-y-3 sm:space-y-4 text-left">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <span className="text-2xl sm:text-3xl flex-shrink-0">👥</span>
+                <div className="text-left">
+                  <p className="font-bold text-gray-900 text-sm sm:text-base">Connect with Friends</p>
+                  <p className="text-xs sm:text-sm text-gray-600">Send friend requests and build your parent community</p>
                 </div>
               </div>
-              <div className="flex items-start gap-4">
-                <span className="text-3xl">💬</span>
-                <div>
-                  <p className="font-bold text-gray-900">Direct Messaging</p>
-                  <p className="text-sm text-gray-600">Chat one-on-one with friends and share experiences</p>
+              <div className="flex items-start gap-3 sm:gap-4">
+                <span className="text-2xl sm:text-3xl flex-shrink-0">💬</span>
+                <div className="text-left">
+                  <p className="font-bold text-gray-900 text-sm sm:text-base">Direct Messaging</p>
+                  <p className="text-xs sm:text-sm text-gray-600">Chat one-on-one with friends and share experiences</p>
                 </div>
               </div>
-              <div className="flex items-start gap-4">
-                <span className="text-3xl">🔵</span>
-                <div>
-                  <p className="font-bold text-gray-900">Learning Circles</p>
-                  <p className="text-sm text-gray-600">Create groups for accountability and mutual support</p>
+              <div className="flex items-start gap-3 sm:gap-4">
+                <span className="text-2xl sm:text-3xl flex-shrink-0">🔵</span>
+                <div className="text-left">
+                  <p className="font-bold text-gray-900 text-sm sm:text-base">Learning Circles</p>
+                  <p className="text-xs sm:text-sm text-gray-600">Create groups for accountability and mutual support</p>
                 </div>
               </div>
-              <div className="flex items-start gap-4">
-                <span className="text-3xl">💪</span>
-                <div>
-                  <p className="font-bold text-gray-900">Group Chat</p>
-                  <p className="text-sm text-gray-600">Collaborate with other parents in your circles</p>
+              <div className="flex items-start gap-3 sm:gap-4">
+                <span className="text-2xl sm:text-3xl flex-shrink-0">💪</span>
+                <div className="text-left">
+                  <p className="font-bold text-gray-900 text-sm sm:text-base">Group Chat</p>
+                  <p className="text-xs sm:text-sm text-gray-600">Collaborate with other parents in your circles</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 rounded-2xl p-8 mb-8 text-white">
-            <p className="text-sm font-semibold text-white/90 mb-2">CURRENT PLAN</p>
-            <p className="text-3xl font-black mb-4 capitalize">{subscriptionType}</p>
-            <p className="text-white/90 font-semibold">Upgrade your account to unlock community features</p>
+          <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 text-white">
+            <p className="text-xs sm:text-sm font-semibold text-white/90 mb-1 sm:mb-2">CURRENT PLAN</p>
+            <p className="text-2xl sm:text-3xl font-black mb-2 sm:mb-4 capitalize">{subscriptionType}</p>
+            <p className="text-sm sm:text-base text-white/90 font-semibold">Upgrade your account to unlock community features</p>
           </div>
 
           <button
             onClick={() => navigate('/upgrade')}
-            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-10 py-5 rounded-full font-black text-lg shadow-xl hover:shadow-2xl transition transform hover:scale-105 inline-flex items-center gap-3"
+            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full font-black text-base sm:text-lg shadow-xl hover:shadow-2xl transition transform hover:scale-105 inline-flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center"
           >
-            <Sparkles size={24} />
+            <Sparkles size={20} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
             Upgrade Now
           </button>
 
-          <p className="text-xs text-gray-500 mt-6 font-semibold">
+          <p className="text-[10px] sm:text-xs text-gray-500 mt-4 sm:mt-6 font-semibold">
             All other features remain available on your current plan
           </p>
         </div>
@@ -2015,14 +2029,14 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
   const EnrichmentTab = () => (
     <div className="max-w-4xl mx-auto">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-orange-400 via-pink-500 to-purple-500 rounded-3xl shadow-2xl p-12 mb-8 text-white text-center relative overflow-hidden">
+      <div className="bg-gradient-to-br from-orange-400 via-pink-500 to-purple-500 rounded-xl sm:rounded-2xl md:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 lg:p-12 mb-4 sm:mb-6 md:mb-8 text-white text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
         <div className="relative z-10">
-          <h2 className="text-4xl md:text-5xl font-black mb-4">Enrichment Activities</h2>
-          <p className="text-xl md:text-2xl mb-2 opacity-95">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-3 sm:mb-4">Enrichment Activities</h2>
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-2 opacity-95">
             Quick, playful activities you can do anywhere!
           </p>
-          <p className="text-lg opacity-90 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg opacity-90 max-w-2xl mx-auto">
             No prep needed. Just fun, engaging games that make learning feel like play.
           </p>
         </div>
@@ -2031,45 +2045,46 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
       {/* Main Card */}
       <button
         onClick={() => handleNavigate('/games')}
-        className="w-full bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition group transform hover:scale-[1.02] mb-8"
+        className="w-full bg-white rounded-xl sm:rounded-2xl md:rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition group transform hover:scale-[1.01] sm:hover:scale-[1.02] mb-4 sm:mb-6 md:mb-8"
       >
-        <div className="p-10 text-center">
-<div className="bg-gradient-to-br from-orange-100 to-pink-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition border-4 border-orange-200">
-            <img src="/assets/Game.png" alt="Game Controller" className="w-16 h-16 object-contain" />
+        <div className="p-4 sm:p-6 md:p-8 lg:p-10 text-center">
+<div className="bg-gradient-to-br from-orange-100 to-pink-100 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 md:mb-6 group-hover:scale-105 sm:group-hover:scale-110 transition border-2 sm:border-3 md:border-4 border-orange-200">
+            <img src="/assets/Game.png" alt="Game Controller" className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 object-contain" />
           </div>
           
-          <h3 className="text-3xl font-black text-gray-900 mb-4">Explore All Games</h3>
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-gray-900 mb-2 sm:mb-3 md:mb-4">Explore All Games</h3>
           
-          <p className="text-lg text-gray-700 mb-6 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-700 mb-3 sm:mb-4 md:mb-6 max-w-2xl mx-auto leading-relaxed">
             Discover research-backed games designed for every phase. From sound awareness to word building, 
             each activity targets specific literacy skills while keeping things light and fun.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-3 mb-8">
-            <span className="bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-bold">Sound Safari</span>
-            <span className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-bold">Word Wizards</span>
-            <span className="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-bold">Story Spinners</span>
-            <span className="bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-bold">Letter Quest</span>
-            <span className="bg-pink-100 text-pink-700 px-4 py-2 rounded-full text-sm font-bold">& More!</span>
+          <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2 md:gap-3 mb-4 sm:mb-6 md:mb-8">
+            <span className="bg-purple-100 text-purple-700 px-2 sm:px-2.5 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-2 rounded-full text-[10px] sm:text-xs md:text-sm font-bold">Sound Safari</span>
+            <span className="bg-blue-100 text-blue-700 px-2 sm:px-2.5 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-2 rounded-full text-[10px] sm:text-xs md:text-sm font-bold">Word Wizards</span>
+            <span className="bg-green-100 text-green-700 px-2 sm:px-2.5 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-2 rounded-full text-[10px] sm:text-xs md:text-sm font-bold">Story Spinners</span>
+            <span className="bg-orange-100 text-orange-700 px-2 sm:px-2.5 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-2 rounded-full text-[10px] sm:text-xs md:text-sm font-bold">Letter Quest</span>
+            <span className="bg-pink-100 text-pink-700 px-2 sm:px-2.5 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-2 rounded-full text-[10px] sm:text-xs md:text-sm font-bold">& More!</span>
           </div>
 
-          <div className="bg-gradient-to-r from-orange-400 to-pink-500 text-white px-10 py-5 rounded-2xl font-black text-xl inline-flex items-center gap-3 group-hover:from-orange-500 group-hover:to-pink-600 transition shadow-lg">
-            <Gamepad2 size={28} />
+          <div className="bg-gradient-to-r from-orange-400 to-pink-500 text-white px-4 sm:px-6 md:px-8 lg:px-10 py-2.5 sm:py-3 md:py-4 lg:py-5 rounded-lg sm:rounded-xl md:rounded-2xl font-black text-sm sm:text-base md:text-lg lg:text-xl inline-flex items-center gap-1.5 sm:gap-2 md:gap-3 group-hover:from-orange-500 group-hover:to-pink-600 transition shadow-lg">
+            <Gamepad2 size={20} className="sm:w-6 sm:h-6 md:w-7 md:h-7" />
             Browse All Games
-            <ArrowRight size={28} />
+            <ArrowRight size={20} className="sm:w-6 sm:h-6 md:w-7 md:h-7" />
           </div>
         </div>
       </button>
 
-<div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl shadow-lg p-8 border-2 border-blue-200 mb-8">        <div className="flex items-start gap-4">
-          <div className="bg-blue-100 p-3 rounded-xl flex-shrink-0">
-            <Sparkles className="text-blue-600" size={32} />
+<div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl sm:rounded-2xl md:rounded-3xl shadow-lg p-4 sm:p-6 md:p-8 border-2 border-blue-200 mb-4 sm:mb-6 md:mb-8">
+  <div className="flex items-start gap-3 sm:gap-4">
+          <div className="bg-blue-100 p-2 sm:p-2.5 md:p-3 rounded-lg sm:rounded-xl flex-shrink-0">
+            <Sparkles className="text-blue-600" size={24} />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-blue-900 mb-3">When to Use These</h3>
-            <ul className="space-y-2 text-blue-800">
-              <li className="flex items-start gap-2">
-                <span className="text-blue-600 font-bold mt-1">•</span>
+            <h3 className="text-base sm:text-lg md:text-xl font-bold text-blue-900 mb-2 sm:mb-3">When to Use These</h3>
+            <ul className="space-y-1.5 sm:space-y-2 text-blue-800 text-xs sm:text-sm md:text-base">
+              <li className="flex items-start gap-1.5 sm:gap-2">
+                <span className="text-blue-600 font-bold mt-0.5 sm:mt-1">•</span>
                 <span><strong>After lessons:</strong> Add 10-15 minutes of stories or games when your baby is still engaged</span>
               </li>
               <li className="flex items-start gap-2">
@@ -2089,10 +2104,10 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
         </div>
       </div>
 
-<div className="bg-purple-50 border-2 border-purple-200 rounded-3xl p-8 text-center">
-        <div className="text-5xl mb-4">💜</div>
-        <h4 className="font-black text-gray-900 text-2xl mb-4">Remember: These are extras!</h4>
-        <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+<div className="bg-purple-50 border-2 border-purple-200 rounded-xl sm:rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 text-center">
+        <div className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 md:mb-4">💜</div>
+        <h4 className="font-black text-gray-900 text-lg sm:text-xl md:text-2xl mb-3 sm:mb-4">Remember: These are extras!</h4>
+        <p className="text-gray-700 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
           Your main curriculum in {currentPhaseInfo?.name} is where the real magic happens. These enrichment activities are just for fun—use them when they fit, skip them when they don't. No pressure, no guilt!
         </p>
       </div>
@@ -2573,12 +2588,12 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
       {showWelcomeTour && <WelcomeTour />}
 
       {/* Navigation Bar */}
-      <nav className="bg-white shadow-xl border-b-4 border-purple-200 p-4 sticky top-0 z-20">
+      <nav className="bg-white shadow-xl border-b-4 border-purple-200 p-3 sm:p-4 sticky top-0 z-20">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-<div className="flex items-center gap-3">
-            <img src="/assets/brlogo2.png" alt="BrightReading Logo" className="h-14 w-auto object-contain" />
+<div className="flex items-center gap-2 sm:gap-3">
+            <img src="/assets/brlogo2.png" alt="BrightReading Logo" className="h-10 sm:h-14 w-auto object-contain" />
             <div>
-              <h1 className="text-3xl font-black bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent">
+              <h1 className="text-xl sm:text-3xl font-black bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent">
                 BrightReading
               </h1>
             </div>
@@ -2587,27 +2602,28 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
             onClick={() => handleNavigate('/profile')}
             className="hover:opacity-80 transition transform hover:scale-105"
           >
-            <img src="/assets/Profile.png" alt="Profile" className="h-12 w-auto object-contain" />
+            <img src="/assets/Profile.png" alt="Profile" className="h-10 sm:h-12 w-auto object-contain" />
           </button>
         </div>
       </nav>
 
       {/* Tab Navigation */}
-      <div className="bg-white shadow-xl border-b-4 border-purple-200 sticky top-[88px] z-30">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex gap-2 overflow-x-auto scrollbar-hide">
+      <div className="bg-white shadow-xl border-b-4 border-purple-200 sticky top-[64px] sm:top-[88px] z-30">
+        <div className="max-w-6xl mx-auto px-2 sm:px-4">
+          <div className="flex gap-1 sm:gap-2 overflow-x-auto scrollbar-hide">
 {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => handleTabChange(tab.id)}
-                className={`flex items-center gap-3 px-6 py-4 font-black transition-all whitespace-nowrap transform hover:scale-105 ${
+                className={`flex flex-col sm:flex-row items-center gap-1 sm:gap-3 px-3 sm:px-6 py-2 sm:py-4 font-black transition-all whitespace-nowrap transform hover:scale-105 text-xs sm:text-base ${
                   activeTab === tab.id
                     ? 'text-purple-600 border-b-4 border-purple-600 bg-gradient-to-t from-purple-100 to-pink-50'
                     : 'text-gray-600 hover:text-purple-600 hover:bg-gradient-to-t hover:from-purple-50 hover:to-transparent'
                 }`}
               >
-                <img src={tab.icon} alt={tab.label} className="w-12 h-12 drop-shadow-md" />
-                {tab.label}
+                <img src={tab.icon} alt={tab.label} className="w-8 h-8 sm:w-12 sm:h-12 drop-shadow-md" />
+                <span className="hidden sm:inline">{tab.label}</span>
+                <span className="sm:hidden text-[10px]">{tab.label.split(' ')[0]}</span>
               </button>
             ))}
           </div>
@@ -2615,7 +2631,7 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
       </div>
 
       {/* Content Area */}
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
         <div className={`transition-opacity duration-200 ease-in-out ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
           {activeTab === 'home' && <HomeTab />}
           {activeTab === 'progress' && <ProgressTab />}

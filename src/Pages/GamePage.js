@@ -1114,40 +1114,40 @@ const GamePage = () => {
     return (
       <div className="space-y-6">
         {/* Game Header */}
-        <div className={`bg-gradient-to-br ${game.color} rounded-3xl p-8 text-white shadow-2xl`}>
-<div className="flex items-center gap-4 mb-4">
-            <div className="animate-bounce flex items-center justify-center">
+                <div className={`bg-gradient-to-br ${game.color} rounded-xl sm:rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 text-white shadow-2xl`}>
+<div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+            <div className="animate-bounce flex items-center justify-center flex-shrink-0">
               {typeof game.icon === 'string' ? <div className="text-6xl">{game.icon}</div> : game.icon}
             </div>
-            <div className="flex-1">
-              <h2 className="text-4xl font-bold mb-2">{game.title}</h2>
-              <p className="text-xl opacity-90 italic">"{game.tagline}"</p>
+            <div className="flex-1 min-w-0">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1 sm:mb-2">{game.title}</h2>
+              <p className="text-base sm:text-lg md:text-xl opacity-90 italic">"{game.tagline}"</p>
             </div>
           </div>
           
-          <div className="grid grid-cols-2 gap-4 mt-6 bg-white/20 backdrop-blur-sm rounded-2xl p-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-4 sm:mt-5 md:mt-6 bg-white/20 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4">
             <div>
-              <p className="text-sm font-semibold opacity-80">Suitable Phases</p>
-              <p className="text-lg font-bold">{game.phases.map(p => `Phase ${p}`).join(', ')}</p>
+              <p className="text-xs sm:text-sm font-semibold opacity-80">Suitable Phases</p>
+              <p className="text-sm sm:text-base md:text-lg font-bold">{game.phases.map(p => `Phase ${p}`).join(', ')}</p>
             </div>
             <div>
-              <p className="text-sm font-semibold opacity-80">Core Skills</p>
-              <p className="text-sm font-medium">{game.skills.slice(0, 2).join(' • ')}</p>
+              <p className="text-xs sm:text-sm font-semibold opacity-80">Core Skills</p>
+              <p className="text-xs sm:text-sm font-medium">{game.skills.slice(0, 2).join(' • ')}</p>
             </div>
           </div>
         </div>
 
         {/* What, Why, Research */}
-        <div className="grid md:grid-cols-3 gap-4">
-          <div className="bg-white rounded-2xl shadow-lg p-6 border-2 border-blue-200">
-            <h3 className="text-lg font-bold text-blue-900 mb-2 flex items-center gap-2">
-              <Sparkles size={20} />
+         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-5 md:p-6 border-2 border-blue-200">
+            <h3 className="text-base sm:text-lg font-bold text-blue-900 mb-2 flex items-center gap-2">
+              <Sparkles size={18} className="sm:w-5 sm:h-5" />
               What Is It?
             </h3>
-            <p className="text-gray-700 text-sm leading-relaxed">{game.what}</p>
+            <p className="text-gray-700 text-xs sm:text-sm leading-relaxed">{game.what}</p>
           </div>
-          <div className="bg-white rounded-2xl shadow-lg p-6 border-2 border-purple-200">
-            <h3 className="text-lg font-bold text-purple-900 mb-2 flex items-center gap-2">
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-5 md:p-6 border-2 border-purple-200">
+            <h3 className="text-base sm:text-lg font-bold text-purple-900 mb-2 flex items-center gap-2">
               <Target size={20} />
               Why Play It?
             </h3>
@@ -1163,46 +1163,46 @@ const GamePage = () => {
         </div>
 
         {/* Learning Objectives */}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border-2 border-indigo-200">
-          <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 border-2 border-indigo-200">
+          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3 flex items-center gap-2">
             🎯 What Your Child Will Learn
           </h3>
-          <ul className="space-y-2">
+          <ul className="space-y-1.5 sm:space-y-2">
             {game.objectives.map((obj, idx) => (
-              <li key={idx} className="flex items-start gap-2 text-gray-700">
-                <span className="text-indigo-600 font-bold mt-1">✓</span>
-                <span className="text-sm">{obj}</span>
+              <li key={idx} className="flex items-start gap-1.5 sm:gap-2 text-gray-700">
+                <span className="text-indigo-600 font-bold mt-0.5 sm:mt-1">✓</span>
+                <span className="text-xs sm:text-sm">{obj}</span>
               </li>
             ))}
           </ul>
         </div>
 
         {/* Research Note */}
-        <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border-2 border-purple-200">
-          <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 border-2 border-purple-200">
+          <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
             📚 The Science Behind It
           </h3>
-          <p className="text-gray-700 text-sm leading-relaxed italic">{game.research}</p>
+          <p className="text-gray-700 text-xs sm:text-sm leading-relaxed italic">{game.research}</p>
         </div>
 
         {/* Activities */}
-        <div className="space-y-5">
-          <h3 className="text-3xl font-bold text-gray-900 flex items-center gap-2">
-            <span className="text-3xl"></span> 
+        <div className="space-y-4 sm:space-y-5">
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2">
+            <span className="text-2xl sm:text-3xl"></span> 
             Activities to Try
           </h3>
           
           {game.activities.map((activity, idx) => (
-            <div key={idx} className="bg-white rounded-3xl shadow-xl p-6 border-l-4 border-purple-400 hover:shadow-2xl transition-all">
-              <div className="flex items-start gap-4 mb-4">
-                <span className="bg-gradient-to-br from-purple-500 to-pink-500 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold shadow-lg flex-shrink-0">
+            <div key={idx} className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl shadow-xl p-4 sm:p-5 md:p-6 border-l-4 border-purple-400 hover:shadow-2xl transition-all">
+              <div className="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
+                <span className="bg-gradient-to-br from-purple-500 to-pink-500 text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-lg sm:text-xl font-bold shadow-lg flex-shrink-0">
                   {idx + 1}
                 </span>
-                <div className="flex-1">
-                  <h4 className="text-2xl font-bold text-gray-900 mb-1">{activity.name}</h4>
-                  <div className="flex gap-3 text-sm text-gray-600">
-                    <span className="bg-blue-100 px-3 py-1 rounded-full font-semibold">{activity.duration}</span>
-                    <span className="bg-green-100 px-3 py-1 rounded-full font-semibold">{activity.phase}</span>
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-1">{activity.name}</h4>
+                  <div className="flex gap-2 sm:gap-3 text-xs sm:text-sm text-gray-600 flex-wrap">
+                    <span className="bg-blue-100 px-2 sm:px-3 py-1 rounded-full font-semibold">{activity.duration}</span>
+                    <span className="bg-green-100 px-2 sm:px-3 py-1 rounded-full font-semibold">{activity.phase}</span>
                   </div>
                 </div>
               </div>
@@ -1304,7 +1304,7 @@ const GamePage = () => {
   return (
 <div className={`min-h-screen bg-gradient-to-b from-purple-50 via-pink-50 to-orange-50 transition-opacity duration-300 ${isPageLoading ? 'opacity-0' : 'opacity-100'}`}>
       {/* Navigation */}
-      <nav className="bg-white/90 backdrop-blur-sm shadow-md p-4 sticky top-0 z-20">
+      <nav className="bg-white/90 backdrop-blur-sm shadow-md p-3 sm:p-4 sticky top-0 z-20">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
 <button
             onClick={() => {
@@ -1322,40 +1322,40 @@ const GamePage = () => {
     }, 200);
   }
 }}
-            className="flex items-center gap-2 text-purple-600 hover:text-purple-700 font-bold transition-colors"
+            className="flex items-center gap-1.5 sm:gap-2 text-purple-600 hover:text-purple-700 font-bold transition-colors text-sm sm:text-base"
           >
-            <ArrowLeft size={24} />
+            <ArrowLeft size={20} className="sm:w-6 sm:h-6" />
             <span>{selectedGame ? 'All Games' : 'Back'}</span>
           </button>
-          <div className="flex items-center gap-3">
-            <Star className="text-yellow-500" size={24} />
-            <span className="font-bold text-gray-900 text-lg">Learning Games</span>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Star className="text-yellow-500 w-5 h-5 sm:w-6 sm:h-6" />
+            <span className="font-bold text-gray-900 text-base sm:text-lg">Learning Games</span>
           </div>
           <div className="w-24"></div>
         </div>
       </nav>
 
-      <div className="max-w-5xl mx-auto px-4 py-8">
+      <div className="max-w-5xl mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8">
         {!selectedGame ? (
           <div className={`transition-opacity duration-500 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
             {/* Header */}
-<div className="text-center mb-12">
-              <div className="mb-4 flex justify-center">
-                <img src="/assets/Game.png" alt="Game Controller" className="w-24 h-24 object-contain" />
+<div className="text-center mb-6 sm:mb-8 md:mb-12">
+              <div className="mb-3 sm:mb-4 flex justify-center">
+                <img src="/assets/Game.png" alt="Game Controller" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain" />
               </div>
-              <h1 className="text-5xl font-bold text-gray-900 mb-4">BrightReading Learning Games</h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6 leading-relaxed">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 px-2">BrightReading Learning Games</h1>
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto mb-4 sm:mb-6 leading-relaxed px-4">
                 Research-backed, play-based activities you can do anywhere, anytime. Each game targets specific literacy skills while keeping learning fun and pressure-free.
               </p>
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-300 rounded-2xl p-6 max-w-2xl mx-auto shadow-lg">
-                <p className="text-sm text-blue-900 font-semibold leading-relaxed">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-300 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 max-w-2xl mx-auto shadow-lg">
+                <p className="text-xs sm:text-sm text-blue-900 font-semibold leading-relaxed">
                   💡 <strong>These are bonus activities!</strong> They complement your daily lessons but aren't required. Use them when you want to practice skills in fun, creative ways during everyday moments.
                 </p>
               </div>
             </div>
 
             {/* Games Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8 md:mb-12">
               {games.map((game) => (
 <button
                   key={game.id}
@@ -1363,35 +1363,35 @@ const GamePage = () => {
                     setPreviewGame(game);
                     setShowPreview(true);
                   }}
-                  className="bg-white rounded-3xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all text-left group flex flex-col overflow-hidden"
+                  className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl shadow-lg hover:shadow-2xl hover:scale-[1.02] sm:hover:scale-105 transition-all text-left group flex flex-col overflow-hidden"
                 >
-<div className={`h-32 bg-gradient-to-br ${game.color} flex items-center justify-center relative overflow-hidden`}>
-                    <div className="group-hover:scale-110 transition-transform flex items-center justify-center">
+<div className={`h-24 sm:h-28 md:h-32 bg-gradient-to-br ${game.color} flex items-center justify-center relative overflow-hidden`}>
+                    <div className="group-hover:scale-105 sm:group-hover:scale-110 transition-transform flex items-center justify-center">
                       {typeof game.icon === 'string' ? <div className="text-6xl">{game.icon}</div> : game.icon}
                     </div>
                     <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all"></div>
                   </div>
-<div className="p-6">
-                    <div className="flex items-center gap-2 mb-2">
-                      <h3 className="text-xl font-bold text-gray-900">{game.title}</h3>
+<div className="p-4 sm:p-5 md:p-6">
+                    <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                      <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900">{game.title}</h3>
                       {game.isPremium && !isPaid && (
-                        <span className="bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                        <span className="bg-yellow-100 text-yellow-700 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold flex items-center gap-1">
                           🔒 Premium
                         </span>
                       )}
                     </div>
-                    <p className="text-purple-600 font-semibold mb-3 text-sm italic">"{game.tagline}"</p>
-                    <div className="flex gap-2 mb-3 flex-wrap">
+                    <p className="text-purple-600 font-semibold mb-2 sm:mb-3 text-xs sm:text-sm italic">"{game.tagline}"</p>
+                    <div className="flex gap-1.5 sm:gap-2 mb-2 sm:mb-3 flex-wrap">
                       {game.phases.map(p => (
-                        <span key={p} className="bg-purple-100 text-purple-700 px-2 py-1 rounded-full text-xs font-bold">
+                        <span key={p} className="bg-purple-100 text-purple-700 px-2 py-1 rounded-full text-[10px] sm:text-xs font-bold">
                           Phase {p}
                         </span>
                       ))}
                     </div>
-                    <p className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2">
+                    <p className="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed line-clamp-2">
                       {game.what}
                     </p>
-                    <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-xl font-bold text-center text-sm group-hover:from-purple-600 group-hover:to-pink-600 transition-all">
+                    <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 sm:px-4 py-2 rounded-lg sm:rounded-xl font-bold text-center text-xs sm:text-sm group-hover:from-purple-600 group-hover:to-pink-600 transition-all">
                       Explore {game.activities.length} Activities →
                     </div>
                   </div>
@@ -1400,18 +1400,18 @@ const GamePage = () => {
             </div>
 
             {/* Bottom Info */}
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-300 rounded-3xl p-8 shadow-xl">
-              <h3 className="text-3xl font-bold text-gray-900 mb-6 text-center">How to Use These Games</h3>
-              <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl sm:rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 shadow-xl">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-4 sm:mb-5 md:mb-6 text-center">How to Use These Games</h3>
+              <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                 <div>
-                  <h4 className="font-bold text-green-900 mb-4 flex items-center gap-2 text-lg">
-                    <Sparkles size={22} />
+                  <h4 className="font-bold text-green-900 mb-3 sm:mb-4 flex items-center gap-2 text-base sm:text-lg">
+                    <Sparkles size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
                     Perfect Times to Play
                   </h4>
-                  <ul className="space-y-2 text-gray-700">
-                    <li className="flex items-start gap-2">
+                  <ul className="space-y-1.5 sm:space-y-2 text-gray-700">
+                    <li className="flex items-start gap-1.5 sm:gap-2">
                       <span className="text-green-600 font-bold mt-0.5">•</span>
-                      <span className="text-sm">While waiting in line or at appointments</span>
+                      <span className="text-xs sm:text-sm">While waiting in line or at appointments</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-green-600 font-bold mt-0.5">•</span>
@@ -1432,14 +1432,14 @@ const GamePage = () => {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-bold text-blue-900 mb-4 flex items-center gap-2 text-lg">
-                    <Target size={22} />
+                  <h4 className="font-bold text-blue-900 mb-3 sm:mb-4 flex items-center gap-2 text-base sm:text-lg">
+                    <Target size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
                     The Golden Rules
                   </h4>
-                  <ul className="space-y-2 text-gray-700">
-                    <li className="flex items-start gap-2">
+                  <ul className="space-y-1.5 sm:space-y-2 text-gray-700">
+                    <li className="flex items-start gap-1.5 sm:gap-2">
                       <span className="text-blue-600 font-bold mt-0.5">•</span>
-                      <span className="text-sm">If it's not fun, stop and try something else</span>
+                      <span className="text-xs sm:text-sm">If it's not fun, stop and try something else</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-blue-600 font-bold mt-0.5">•</span>
