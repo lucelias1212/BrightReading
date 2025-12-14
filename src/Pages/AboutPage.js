@@ -45,7 +45,7 @@ const AboutPage = () => {
           </div>
           <h2 className="text-5xl font-bold text-gray-900 mb-4">About BrightReading</h2>
           <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            We've curated proven teaching methods from leading literacy researchers into a simple, parent-friendly curriculum
+            We've curated proven teaching methods from leading literacy researchers into a simple, parent-friendly Activity Book
           </p>
         </div>
 
@@ -57,7 +57,7 @@ const AboutPage = () => {
           </p>
           <div className="bg-white/20 backdrop-blur rounded-xl p-6 max-w-2xl mx-auto">
             <p className="text-lg">
-              We don't conduct research, we translate it. BrightReading brings together decades of peer-reviewed literacy studies and transforms them into practical, 10-minute daily lessons any parent can follow.
+              We don't conduct research, we translate it. BrightReading brings together decades of peer-reviewed literacy studies and transforms them into practical, 10-minute daily activities any parent can follow.
             </p>
           </div>
         </div>
@@ -103,7 +103,7 @@ const AboutPage = () => {
         <div className="mb-12">
           <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">Four Phases, One Goal: Confident Readers</h3>
           <p className="text-lg text-gray-600 text-center mb-8 max-w-3xl mx-auto">
-            Each phase follows a complete 52-week curriculum with 260 guided lessons, building progressively from sound awareness to independent reading.
+            Each phase follows a complete 52-week activity book with 260 guided lessons, building progressively from sound awareness to independent reading.
           </p>
 
           {/* Phase Cards */}
@@ -206,7 +206,7 @@ const AboutPage = () => {
 onClick={() => handleNavigate('/curriculum')}              
 className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl transition"
             >
-              <span>Explore Full Curriculum</span>
+              <span>Explore Full Activity Book</span>
               <ExternalLink size={20} />
             </button>
           </div>
@@ -217,7 +217,7 @@ className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pi
           <div className="flex items-start gap-4 mb-6">
             <Clock className="text-blue-500 flex-shrink-0" size={32} />
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Every Lesson Follows a Proven Structure</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">Every Activity Follows a Proven Structure</h3>
               <p className="text-gray-700 leading-relaxed mb-6">
                 Each 10-minute session is designed around research-backed teaching methods, broken into digestible activities:
               </p>
@@ -281,7 +281,7 @@ className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pi
             </div>
             <h3 className="text-3xl font-bold text-gray-900 mb-3">Built on Decades of Research</h3>
             <p className="text-gray-600 max-w-2xl mx-auto mb-2">
-              Our curriculum synthesizes findings from leading literacy researchers
+              Our activity book synthesizes findings from leading literacy researchers
             </p>
             <p className="text-sm text-gray-500 italic max-w-2xl mx-auto">
               (We didn't conduct these studies — we compiled and translated them into parent-friendly lessons)
@@ -379,7 +379,7 @@ className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pi
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-3">Designed for Real Life</h3>
               <p className="text-gray-700 leading-relaxed">
-                We understand parenting is demanding. That's why every lesson includes:
+                We understand parenting is demanding. That's why every activity includes:
               </p>
             </div>
           </div>
@@ -396,7 +396,7 @@ className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pi
               <div className="text-2xl">⏱️</div>
               <div>
                 <h4 className="font-bold text-gray-900 mb-1">Time-Efficient</h4>
-                <p className="text-gray-600 text-sm">Complete lessons in 10-15 minutes, 5 times per week</p>
+                <p className="text-gray-600 text-sm">Complete activities in 10-15 minutes, 5 times per week</p>
               </div>
             </div>
             <div className="flex gap-3">
@@ -421,7 +421,7 @@ className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pi
           <Star className="mx-auto mb-4" size={48} />
           <h3 className="text-3xl font-bold mb-4">Start Your Family's Reading Journey</h3>
           <p className="text-xl mb-8 opacity-95 max-w-2xl mx-auto">
-            Join parents who are building strong literacy foundations, one simple lesson at a time.
+            Join parents who are building strong literacy foundations, one simple activity at a time.
           </p>
           <button
             onClick={() => handleNavigate('/login')}

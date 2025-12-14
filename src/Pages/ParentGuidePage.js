@@ -37,9 +37,9 @@ const ParentGuidePage = () => {
   const dosDonts = {
     dos: [
       "Follow your child's lead - if they're excited about a particular activity, do more of it",
-      "Use lots of praise and encouragement throughout the lesson",
+      "Use lots of praise and encouragement throughout the activity",
       "Adapt activities to your child's energy level and mood",
-      "Read books together every day, even outside of lessons",
+      "Read books together every day, even outside of activities",
       "Point out letters and words in everyday life (signs, labels, menus)",
       "Make learning multi-sensory: touch, see, hear, move"
     ],
@@ -110,8 +110,8 @@ const ParentGuidePage = () => {
       solution: "That's totally normal! Try doing activities while moving - read while swinging, practice letters while jumping. Learning doesn't have to happen sitting down."
     },
     {
-      problem: "They're not interested in the lesson",
-      solution: "Skip that lesson and try a different one, or come back to it another day. You can also adapt activities to their current interests (dinosaurs, princesses, trucks, etc.)."
+      problem: "They're not interested in the activity",
+      solution: "Skip that activity and try a different one, or come back to it another day. You can also adapt activities to their current interests (dinosaurs, princesses, trucks, etc.)."
     },
     {
       problem: "I don't have time every day",
@@ -119,28 +119,28 @@ const ParentGuidePage = () => {
     },
     {
       problem: "My child is ahead/behind the age range",
-      solution: "Use the curriculum that matches their skill level, not their age. It's perfectly fine to move between age groups based on what they're ready for."
+      solution: "Use the phase that matches their skill level, not their age. It's perfectly fine to move between age groups based on what they're ready for."
     },
     {
       problem: "I feel silly doing the activities",
       solution: "That feeling goes away quickly! Kids respond to enthusiasm. The sillier you are, the more fun they have. Plus, nobody's watching - it's just you and your child."
     },
     {
-      problem: "We missed a lot of lessons",
-      solution: "No problem! There's no 'behind' in early learning. Just start where you are. The lessons build on each other, but it's not a race."
+      problem: "We missed a lot of activities",
+      solution: "No problem! There's no 'behind' in early learning. Just start where you are. The activities build on each other, but it's not a race."
     }
   ];
 
   const faqs = [
     {
       id: 1,
-      question: "How long should each lesson take?",
+      question: "How long should each activity take?",
       answer: "Aim for 10 minutes, but let your child guide you. Some days they'll want more, some days less. The key is keeping it fun and pressure-free. If you're both enjoying it and have time, going to 15-20 minutes is fine!"
     },
     {
       id: 2,
       question: "What if my child already knows some of this content?",
-      answer: "Great! You can move through those lessons quickly or skip ahead to more challenging material. The curriculum is flexible - use it as a guide, not a rigid rulebook. Start with an assessment to find the right level."
+      answer: "Great! You can move through those activities quickly or skip ahead to more challenging material. The activity book is flexible - use it as a guide, not a rigid rulebook. Start with an assessment to find the right level."
     },
     {
       id: 3,
@@ -150,12 +150,12 @@ const ParentGuidePage = () => {
     {
       id: 4,
       question: "What if I miss several days or weeks?",
-      answer: "Just pick up where you left off! There's no penalty for breaks. Life happens - vacations, illness, busy periods. The lessons will still be here when you're ready to return."
+      answer: "Just pick up where you left off! There's no penalty for breaks. Life happens - vacations, illness, busy periods. The activities will still be here when you're ready to return."
     },
     {
       id: 5,
       question: "Is this enough, or should I also do preschool/other programs?",
-      answer: "BrightReading is a comprehensive literacy curriculum, but it's designed to complement (not replace) other learning experiences. Preschool, playgroups, library storytime - all of these are wonderful additions!"
+      answer: "BrightReading is a comprehensive literacy activity book designed to complement (not replace) other learning experiences. Preschool, playgroups, library storytime - all of these are wonderful additions!"
     },
     {
       id: 6,
@@ -342,7 +342,7 @@ const ParentGuidePage = () => {
             }}
             className="bg-white text-purple-600 px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-50 transition shadow-lg hover:shadow-2xl transform hover:scale-105"
           >
-            Start Your Next Lesson →
+            Start Your Next Activity →
           </button>
         </div>
       </div>

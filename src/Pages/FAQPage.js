@@ -26,7 +26,7 @@ const FAQPage = () => {
       id: 1,
       category: 'getting-started',
       question: "How do I get started with BrightReading?",
-      answer: "Getting started is easy! First, create an account or log in. Then, select your child's age group from the dashboard. Once complete, you can begin with Lesson 1 or jump to the recommended lesson based on the assessment results."
+      answer: "Getting started is easy! First, create an account or log in. Then, select your child's age group from the dashboard. Once complete, you can begin with Activity 1 or jump to the recommended activity  based on the assessment results."
     },
     {
       id: 2,
@@ -44,15 +44,15 @@ const FAQPage = () => {
       id: 4,
       category: 'getting-started',
       question: "Do I need teaching experience to use BrightReading?",
-      answer: "Absolutely not! BrightReading is designed specifically for parents with no teaching background. Every lesson includes step-by-step scripts showing you exactly what to say and do. Think of it as having a literacy expert guiding you through each activity."
+      answer: "Absolutely not! BrightReading is designed specifically for parents with no teaching background. Every activity  includes step-by-step scripts showing you exactly what to say and do. Think of it as having a literacy expert guiding you through each activity."
     },
 
-    // Lessons & Learning
+    // Activities & Learning
     {
       id: 5,
       category: 'lessons',
-      question: "How long should each lesson take?",
-      answer: "Each lesson is designed to take about 10 minutes. However, let your child guide you - some days they may want to continue for 15-20 minutes, other days 5 minutes might be enough. The key is keeping it fun and pressure-free. Quality matters more than quantity."
+      question: "How long should each activity  take?",
+      answer: "Each activity  is designed to take about 10 minutes. However, let your child guide you - some days they may want to continue for 15-20 minutes, other days 5 minutes might be enough. The key is keeping it fun and pressure-free. Quality matters more than quantity."
     },
     {
       id: 6,
@@ -64,13 +64,13 @@ const FAQPage = () => {
       id: 7,
       category: 'lessons',
       question: "What if my child already knows some of the content?",
-      answer: "That's great! You have several options: move through those lessons quickly, skip ahead to more challenging material, or take an assessment to find the right level. The curriculum is flexible - use it as a guide, not a rigid rulebook. You can always adjust up or down based on your child's needs."
+      answer: "That's great! You have several options: move through those activities quickly, skip ahead to more challenging material, or take an assessment to find the right level. The activity book is flexible - use it as a guide, not a rigid rulebook. You can always adjust up or down based on your child's needs."
     },
     {
       id: 8,
       category: 'lessons',
       question: "What if we miss several days or weeks?",
-      answer: "No problem at all! Life happens - vacations, illness, busy periods are all normal. There's no penalty for breaks. Simply pick up where you left off when you're ready. The lessons will still be here, and your child's progress is saved. There's no such thing as 'behind' in early learning."
+      answer: "No problem at all! Life happens - vacations, illness, busy periods are all normal. There's no penalty for breaks. Simply pick up where you left off when you're ready. The activities will still be here, and your child's progress is saved. There's no such thing as 'behind' in early learning."
     },
     {
       id: 9,
@@ -81,7 +81,7 @@ const FAQPage = () => {
     {
       id: 10,
       category: 'lessons',
-      question: "Can I do lessons in a language other than English?",
+      question: "Can I do activities in a language other than English?",
       answer: "Yes! The foundational skills we teach (sound awareness, letter recognition, comprehension strategies) transfer across languages. You can adapt activities to any language. If your child is learning two languages, the skills will benefit both."
     },
     {
@@ -94,19 +94,19 @@ const FAQPage = () => {
       id: 12,
       category: 'lessons',
       question: "Is BrightReading enough, or should my child also attend preschool?",
-      answer: "It is not enough. BrightReading provides a comprehensive literacy curriculum, but it's designed to complement (not replace) other learning experiences. Preschool, playgroups, library storytime, and social activities are all wonderful additions that support your child's overall development."
+      answer: "It is not enough. BrightReading provides a comprehensive literacy activity book, but it's designed to complement (not replace) other learning experiences. Preschool, playgroups, library storytime, and social activities are all wonderful additions that support your child's overall development."
     },
     {
       id: 13,
       category: 'lessons',
-      question: "What if my child gets frustrated or upset during a lesson?",
-      answer: "Stop the lesson immediately and try again later. Learning should never feel stressful. If a particular activity consistently causes frustration, skip it and come back in a few weeks when they're ready. You can also try adapting the activity to make it easier or more engaging."
+      question: "What if my child gets frustrated or upset during an activity ?",
+      answer: "Stop the activity  immediately and try again later. Learning should never feel stressful. If a particular activity consistently causes frustration, skip it and come back in a few weeks when they're ready. You can also try adapting the activity to make it easier or more engaging."
     },
     {
       id: 14,
       category: 'lessons',
       question: "Can I work with multiple children at different levels?",
-      answer: "Yes! You can create separate profiles for each child and switch phases for them on the dashboard. Each phase will have their own progress tracking and lesson recommendations. Some activities can be adapted for multiple ages, while others work best one-on-one."
+      answer: "Yes! You can create separate profiles for each child and switch phases for them on the dashboard. Each phase will have their own progress tracking and activity  recommendations. Some activities can be adapted for multiple ages, while others work best one-on-one."
     },
 
     // Technical
@@ -114,19 +114,19 @@ const FAQPage = () => {
       id: 15,
       category: 'technical',
       question: "How do I track my child's progress?",
-      answer: "Your dashboard displays your child's progress including lessons completed, current streak, skills mastered, and overall advancement. After each lesson, you can mark it complete and the system automatically updates your progress tracker. You can view detailed progress reports anytime."
+      answer: "Your dashboard displays your child's progress including activities completed, current streak, skills mastered, and overall advancement. After each lesson, you can mark it complete and the system automatically updates your progress tracker. You can view detailed progress reports anytime."
     },
     {
       id: 16,
       category: 'technical',
       question: "Can I access BrightReading on multiple devices?",
-      answer: "Yes! Your account syncs across all devices. You can start a lesson on your computer, continue on your tablet, and review progress on your phone. Just log in with the same account credentials on any device."
+      answer: "Yes! Your account syncs across all devices. You can start an activity  on your computer, continue on your tablet, and review progress on your phone. Just log in with the same account credentials on any device."
     },
     {
       id: 17,
       category: 'technical',
       question: "Do I need an internet connection to use BrightReading?",
-      answer: "Yes, BrightReading currently requires an internet connection to access lessons and track progress. We recommend using a stable WiFi connection for the best experience. Offline functionality is being considered for future updates."
+      answer: "Yes, BrightReading currently requires an internet connection to access activities and track progress. We recommend using a stable WiFi connection for the best experience. Offline functionality is being considered for future updates."
     },
     {
       id: 18, 
@@ -140,7 +140,7 @@ const FAQPage = () => {
       id: 29,
       category: 'account',
       question: "Is there a free trial available?",
-      answer: "Yes! You can try Lesson 1-10 completely free without creating an account, as well as play one game. This gives you a full experience of what BrightReading offers. After that, you'll need to create an account to continue accessing lessons and track progress."
+      answer: "Yes! You can try Activity 1-10 completely free without creating an account, as well as play one game. This gives you a full experience of what BrightReading offers. After that, you'll need to create an account to continue accessing activities and track progress."
     },
     {
       id: 20,

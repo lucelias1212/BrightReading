@@ -1349,7 +1349,7 @@ const GamePage = () => {
               </p>
               <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-300 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 max-w-2xl mx-auto shadow-lg">
                 <p className="text-xs sm:text-sm text-blue-900 font-semibold leading-relaxed">
-                  💡 <strong>These are bonus activities!</strong> They complement your daily lessons but aren't required. Use them when you want to practice skills in fun, creative ways during everyday moments.
+                  💡 <strong>These are bonus activities!</strong> They complement your daily activities but aren't required. Use them when you want to practice skills in fun, creative ways during everyday moments.
                 </p>
               </div>
             </div>
@@ -1427,7 +1427,7 @@ const GamePage = () => {
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-green-600 font-bold mt-0.5">•</span>
-                      <span className="text-sm">To practice skills from lessons in new ways</span>
+                      <span className="text-sm">To practice skills from activities in new ways</span>
                     </li>
                   </ul>
                 </div>

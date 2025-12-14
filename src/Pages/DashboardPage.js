@@ -298,7 +298,7 @@ const HomeTab = () => {
                 <span className="hidden sm:inline">{currentPhaseInfo?.name.toUpperCase()} • CONTINUE LEARNING</span>
                 <span className="sm:hidden">CONTINUE</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-2 sm:mb-3 drop-shadow-lg">Week {nextLesson.week}, Lesson {nextLesson.lessonInWeek}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-2 sm:mb-3 drop-shadow-lg">Week {nextLesson.week}, Activity  {nextLesson.lessonInWeek}</h2>
               <p className="text-base sm:text-lg md:text-xl opacity-95 mb-4 sm:mb-6 font-bold">
                 You're crushing it! {childName} is learning so much from you. Let's keep the momentum going.
               </p>
@@ -355,7 +355,7 @@ const HomeTab = () => {
                   Remember: there's no "perfect" way to do this. Every parent feels a little nervous sometimes, and that's totally okay. You showing up today? That's what matters.
                 </p>
                 <p className="text-gray-800 font-black text-sm sm:text-base md:text-lg">
-                  Each little lesson is a gift you're giving {childName}. Enjoy the journey together.
+                  Each little activity  is a gift you're giving {childName}. Enjoy the journey together.
                 </p>
               </div>
             </div>
@@ -363,7 +363,7 @@ const HomeTab = () => {
         </>
       )}
 
-      {/* Current Week Lessons */}
+      {/* Current Week Activities */}
       {completedLessons.length > 0 && (
         <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 border-3 sm:border-4 border-blue-200 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-72 h-72 bg-blue-100/50 rounded-full blur-3xl"></div>
@@ -465,7 +465,7 @@ const ProgressTab = () => {
             </div>
           </div>
           <p className="text-center text-gray-600 mt-3 sm:mt-4 font-semibold text-xs sm:text-sm md:text-base">
-            {completedLessons.length} of 260 lessons completed in {currentPhaseInfo?.name}
+            {completedLessons.length} of 260activities completed in {currentPhaseInfo?.name}
           </p>
         </div>
 
@@ -592,7 +592,7 @@ const ProgressTab = () => {
                 : `${achievements.length - unlockedCount} more to unlock!`}
             </p>
             <p className="text-xs sm:text-sm font-bold text-white/90 mt-1 sm:mt-2">
-              Total lessons across all phases: {allPhasesTotal}
+              Totalactivities across all phases: {allPhasesTotal}
             </p>
           </div>
         )}
@@ -611,7 +611,7 @@ const ProgressTab = () => {
       <div className="relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
           <div className="flex-1 text-center md:text-left">
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3">{currentPhaseInfo?.name} Curriculum</h3>
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3">{currentPhaseInfo?.name} Activity Book</h3>
             <p className="text-base sm:text-lg md:text-xl opacity-95 mb-1 sm:mb-2">52 weeks organized into 4 quarters</p>
             <p className="text-xs sm:text-sm opacity-80">Quick overview of your learning path</p>
           </div>
@@ -620,7 +620,7 @@ const ProgressTab = () => {
             className="bg-white text-purple-600 px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-full font-bold text-sm sm:text-base md:text-lg hover:bg-gray-50 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105 inline-flex items-center gap-2 sm:gap-3 whitespace-nowrap w-full md:w-auto justify-center"
           >
             <BookOpen size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
-            View Full Curriculum
+            View Full Activity Book
           </button>
         </div>
       </div>
@@ -740,7 +740,7 @@ const ProgressTab = () => {
                       {/* Phase 4 Goals */}
                       {currentPhase === 4 && quarterNum === 1 && "Strengthen decoding of CVC and blend words. Develop fluency with sound blending and word families, recognize and read 10-20 sight words, and read with confidence and enjoyment"}
                       {currentPhase === 4 && quarterNum === 2 && "Form complete sentences in speech and writing. Understand punctuation and sentence boundaries, read short patterned books, and write short sentences independently"}
-                      {currentPhase === 4 && quarterNum === 3 && "Understand sequencing, cause/effect, and inference. Use descriptive vocabulary in retelling, identify emotions and lessons in stories, and retell or act out stories with detail"}
+                      {currentPhase === 4 && quarterNum === 3 && "Understand sequencing, cause/effect, and inference. Use descriptive vocabulary in retelling, identify emotions andactivities in stories, and retell or act out stories with detail"}
                       {currentPhase === 4 && quarterNum === 4 && "Read short paragraphs or early readers independently. Write 3-5 sentence stories with structure, express ideas and experiences in written form, and demonstrate comprehension, emotion, and creativity"}
                     </p>
                   </div>
@@ -851,14 +851,14 @@ const ProgressTab = () => {
 </div>
       <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">Want to See the Complete Picture?</h3>
       <p className="text-sm sm:text-base text-gray-700 mb-4 sm:mb-6 max-w-2xl mx-auto">
-        Explore the full BrightReading curriculum with detailed breakdowns, learning principles, and what your baby should achieve in each phase.
+        Explore the full BrightReading activity book with detailed breakdowns, learning principles, and what your baby should achieve in each phase.
       </p>
       <button
         onClick={() => handleNavigate('/curriculum')}
         className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 md:py-4 rounded-full font-bold text-sm sm:text-base md:text-lg hover:shadow-xl transition-all transform hover:scale-105 inline-flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center"
       >
         <BookOpen size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
-        <span className="hidden sm:inline">View Complete Curriculum Guide</span>
+        <span className="hidden sm:inline">View CompleteActivity Book Guide</span>
         <span className="sm:hidden">View Full Guide</span>
         <ArrowRight size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
       </button>
@@ -1587,7 +1587,7 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
                   <p className="text-gray-700 mb-6 font-semibold">Select an achievement to share with your circle:</p>
                   <div className="space-y-3 max-h-96 overflow-y-auto">
                     {unlockedAchievements.length === 0 ? (
-                      <p className="text-center text-gray-500 py-8">Complete lessons to unlock achievements!</p>
+                      <p className="text-center text-gray-500 py-8">Completeactivities to unlock achievements!</p>
                     ) : (
                       unlockedAchievements.map((achievement) => (
                         <button
@@ -2077,7 +2077,7 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-blue-600 font-bold mt-1">•</span>
-                <span><strong>On busy days:</strong> Skip your formal lesson and just do a quick game instead</span>
+                <span><strong>On busy days:</strong> Skip your formal activity  and just do a quick game instead</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-blue-600 font-bold mt-1">•</span>
@@ -2096,7 +2096,7 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
         <div className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 md:mb-4">💜</div>
         <h4 className="font-black text-gray-900 text-lg sm:text-xl md:text-2xl mb-3 sm:mb-4">Remember: These are extras!</h4>
         <p className="text-gray-700 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
-          Your main curriculum in {currentPhaseInfo?.name} is where the real magic happens. These enrichment activities are just for fun—use them when they fit, skip them when they don't. No pressure, no guilt!
+          Your mainActivity book in {currentPhaseInfo?.name} is where the real magic happens. These enrichment activities are just for fun—use them when they fit, skip them when they don't. No pressure, no guilt!
         </p>
       </div>
     </div>
@@ -2271,7 +2271,7 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
       },
       {
         title: "My Progress - Celebrate Growth",
-        content: "Watch your journey unfold! Track lessons completed, unlock achievements, and see your progress across all phases and quarters.",
+        content: "Watch your journey unfold! Trackactivities completed, unlock achievements, and see your progress across all phases and quarters.",
         position: "bottom-right",
         emoji: "📊",
         tab: "progress",
@@ -2292,7 +2292,7 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
           { text: "Quarter Themes", description: "Each quarter has a focus area" },
           { text: "Week Overview", description: "See all weeks at a glance" },
           { text: "Learning Goals", description: "Learning goals for your child" },
-          { text: "Full Curriculum Link", description: "Deep dive into the methodology" }
+          { text: "FullActivity Book Link", description: "Deep dive into the methodology" }
         ]
       },
       {

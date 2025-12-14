@@ -82,8 +82,8 @@ const PaymentSuccess = () => {
                   <CheckCircle className="text-green-600" size={20} />
                 </div>
                 <div>
-                  <p className="font-bold text-gray-900">All 1040 Lessons</p>
-                  <p className="text-sm text-gray-600">Complete curriculum unlocked</p>
+                  <p className="font-bold text-gray-900">All 1040 Activities</p>
+                  <p className="text-sm text-gray-600">Complete activity book unlocked</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -125,7 +125,7 @@ const PaymentSuccess = () => {
             <ul className="space-y-2 text-blue-800">
               <li className="flex items-start gap-2">
                 <span className="font-bold">1.</span>
-                <span>Head to your dashboard to see all available lessons</span>
+                <span>Head to your dashboard to see all available activities </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="font-bold">2.</span>
@@ -133,7 +133,7 @@ const PaymentSuccess = () => {
               </li>
               <li className="flex items-start gap-2">
                 <span className="font-bold">3.</span>
-                <span>Complete one lesson per day for best results</span>
+                <span>Complete one activity per day for best results</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="font-bold">4.</span>

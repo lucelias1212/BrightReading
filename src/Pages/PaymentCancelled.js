@@ -43,11 +43,11 @@ const PaymentCancelled = () => {
             <ul className="space-y-3 text-left text-gray-700">
               <li className="flex items-start gap-2">
                 <span className="text-purple-500 font-bold">•</span>
-                <span><strong>1040 complete lessons</strong> covering ages 1-5</span>
+                <span><strong>1040 complete activities</strong> covering ages 1-5</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-purple-500 font-bold">•</span>
-                <span><strong>Research-backed curriculum</strong> proven to work</span>
+                <span><strong>Research-backed activity book</strong> proven to work</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-purple-500 font-bold">•</span>
@@ -107,8 +107,8 @@ const PaymentCancelled = () => {
               <p>No, your payment was cancelled and no charges were made.</p>
             </div>
             <div>
-              <p className="font-semibold text-gray-900 mb-1">Can I still use my free lessons?</p>
-              <p>Yes! Your 10 free trial lessons are still available.</p>
+              <p className="font-semibold text-gray-900 mb-1">Can I still use my free activities?</p>
+              <p>Yes! Your 10 free trial activities are still available.</p>
             </div>
             <div>
               <p className="font-semibold text-gray-900 mb-1">What payment methods do you accept?</p>

@@ -127,7 +127,7 @@ const LoginPage = () => {
             
             <p className="text-xl text-white/90 font-semibold">
               {isSignUp 
-                ? 'Join thousands of parents giving their kids a head start with science-backed reading lessons.'
+                ? 'Join thousands of parents giving their kids a head start with science-backed reading activities.'
                 : 'Your little reader is waiting to continue their adventure with you!'
               }
             </p>
@@ -136,7 +136,7 @@ const LoginPage = () => {
             <div className="flex flex-wrap gap-3 pt-4">
               <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 flex items-center gap-2">
                 <Star size={16} className="text-yellow-200" />
-                <span className="text-sm font-bold">1040 Lessons</span>
+                <span className="text-sm font-bold">1040 Activities</span>
               </div>
               <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 flex items-center gap-2">
                 <Heart size={16} className="text-pink-200" />

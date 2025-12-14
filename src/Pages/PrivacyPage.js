@@ -31,7 +31,7 @@ const PrivacyPage = () => {
         {
           subtitle: "1.3 Usage Data",
           list: [
-            "Features used, lesson progress, and game engagement",
+            "Features used, activity progress, and game engagement",
             "Device type, browser, and technical performance information"
           ]
         },

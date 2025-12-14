@@ -183,7 +183,7 @@ const { userData, user, createCheckoutSession, createPaymentIntent } = useUser()
       period: '/month',
       savings: null,
       features: [
-        'All 1040 lessons unlocked',
+        'All 1040 activities unlocked',
         'All 4 phases (ages 1-5)',
         'Progress tracking',
         'Achievement badges',
@@ -200,7 +200,7 @@ const { userData, user, createCheckoutSession, createPaymentIntent } = useUser()
       savings: 'Save 18%',
       totalPrice: '$107.88/year',
       features: [
-        'All 1040 lessons unlocked',
+        'All 1040 activities unlocked',
         'All 4 phases (ages 1-5)',
         'Progress tracking',
         'Achievement badges',
@@ -212,12 +212,12 @@ const { userData, user, createCheckoutSession, createPaymentIntent } = useUser()
   ];
 
   const benefits = [
-    { icon: BookOpen, title: '1040 Total Lessons', desc: 'Complete curriculum for ages 1-5' },
-    { icon: Award, title: 'All 4 Phases', desc: '260 lessons per developmental phase' },
+    { icon: BookOpen, title: '1040 Total Activities', desc: 'Complete activity book for ages 1-5' },
+    { icon: Award, title: 'All 4 Phases', desc: '260 activities per developmental phase' },
     { icon: Clock, title: 'Just 10 Min/Day', desc: 'Short, effective learning sessions' },
     { icon: Users, title: 'Multiple Children', desc: 'Track progress for all your kids' },
     { icon: Shield, title: 'Science-Backed', desc: 'Research-proven reading methods' },
-    { icon: Sparkles, title: 'Regular Updates', desc: 'New lessons added continuously' }
+    { icon: Sparkles, title: 'Regular Updates', desc: 'New activities added continuously' }
   ];
 
   return (

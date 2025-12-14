@@ -379,22 +379,22 @@ const ProfilePage = () => {
                     <Zap size={20} />
                     <span className="font-bold text-sm">FREE TRIAL ACTIVE</span>
                   </div>
-                  <h3 className="text-3xl md:text-4xl font-black mb-3">Unlock All 1040 Lessons!</h3>
+                  <h3 className="text-3xl md:text-4xl font-black mb-3">Unlock All 1040 Activities!</h3>
                   <p className="text-xl font-semibold text-white/90 mb-4">
-                    You've tried 10 free lessons. Keep the momentum going with full access to all 4 phases.
+                    You've tried 10 free activities. Keep the momentum going with full access to all 4 phases.
                   </p>
                   <ul className="space-y-2 text-left inline-block">
                     <li className="flex items-center gap-2">
                       <div className="bg-white/20 p-1 rounded-full">
                         <Check size={16} />
                       </div>
-                      <span className="font-semibold">260 lessons per phase • 1040 total</span>
+                      <span className="font-semibold">260 activities per phase • 1040 total</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <div className="bg-white/20 p-1 rounded-full">
                         <Check size={16} />
                       </div>
-                      <span className="font-semibold">Complete curriculum for ages 1-5</span>
+                      <span className="font-semibold">Complete activity book for ages 1-5</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <div className="bg-white/20 p-1 rounded-full">
@@ -464,7 +464,7 @@ const ProfilePage = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <div className="bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl p-6 text-center border-3 border-purple-300">
               <div className="text-4xl font-black text-purple-600 mb-2">{completedLessons}</div>
-              <div className="text-sm text-gray-800 font-bold">Lessons</div>
+              <div className="text-sm text-gray-800 font-bold">Activities</div>
               <div className="text-xs text-purple-600 font-semibold mt-1">Completed</div>
             </div>
             <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl p-6 text-center border-3 border-blue-300">
@@ -499,7 +499,7 @@ const ProfilePage = () => {
               </div>
             </div>
             <p className="text-center text-gray-600 mt-3 font-semibold text-sm">
-              {completedLessons} of 260 lessons • {260 - completedLessons} remaining
+              {completedLessons} of 260 Activities • {260 - completedLessons} remaining
             </p>
           </div>
         </div>

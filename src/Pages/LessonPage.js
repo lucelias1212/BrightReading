@@ -785,7 +785,7 @@ const LessonPage = () => {
 
             <div className="bg-blue-50 border-l-4 border-blue-400 rounded-xl p-6 mb-8 text-left">
               <p className="text-gray-800">
-                <span className="font-bold text-blue-900">250+ more lessons</span> await with Premium — covering all 4 developmental phases with complete curriculum progression.
+                <span className="font-bold text-blue-900">250+ more lessons</span> await with Premium — covering all 4 developmental phases with complete activity book progression.
               </p>
             </div>
 

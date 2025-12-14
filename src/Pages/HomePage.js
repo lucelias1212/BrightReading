@@ -132,7 +132,7 @@ const HomePage = () => {
               </h2>
 
               <p className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed font-semibold">
-                By age 3, your child will have missed 40% of their peak learning window. BrightReading is the only app designed for parent-guided reading lessons starting at age 1—when learning is 4X more effective.
+                By age 3, your child will have missed 40% of their peak learning window. BrightReading is the only app designed for parent-guided reading activities starting at age 1—when learning is 4X more effective.
               </p>
 
               {/* Key Differentiator */}
@@ -168,7 +168,7 @@ const HomePage = () => {
                 onClick={handleGetStarted}
                 className="w-full md:w-auto bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-5 rounded-full text-lg md:text-xl font-black hover:shadow-2xl transition-all transform hover:scale-105 shadow-lg flex items-center justify-center gap-3 mb-4"
               >
-                Start 10 Free Lessons
+                Start 10 Free Activities
                 <ArrowRight size={24} />
               </button>
 
@@ -196,7 +196,7 @@ const HomePage = () => {
                 <button
                   onClick={() => handleNavigate('/lesson/1')}
                   className="absolute inset-0 z-20 bg-transparent hover:bg-purple-600/5 transition-all flex items-center justify-center group"
-                  aria-label="Try lesson 1 now"
+                  aria-label="Try Activity 1 now"
                 >
                   <div className="bg-white rounded-full p-6 shadow-2xl transform scale-0 group-hover:scale-100 transition-transform duration-300 border-4 border-purple-500">
                     <div className="flex flex-col items-center gap-2">
@@ -218,17 +218,17 @@ const HomePage = () => {
                   </div>
                 </div>
 
-                {/* Lesson Content */}
+                {/* Activity Content */}
                 <div className="bg-gradient-to-b from-amber-50 to-pink-50 p-6 md:p-8">
                   
-                  {/* Lesson Header */}
+                  {/* Activity Header */}
                   <div className="bg-white rounded-xl p-4 md:p-5 shadow-sm border border-purple-100 mb-4">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="bg-gradient-to-br from-pink-500 to-rose-500 p-2 md:p-3 rounded-lg">
                         <BookOpen className="text-white" size={20} />
                       </div>
                       <div>
-                        <h3 className="text-sm md:text-base font-bold">Phase 1, Week 1, Lesson 1</h3>
+                        <h3 className="text-sm md:text-base font-bold">Phase 1, Week 1, Activity 1</h3>
                         <p className="text-xs text-gray-600">Sound Awareness Foundation</p>
                       </div>
                     </div>
@@ -269,7 +269,7 @@ const HomePage = () => {
                   {/* CTA */}
                   <button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 md:py-4 rounded-lg font-bold text-sm shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
                     <Play size={20} />
-                    Try This Lesson Now
+                    Try This Activity Now
                   </button>
                 </div>
               </div>
@@ -370,7 +370,7 @@ const HomePage = () => {
                 How BrightReading Works
               </h3>
               <p className="text-xl text-gray-600">
-                No teaching degree required. Every lesson tells you exactly what to do.
+                No teaching degree required. Every Activity tells you exactly what to do.
               </p>
             </div>
 
@@ -426,7 +426,7 @@ const HomePage = () => {
                     <div className="bg-blue-100 text-blue-700 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold text-sm">You</div>
                     <div>
                       <div className="font-bold text-gray-900">Open the app on your device for 60 seconds</div>
-                      <div className="text-sm text-gray-600">Read today's lesson instructions</div>
+                      <div className="text-sm text-gray-600">Read today's Activity instructions</div>
                     </div>
                   </div>
                   <div className="flex gap-3">
@@ -482,7 +482,7 @@ const HomePage = () => {
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-lg p-6 text-center border border-white/20">
                   <div className="text-5xl font-black mb-3">260</div>
-                  <div className="text-lg font-bold">Lessons from age 1-5</div>
+                  <div className="text-lg font-bold">Activities from age 1-5</div>
                   <div className="text-sm opacity-80 mt-2">Structured, progressive learning</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-lg p-6 text-center border border-white/20">
@@ -497,7 +497,7 @@ const HomePage = () => {
                   onClick={handleGetStarted}
                   className="bg-white text-purple-600 px-12 py-5 rounded-full text-xl font-black hover:bg-gray-50 transition shadow-xl transform hover:scale-105 inline-block"
                 >
-                  Start Today — 10 Lessons Free
+                  Start Today — 10 Activities Free
                 </button>
               </div>
             </div>
@@ -642,7 +642,7 @@ const HomePage = () => {
                   highlight: "Letter recognition ahead of schedule"
                 },
                 {
-                  quote: "We were skeptical about starting at age 1. But these lessons are so simple, so fun. My kid actually ASKS to do them. That's when I knew it was working.",
+                  quote: "We were skeptical about starting at age 1. But these activities are so simple, so fun. My kid actually ASKS to do them. That's when I knew it was working.",
                   author: "James T.",
                   child: "Son, 19 months",
                   highlight: "Loves the daily routine"
@@ -775,7 +775,7 @@ const HomePage = () => {
           >
             <div className="max-w-4xl mx-auto">
               <div className="inline-block bg-blue-100 px-6 py-3 rounded-full border border-blue-300 mb-6">
-                <span className="font-black text-blue-700">Science-Backed Curriculum</span>
+                <span className="font-black text-blue-700">Science-Backed Activity Book</span>
               </div>
 
               <h3 className="text-3xl md:text-4xl font-black text-gray-900 mb-6">
@@ -783,7 +783,7 @@ const HomePage = () => {
               </h3>
               
               <p className="text-lg text-gray-700 mb-8">
-                BrightReading isn't guesswork. Every lesson implements proven learning principles from leading literacy researchers:
+                BrightReading isn't guesswork. Every Activity implements proven learning principles from leading literacy researchers:
               </p>
 
               <div className="grid md:grid-cols-3 gap-6 mb-8">
@@ -856,7 +856,7 @@ const HomePage = () => {
               </div>
 
               <p className="text-gray-700 italic text-center">
-                Every lesson, every phase, every activity is intentional. Nothing is random.
+                Every Activity, every phase, every activity is intentional. Nothing is random.
               </p>
             </div>
           </div>
@@ -875,13 +875,13 @@ const HomePage = () => {
                 Give Your Child a Head Start That Lasts a Lifetime
               </h3>
               <p className="text-xl md:text-2xl mb-8 opacity-95 font-bold max-w-2xl mx-auto">
-                Start building reading skills today—when it matters most. Try 10 lessons completely free. No credit card required.
+                Start building reading skills today—when it matters most. Try 10 activities completely free. No credit card required.
               </p>
               <button
                 onClick={handleGetStarted}
                 className="bg-white text-purple-600 px-12 py-6 rounded-full text-xl md:text-2xl font-black hover:bg-gray-50 transition shadow-2xl transform hover:scale-110 inline-flex items-center gap-3 mb-8"
               >
-                Start 10 Free Lessons Now
+                Start 10 Free Activities Now
                 <ArrowRight size={32} />
               </button>
               <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 text-sm md:text-base mb-8">
@@ -920,7 +920,7 @@ const HomePage = () => {
                 <h3 className="text-2xl font-black">BrightReading</h3>
               </div>
               <p className="text-purple-200 leading-relaxed text-sm">
-                Early literacy curriculum for children ages 1-5. Parent-guided, screen-free activities. Proven results by age 4.
+                Early literacy activity book for children ages 1-5. Parent-guided, screen-free activities. Proven results by age 4.
               </p>
             </div>
 
@@ -941,7 +941,7 @@ const HomePage = () => {
                     onClick={() => handleNavigate('/lesson/1')} 
                     className="hover:text-white transition hover:underline"
                   >
-                    Try a Lesson Free
+                    Try an Activity Free
                   </button>
                 </li>
                 <li>
@@ -949,7 +949,7 @@ const HomePage = () => {
                     onClick={() => scrollToSection('phases')} 
                     className="hover:text-white transition hover:underline"
                   >
-                    Curriculum
+                    Activity Book
                   </button>
                 </li>
               </ul>

@@ -27,7 +27,7 @@ const CurriculumPage = () => {
       focus: ['Sound awareness and listening', 'Object recognition and labeling', 'Early motor control for pre-writing', 'Rhythm, rhyme, and simple imitation', 'Book awareness (turning pages, pointing, naming)'],
       parentRole: 'Guide exposure and encourage curiosity. No testing — only play and conversation.',
       lessonStructure: {
-        weekly: '1 Chapter = 5 Lessons',
+        weekly: '1 Week = 5 Activities',
         daily: '10-20 minutes per day',
         quarterly: 'Deep mastery of 2-3 developmental domains'
       },
@@ -486,9 +486,9 @@ const LearningMechanicsSection = () => (
 <div className="mb-6 inline-block">
   <img src="/assets/Curriculum.png" alt="Curriculum" className="w-48 h-36 object-contain mx-auto" />
 </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 drop-shadow-lg">BrightReading Curriculum </h1>
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 drop-shadow-lg">BrightReading Activity Book </h1>
           <p className="text-xl md:text-2xl opacity-95 max-w-3xl mx-auto mb-8 leading-relaxed">
-            From first sounds to confident reading — a science-backed curriculum built on play, repetition, and natural development
+            From first sounds to confident reading — a science-backed activity book built on play, repetition, and natural development
           </p>
           <div className="flex gap-3 justify-center flex-wrap">
             <div className="bg-white/20 backdrop-blur-md rounded-full px-6 py-3 font-semibold hover:bg-white/30 transition-all transform hover:scale-105">
@@ -526,8 +526,8 @@ const LearningMechanicsSection = () => (
           </div>
           <div className="bg-gradient-to-br from-green-50 to-teal-50 rounded-xl p-6 border-2 border-green-200 hover:shadow-lg transition-all transform hover:scale-105">
             <div className="text-4xl mb-3">⏰</div>
-            <h3 className="font-bold text-xl text-gray-900 mb-3">Daily Lessons</h3>
-            <p className="text-gray-700 text-sm leading-relaxed">Just 10-15 minutes per day, 5 lessons per week — short, focused, and designed for busy families</p>
+            <h3 className="font-bold text-xl text-gray-900 mb-3">Daily Activities </h3>
+            <p className="text-gray-700 text-sm leading-relaxed">Just 10-15 minutes per day, 5 activities per week — short, focused, and designed for busy families</p>
           </div>
         </div>
         <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-6 border-2 border-amber-300">
@@ -536,8 +536,8 @@ const LearningMechanicsSection = () => (
             The BrightReading Formula
           </h3>
           <div className="space-y-2 text-gray-700 leading-relaxed">
-            <p><strong>260 lessons per year</strong> = 52 weeks × 5 lessons</p>
-            <p><strong>Each week = 1 Chapter</strong> with 5 focused lessons (10-20 minutes each)</p>
+            <p><strong>260 activities per year</strong> = 52 weeks × 5 activities </p>
+            <p><strong>Each week = 1 Chapter</strong> with 5 focused activities (10-20 minutes each)</p>
             <p className="text-sm">Skills are introduced, practiced through play, reinforced every 3-4 weeks, and celebrated quarterly. No pressure, no testing — just natural, joyful learning.</p>
           </div>
         </div>
@@ -591,7 +591,7 @@ const LearningMechanicsSection = () => (
         <div className="grid md:grid-cols-3 gap-6">
           <div className="border-2 border-purple-200 rounded-xl p-6 hover:shadow-lg transition-all bg-gradient-to-br from-purple-50 to-white">
             <div className="text-3xl mb-3">🔄</div>
-            <h3 className="font-bold text-lg mb-2 text-gray-900">Spiral Curriculum</h3>
+            <h3 className="font-bold text-lg mb-2 text-gray-900">Spiral Activity Book</h3>
             <p className="text-sm text-gray-600 leading-relaxed">
               <strong>Bruner (1960):</strong> Reintroducing concepts at increasing complexity deepens understanding and retention
             </p>
@@ -668,7 +668,7 @@ const LearningMechanicsSection = () => (
                     4 Quarters
                   </span>
                   <span className="bg-green-100 text-green-700 px-4 py-2 rounded-full font-semibold">
-                    260 Lessons
+                    260 Activities 
                   </span>
                 </div>
                 <span className="text-purple-600 font-bold flex items-center gap-2 text-base hover:gap-3 transition-all">
@@ -764,7 +764,7 @@ const LearningMechanicsSection = () => (
                 4 Quarters
               </span>
               <span className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full font-semibold border border-white/30">
-                260 Lessons
+                260 Activities 
               </span>
               <span className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full font-semibold border border-white/30">
                 10-15 min/day

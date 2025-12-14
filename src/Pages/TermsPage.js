@@ -11,7 +11,7 @@ const TermsPage = () => {
       id: 1,
       icon: <FileText className="text-purple-600" size={28} />,
       title: "1. Purpose of the Service",
-      content: "BrightReading provides parents and caregivers with structured, evidence-informed activities, lessons, and games designed to support early literacy, language, and cognitive development for children aged 1–5. BrightReading is not a school, research organization, or accredited educational institution. The Service is an informational tool for parents and caregivers. We make no guarantees of learning outcomes or developmental milestones."
+      content: "BrightReading provides parents and caregivers with structured, evidence-informed activities, activities, and games designed to support early literacy, language, and cognitive development for children aged 1–5. BrightReading is not a school, research organization, or accredited educational institution. The Service is an informational tool for parents and caregivers. We make no guarantees of learning outcomes or developmental milestones."
     },
     {
       id: 2,
@@ -38,11 +38,11 @@ const TermsPage = () => {
       subsections: [
         {
           subtitle: "4.1 Free Accounts",
-          text: "Free accounts include access to up to 10 lessons and 1 game."
+          text: "Free accounts include access to up to 10 activities and 1 game."
         },
         {
           subtitle: "4.2 Paid Subscription",
-          text: "Paid users gain access to all available lessons, games, and additional learning materials. The subscription price is $10.99 (USD) per month."
+          text: "Paid users gain access to all available activities, games, and additional learning materials. The subscription price is $10.99 (USD) per month."
         },
         {
           subtitle: "4.3 Billing and Renewal",
@@ -62,7 +62,7 @@ const TermsPage = () => {
       id: 5,
       icon: <Shield className="text-indigo-600" size={28} />,
       title: "5. Intellectual Property",
-      content: "All curriculum materials, games, designs, lesson structures, and related content within the Service are the intellectual property of BrightReading or its licensors. You are granted a limited, non-exclusive, non-transferable right to use the content for personal, non-commercial purposes only. You may not copy, distribute, modify, or create derivative works without prior written consent."
+      content: "All activity book materials, games, designs, activity structures, and related content within the Service are the intellectual property of BrightReading or its licensors. You are granted a limited, non-exclusive, non-transferable right to use the content for personal, non-commercial purposes only. You may not copy, distribute, modify, or create derivative works without prior written consent."
     },
     {
       id: 6,

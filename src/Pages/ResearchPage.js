@@ -79,7 +79,7 @@ const ResearchPage = () => {
       sample: '8-month-old infants exposed to artificial language streams',
       findings: 'Infants can extract patterns from speech through statistical learning, demonstrating early capacity for language structure recognition.',
       implication: 'Justifies early exposure to consistent routines and repeated word forms',
-      relevance: 'Supports repetitive sound patterns and predictable routines in Phase 1 curriculum'
+      relevance: 'Supports repetitive sound patterns and predictable routines in Phase 1 activity book'
     },
     {
       title: 'Early Phonological Predictors of Toddler Language',
@@ -166,9 +166,9 @@ const ResearchPage = () => {
         'Child-directed speech improves real-time language processing efficiency'
       ],
       applicationInBrightReading: [
-        'Dialogic reading prompts that encourage child responses throughout curriculum',
+        'Dialogic reading prompts that encourage child responses throughout activity book',
         'Parent scripts model open-ended questions, not just labeling',
-        'Turn-taking games and conversations embedded in every lesson',
+        'Turn-taking games and conversations embedded in every activity',
         'Emphasis on responsive parenting: follow child\'s lead, expand utterances',
         'Quality metrics prioritize conversational turns over passive word exposure'
       ],
@@ -367,7 +367,7 @@ const ResearchPage = () => {
         'Word recognition: systematic phonological awareness → alphabet → decoding progression',
         'Language comprehension: vocabulary building, dialogic reading, story structure from Phase 1',
         'Spiral curriculum ensures skill recurrence and integration across phases',
-        'Both strands addressed in every lesson, not isolated skill practice'
+        'Both strands addressed in every activity, not isolated skill practice'
       ]
     }
   ];
@@ -651,7 +651,7 @@ const ResearchPage = () => {
         },
         {
           authors: "Hirsh-Pasek, Kathy, et al.",
-          title: "Putting Education in 'Educational' Apps: Lessons from the Science of Learning",
+          title: "Putting Education in 'Educational' Apps: Activities from the Science of Learning",
           publication: "Psychological Science in the Public Interest, 2015",
           annotation: "Analyzed hundreds of apps; those encouraging parent-child interaction and real conversation are most effective. Passive screen time doesn't help literacy development."
         },
@@ -702,7 +702,7 @@ const ResearchPage = () => {
           title: "Teaching Children to Read: An Evidence-Based Assessment",
           publication: "National Institute of Child Health and Human Development, 2000",
           link: "https://www1.nichd.nih.gov/publications/pubs/nrp/documents/report.pdf",
-          annotation: "Landmark report identifying five pillars: phonemic awareness, systematic phonics, fluency, vocabulary, and comprehension. Foundation for structuring Phase 3-4 lesson sequences."
+          annotation: "Landmark report identifying five pillars: phonemic awareness, systematic phonics, fluency, vocabulary, and comprehension. Foundation for structuring Phase 3-4 activities sequences."
         },
         {
           authors: "Adams, Marilyn Jager",
@@ -733,7 +733,7 @@ const ResearchPage = () => {
           title: "Foundational Skills to Support Reading for Understanding in Kindergarten Through 3rd Grade",
           publication: "IES Practice Guide, 2016",
           link: "https://ies.ed.gov/ncee/wwc/docs/practiceguide/wwc_foundationalreading_070516.pdf",
-          annotation: "Actionable classroom recommendations for phonics scope, practice lengths, systematic instruction. Maps directly to 10-20 minute daily lesson rhythm."
+          annotation: "Actionable classroom recommendations for phonics scope, practice lengths, systematic instruction. Maps directly to 10-20 minute daily activity rhythm."
         }
       ]
     },
@@ -1010,7 +1010,7 @@ const ResearchPage = () => {
           </div>
           <h1 className="text-5xl font-bold text-gray-900 mb-4">The Science Behind BrightReading</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Our curriculum is built on decades of peer-reviewed research in early literacy development. 
+            Our activity book is built on decades of peer-reviewed research in early literacy development. 
             Here's the evidence supporting every activity your child does.
           </p>
         </div>
@@ -1230,7 +1230,7 @@ const ResearchPage = () => {
             Complete Annotated Bibliography
           </h2>
           <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
-            Comprehensive bibliography of peer-reviewed studies informing every aspect of BrightReading curriculum design
+            Comprehensive bibliography of peer-reviewed studies informing every aspect of BrightReading activity book design
           </p>
           <div className="space-y-8">
             {annotatedBibliography.map((section, sectionIdx) => (
@@ -1325,7 +1325,7 @@ const ResearchPage = () => {
         <div className="bg-white rounded-2xl shadow-lg p-8 mb-16">
           <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Leading Research Organizations</h2>
           <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
-            BrightReading curriculum draws from recommendations and findings published by these authoritative bodies
+            BrightReading activity book draws from recommendations and findings published by these authoritative bodies
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
