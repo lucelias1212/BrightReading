@@ -156,8 +156,8 @@ const HomePage = () => {
                   <div className="flex gap-3 items-start">
                     <CheckCircle className="text-green-600 flex-shrink-0 mt-1" size={20} />
                     <div>
-                      <div className="font-bold text-gray-900">Proven Results by Age 4</div>
-                      <div className="text-sm text-gray-700">Independent reading. Not "learning the alphabet"—actually reading books.</div>
+                      <div className="font-bold text-gray-900">Understand Language</div>
+                      <div className="text-sm text-gray-700">Independent reading. Not "learning the alphabet", actually reading books.</div>
                     </div>
                   </div>
                 </div>
@@ -175,11 +175,11 @@ const HomePage = () => {
               <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600 font-semibold">
                 <div className="flex items-center gap-2">
                   <CheckCircle size={16} className="text-green-600" />
-                  <span>No credit card required</span>
+                  <span>No credit card required to sign up</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle size={16} className="text-green-600" />
-                  <span>Then $10.99/month</span>
+                  <span>$10.99/month</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle size={16} className="text-green-600" />
@@ -201,7 +201,7 @@ const HomePage = () => {
                   <div className="bg-white rounded-full p-6 shadow-2xl transform scale-0 group-hover:scale-100 transition-transform duration-300 border-4 border-purple-500">
                     <div className="flex flex-col items-center gap-2">
                       <Play size={48} className="text-purple-600" />
-                      <span className="font-black text-purple-600 text-sm whitespace-nowrap">Try Free Lesson</span>
+                      <span className="font-black text-purple-600 text-sm whitespace-nowrap">Try Free Activity</span>
                     </div>
                   </div>
                 </button>
@@ -352,7 +352,7 @@ const HomePage = () => {
                 onClick={handleGetStarted}
                 className="w-full md:w-auto mx-auto block bg-gradient-to-r from-red-600 to-orange-600 text-white px-8 py-4 rounded-full text-lg font-black hover:shadow-xl transition-all transform hover:scale-105 shadow-lg"
               >
-                Don't Miss This Window — Start Free
+                Don't Miss This Window, Start Free
               </button>
             </div>
           </div>
@@ -379,7 +379,7 @@ const HomePage = () => {
                 {
                   step: '1',
                   title: 'Open App',
-                  desc: '60 seconds to read today\'s lesson',
+                  desc: '60 seconds to read today\'s activity',
                   icon: '📱'
                 },
                 {
@@ -783,7 +783,7 @@ const HomePage = () => {
               </h3>
               
               <p className="text-lg text-gray-700 mb-8">
-                BrightReading isn't guesswork. Every Activity implements proven learning principles from leading literacy researchers:
+                BrightReading isn't guesswork. Every Activity implements science-backed learning principles from leading literacy researchers:
               </p>
 
               <div className="grid md:grid-cols-3 gap-6 mb-8">
@@ -887,11 +887,11 @@ const HomePage = () => {
               <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 text-sm md:text-base mb-8">
                 <div className="flex items-center gap-2">
                   <CheckCircle size={20} />
-                  <span className="font-bold">No credit card</span>
+                  <span className="font-bold">No credit card required to sign up</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle size={20} />
-                  <span className="font-bold">Then $10.99/month</span>
+                  <span className="font-bold">$10.99/month</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle size={20} />
@@ -920,7 +920,7 @@ const HomePage = () => {
                 <h3 className="text-2xl font-black">BrightReading</h3>
               </div>
               <p className="text-purple-200 leading-relaxed text-sm">
-                Early literacy activity book for children ages 1-5. Parent-guided, screen-free activities. Proven results by age 4.
+                Early literacy activity book for children ages 1-5. Parent-guided, screen-free activities.
               </p>
             </div>
 

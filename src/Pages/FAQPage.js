@@ -57,7 +57,7 @@ const FAQPage = () => {
     {
       id: 6,
       category: 'lessons',
-      question: "How often should we do lessons?",
+      question: "How often should we do activities?",
       answer: "We recommend 3-5 times per week for best results. Consistency is more important than daily practice. Regular short sessions are more effective than occasional long ones. It's perfectly fine to skip days when life gets busy - just pick up where you left off."
     },
     {
@@ -75,7 +75,7 @@ const FAQPage = () => {
     {
       id: 9,
       category: 'lessons',
-      question: "My child won't sit still during lessons. Is this normal?",
+      question: "My child won't sit still during activities. Is this normal?",
       answer: "Completely normal! Young children learn through movement. Try doing activities while they're moving - read while they swing, practice letters while jumping, or have them act out stories. Learning doesn't have to happen sitting down. Follow their energy level and keep sessions short."
     },
     {
@@ -114,7 +114,7 @@ const FAQPage = () => {
       id: 15,
       category: 'technical',
       question: "How do I track my child's progress?",
-      answer: "Your dashboard displays your child's progress including activities completed, current streak, skills mastered, and overall advancement. After each lesson, you can mark it complete and the system automatically updates your progress tracker. You can view detailed progress reports anytime."
+      answer: "Your dashboard displays your child's progress including activities completed, current streak, skills mastered, and overall advancement. After each activity, you can mark it complete and the system automatically updates your progress tracker. You can view detailed progress reports anytime."
     },
     {
       id: 16,

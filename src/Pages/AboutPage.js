@@ -103,7 +103,7 @@ const AboutPage = () => {
         <div className="mb-12">
           <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">Four Phases, One Goal: Confident Readers</h3>
           <p className="text-lg text-gray-600 text-center mb-8 max-w-3xl mx-auto">
-            Each phase follows a complete 52-week activity book with 260 guided lessons, building progressively from sound awareness to independent reading.
+            Each phase follows a complete 52-week activity book with 260 guided activities, building progressively from sound awareness to independent reading.
           </p>
 
           {/* Phase Cards */}
@@ -284,7 +284,7 @@ className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pi
               Our activity book synthesizes findings from leading literacy researchers
             </p>
             <p className="text-sm text-gray-500 italic max-w-2xl mx-auto">
-              (We didn't conduct these studies — we compiled and translated them into parent-friendly lessons)
+              (We didn't conduct these studies — we compiled and translated them into parent-friendly activities)
             </p>
           </div>
 

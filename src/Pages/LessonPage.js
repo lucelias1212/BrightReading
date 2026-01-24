@@ -195,10 +195,10 @@ const LessonPage = () => {
             <div className="bg-gray-100 w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6">
               <Lock className="text-gray-400" size={64} />
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">This Lesson is Locked</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">This Activity is Locked</h2>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              You've completed your 10 free lessons! 🎉<br/>
-              Upgrade to unlock all 260 lessons across all 4 phases and continue your child's reading journey.
+              You've completed your 10 free activities! 🎉<br/>
+              Upgrade to unlock all 260 activites across all 4 phases and continue your child's reading journey.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
@@ -247,9 +247,9 @@ const LessonPage = () => {
             <div className="bg-gray-100 w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6">
               <BookOpen className="text-gray-400" size={64} />
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Oops! Lesson Not Found</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Oops! Activity Not Found</h2>
             <p className="text-xl text-gray-600 mb-8">
-              Lesson {currentLessonNum} hasn't been created yet. Check back soon!
+              Activity {currentLessonNum} hasn't been created yet. Check back soon!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
@@ -282,7 +282,7 @@ const LessonPage = () => {
                 className="bg-white text-gray-700 border-2 border-gray-300 px-10 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition inline-flex items-center justify-center gap-2 transform hover:scale-105 active:scale-95"
               >
                 <ChevronLeft size={24} />
-                Previous Lesson
+                Previous Activity
               </button>
             </div>
           </div>
@@ -302,7 +302,7 @@ const LessonPage = () => {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-xl font-bold text-gray-900">Week {weekNum}, Lesson {lessonInWeek}</h1>
+                <h1 className="text-xl font-bold text-gray-900">Week {weekNum}, Activity {lessonInWeek}</h1>
                 <span className={`text-xs font-bold px-2 py-1 rounded-full bg-gradient-to-r ${currentPhaseInfo?.color} text-white`}>
                   Phase {currentPhase}
                 </span>
@@ -345,7 +345,7 @@ const LessonPage = () => {
               <Trophy size={24} className="flex-shrink-0" />
               <div>
                 <p className="font-semibold">
-                  {currentPhaseInfo?.name}: {completedLessonsCount} of 260 lessons
+                  {currentPhaseInfo?.name}: {completedLessonsCount} of 260 Activities
                 </p>
                 <p className="text-xs text-white/80">
                   {currentPhaseInfo?.subtitle} • {Math.round((completedLessonsCount / 260) * 100)}% complete
@@ -359,7 +359,7 @@ const LessonPage = () => {
             <div className="bg-green-50 border-2 border-green-300 rounded-xl px-4 py-3 mb-4 flex items-center gap-3">
               <CheckCircle className="text-green-600 flex-shrink-0" size={24} />
               <p className="text-green-800 font-semibold">
-                ✓ Completed! You can review this lesson anytime.
+                ✓ Completed! You can review this activity anytime.
               </p>
             </div>
           )}
@@ -370,7 +370,7 @@ const LessonPage = () => {
               <div className="flex items-center gap-3 text-white">
                 <Zap size={24} className="flex-shrink-0" />
                 <p className="font-semibold">
-                  Free Trial: {totalCompletedAcrossAllPhases} of 10 lessons completed • {10 - totalCompletedAcrossAllPhases} remaining across all phases
+                  Free Trial: {totalCompletedAcrossAllPhases} of 10 activities completed • {10 - totalCompletedAcrossAllPhases} remaining across all phases
                 </p>
               </div>
             </div>
@@ -420,7 +420,7 @@ const LessonPage = () => {
               <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 shadow-md">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <span className="text-3xl">🎯</span>
-                  Lesson Goal
+                  Activity Goal
                 </h3>
                 <p className="text-gray-800 text-lg leading-relaxed">{currentStepData.content.goal}</p>
               </div>
@@ -703,7 +703,7 @@ const LessonPage = () => {
                 className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white py-5 rounded-xl font-bold text-lg hover:shadow-xl transition flex items-center justify-center gap-2"
               >
                 <CheckCircle size={24} />
-                {alreadyCompleted ? 'Back to Dashboard' : 'Complete Lesson'}
+                {alreadyCompleted ? 'Back to Dashboard' : 'Complete Activity'}
               </button>
             )}
           </div>
@@ -719,7 +719,7 @@ const LessonPage = () => {
                 <Trophy className="text-white" size={56} />
               </div>
               <h2 className="text-4xl font-bold text-gray-900 mb-3">Amazing Work!</h2>
-              <p className="text-xl text-gray-600">You've completed Lesson {currentLessonNum} in {currentPhaseInfo?.name}</p>
+              <p className="text-xl text-gray-600">You've completed Activity {currentLessonNum} in {currentPhaseInfo?.name}</p>
             </div>
 
             <div className={`bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 mb-8 border-2 ${currentPhaseInfo?.color.replace('from-', 'border-').replace(' to-', '')}`}>
@@ -762,7 +762,7 @@ const LessonPage = () => {
                 <Zap className="text-white" size={56} />
               </div>
               <h2 className="text-4xl font-bold text-gray-900 mb-3">You Did It!</h2>
-              <p className="text-xl text-gray-600">You've completed all 10 free trial lessons! 🎉</p>
+              <p className="text-xl text-gray-600">You've completed all 10 free trial activities! 🎉</p>
             </div>
 
             <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 mb-6 text-left">
@@ -770,7 +770,7 @@ const LessonPage = () => {
               <ul className="space-y-4">
                 <li className="flex gap-3 text-gray-800">
                   <CheckCircle className="text-green-500 flex-shrink-0" size={24} />
-                  <span>Research-backed lesson design</span>
+                  <span>Research-backed activity design</span>
                 </li>
                 <li className="flex gap-3 text-gray-800">
                   <CheckCircle className="text-green-500 flex-shrink-0" size={24} />
@@ -785,7 +785,7 @@ const LessonPage = () => {
 
             <div className="bg-blue-50 border-l-4 border-blue-400 rounded-xl p-6 mb-8 text-left">
               <p className="text-gray-800">
-                <span className="font-bold text-blue-900">250+ more lessons</span> await with Premium — covering all 4 developmental phases with complete activity book progression.
+                <span className="font-bold text-blue-900">250+ more activities</span> await with Premium — covering all 4 developmental phases with complete activity book progression.
               </p>
             </div>
 
@@ -824,7 +824,7 @@ const LessonPage = () => {
                   <Calendar size={32} />
                   <div>
                     <h2 className="text-2xl font-bold">Week {displayWeek}</h2>
-                    <p className="text-white/90">{currentPhaseInfo?.name} • 5 lessons</p>
+                    <p className="text-white/90">{currentPhaseInfo?.name} • 5 activities</p>
                   </div>
                 </div>
                 <button

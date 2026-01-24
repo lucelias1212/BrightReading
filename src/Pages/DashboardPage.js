@@ -179,7 +179,7 @@ const [activeTab, setActiveTab] = useState(location.state?.activeTab || 'home');
   const tabs = [
     { id: 'home', label: 'Home', icon: '/assets/Home.png' },
     { id: 'progress', label: 'My Progress', icon: '/assets/My Progress.png' },
-    { id: 'curriculum', label: 'Curriculum', icon: '/assets/Curriculum.png' },
+    { id: 'curriculum', label: 'Activity Book', icon: '/assets/Curriculum.png' },
     { id: 'community', label: 'Community', icon: '/assets/Community.png' },
     { id: 'enrichment', label: 'Enrichment', icon: '/assets/Enrichment.png' }
   ];
@@ -283,7 +283,7 @@ const HomeTab = () => {
               className="bg-white text-purple-600 px-6 sm:px-8 md:px-12 py-3 sm:py-4 md:py-6 rounded-full font-black text-lg sm:text-xl md:text-2xl hover:bg-gray-50 transition shadow-2xl transform hover:scale-110 active:scale-95 inline-flex items-center gap-2 sm:gap-3 border-3 sm:border-4 border-purple-200"
             >
               <Play size={24} className="sm:w-7 sm:h-7 md:w-8 md:h-8" />
-              Start First Lesson
+              Start First Activity
             </button>
           </div>
         </div>
@@ -307,7 +307,7 @@ const HomeTab = () => {
                 className="bg-white text-purple-600 px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full font-black text-base sm:text-lg md:text-xl hover:bg-gray-50 transition shadow-2xl inline-flex items-center gap-2 sm:gap-3 border-3 sm:border-4 border-purple-200 transform hover:scale-110 active:scale-95"
               >
                 <Play size={20} className="sm:w-6 sm:h-6 md:w-7 md:h-7" />
-                Continue Lesson
+                Continue Activity
               </button>
             </div>
             <div className="bg-white/30 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 text-center min-w-[120px] sm:min-w-[160px] border-3 sm:border-4 border-white/50 shadow-2xl">
@@ -367,7 +367,7 @@ const HomeTab = () => {
       {completedLessons.length > 0 && (
         <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 border-3 sm:border-4 border-blue-200 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-72 h-72 bg-blue-100/50 rounded-full blur-3xl"></div>
-          <h3 className="text-2xl sm:text-3xl font-black text-gray-900 mb-4 sm:mb-6 relative z-10">This Week's Lessons</h3>
+          <h3 className="text-2xl sm:text-3xl font-black text-gray-900 mb-4 sm:mb-6 relative z-10">This Week's Activities</h3>
           <div className="space-y-2 sm:space-y-3 relative z-10">
 {getWeekLessons(currentWeek).map((lessonNum, idx) => {
   const lessonData = getLesson(lessonNum, currentPhase); 
@@ -472,7 +472,7 @@ const ProgressTab = () => {
         <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6">
           <div className="text-center p-3 sm:p-4 md:p-6 bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl sm:rounded-2xl border-2 sm:border-3 border-purple-300">
             <div className="text-3xl sm:text-4xl md:text-5xl font-black text-purple-600 mb-1 sm:mb-2">{completedLessons.length}</div>
-            <div className="text-xs sm:text-sm md:text-base text-gray-700 font-bold">Total Lessons</div>
+            <div className="text-xs sm:text-sm md:text-base text-gray-700 font-bold">Total Activities</div>
             <div className="text-[10px] sm:text-xs text-purple-600 font-semibold mt-1 sm:mt-2">in this phase</div>
           </div>
           <div className="text-center p-3 sm:p-4 md:p-6 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl sm:rounded-2xl border-2 sm:border-3 border-blue-300">
@@ -819,7 +819,7 @@ const ProgressTab = () => {
                             ))}
                           </div>
                           <div className="text-[10px] sm:text-xs text-gray-600 mt-1 sm:mt-2 text-center">
-                            {completedCount}/5 lessons
+                            {completedCount}/5 activites
                           </div>
                         </div>
 
@@ -858,7 +858,7 @@ const ProgressTab = () => {
         className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 md:py-4 rounded-full font-bold text-sm sm:text-base md:text-lg hover:shadow-xl transition-all transform hover:scale-105 inline-flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center"
       >
         <BookOpen size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
-        <span className="hidden sm:inline">View CompleteActivity Book Guide</span>
+        <span className="hidden sm:inline">View Complete Activity Book Guide</span>
         <span className="sm:hidden">View Full Guide</span>
         <ArrowRight size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
       </button>
@@ -2073,7 +2073,7 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
             <ul className="space-y-1.5 sm:space-y-2 text-blue-800 text-xs sm:text-sm md:text-base">
               <li className="flex items-start gap-1.5 sm:gap-2">
                 <span className="text-blue-600 font-bold mt-0.5 sm:mt-1">•</span>
-                <span><strong>After lessons:</strong> Add 10-15 minutes of stories or games when your baby is still engaged</span>
+                <span><strong>After activites:</strong> Add 10-15 minutes of stories or games when your baby is still engaged</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-blue-600 font-bold mt-1">•</span>
@@ -2258,12 +2258,12 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
       },
       {
         title: "Home - Your Daily Hub",
-        content: "This is your command center! See your current lesson, track your streak, switch between learning phases, and get personalized encouragement.",
+        content: "This is your command center! See your current activity, track your streak, switch between learning phases, and get personalized encouragement.",
         position: "bottom-right",
         emoji: "🏠",
         tab: "home",
         highlights: [
-          { text: "Next Lesson", description: "Start or continue your learning journey" },
+          { text: "Next Activity", description: "Start or continue your learning journey" },
           { text: "Phase Selector", description: "Switch between age-appropriate phases" },
           { text: "Weekly Progress", description: "See how you're doing this week" },
           { text: "Streak Counter", description: "Keep your learning momentum going" }
