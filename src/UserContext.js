@@ -406,35 +406,40 @@ const defaultData = {
       const requestToRemove = userData.friendRequests.find(r => r.from === requesterId);
       const sentRequestToRemove = requesterData.sentFriendRequests?.find(r => r.to === user.uid);
       
+      // Add requester to current user's friends list
       const addRequesterFriend = {
         uid: requesterId,
         username: requesterData.username || '',
         email: requesterData.email || '',
         name: requesterData.parentName || requesterData.username || '',
-        addedAt: new Date().toISOString()
+        profilePicture: requesterData.profilePicture || null,
+        childName: requesterData.childName || null,
+        addedAt: new Date().toISOString(),
+        unreadCount: 0
       };
-      if (requesterData.childName) addRequesterFriend.childName = requesterData.childName;
       
+      // Add current user to requester's friends list
       const addCurrentUserFriend = {
         uid: user.uid,
         username: userData.username || '',
         email: userData.email || '',
         name: userData.parentName || userData.username || '',
-        addedAt: new Date().toISOString()
+        profilePicture: userData.profilePicture || null,
+        childName: userData.childName || null,
+        addedAt: new Date().toISOString(),
+        unreadCount: 0
       };
-      if (userData.childName) addCurrentUserFriend.childName = userData.childName;
       
+      // Update both users' friend lists simultaneously
       await updateDoc(doc(db, 'users', user.uid), {
         friends: arrayUnion(addRequesterFriend),
         friendRequests: arrayRemove(requestToRemove)
       });
       
-      if (sentRequestToRemove) {
-        await updateDoc(doc(db, 'users', requesterId), {
-          friends: arrayUnion(addCurrentUserFriend),
-          sentFriendRequests: arrayRemove(sentRequestToRemove)
-        });
-      }
+      await updateDoc(doc(db, 'users', requesterId), {
+        friends: arrayUnion(addCurrentUserFriend),
+        sentFriendRequests: arrayRemove(sentRequestToRemove)
+      });
       
       return { success: true };
     } catch (error) {
@@ -697,9 +702,39 @@ const defaultData = {
       }
     }
     
-    setTimeout(() => {
-      setDoc(doc(db, 'users', user.uid), profileData, { merge: true }).catch(() => {});
-    }, 500);
+    // Update own profile
+    await setDoc(doc(db, 'users', user.uid), profileData, { merge: true });
+    
+    // If profile picture or name changed, update in all friends' lists
+    if (profileData.profilePicture !== undefined || profileData.parentName !== undefined) {
+      const friends = userData.friends || [];
+      
+      // Update each friend's friend list with new data
+      for (const friend of friends) {
+        try {
+          const friendDoc = await getDoc(doc(db, 'users', friend.uid));
+          if (friendDoc.exists()) {
+            const friendData = friendDoc.data();
+            const updatedFriends = (friendData.friends || []).map(f => {
+              if (f.uid === user.uid) {
+                return {
+                  ...f,
+                  profilePicture: profileData.profilePicture !== undefined ? profileData.profilePicture : f.profilePicture,
+                  name: profileData.parentName || f.name
+                };
+              }
+              return f;
+            });
+            
+            await updateDoc(doc(db, 'users', friend.uid), {
+              friends: updatedFriends
+            });
+          }
+        } catch (error) {
+          console.error(`Failed to update friend ${friend.uid}:`, error);
+        }
+      }
+    }
     
     return { success: true };
   }, [user, userData]);
@@ -718,6 +753,22 @@ const defaultData = {
         text: messageText.trim(),
         sentAt: new Date().toISOString()
       });
+
+      // Increment unread count for recipient
+      const recipientDoc = await getDoc(doc(db, 'users', recipientId));
+      if (recipientDoc.exists()) {
+        const recipientData = recipientDoc.data();
+        const updatedFriends = (recipientData.friends || []).map(friend => {
+          if (friend.uid === user.uid) {
+            return { ...friend, unreadCount: (friend.unreadCount || 0) + 1 };
+          }
+          return friend;
+        });
+        
+        await updateDoc(doc(db, 'users', recipientId), {
+          friends: updatedFriends
+        });
+      }
 
       return { success: true };
     } catch (error) {
@@ -895,6 +946,28 @@ const defaultData = {
     });
 
     return unsubscribe;
+  }, [user, userData]);
+
+const markMessagesAsRead = useCallback(async (friendId) => {
+    if (!user || !userData) return { success: false };
+
+    try {
+      const updatedFriends = (userData.friends || []).map(friend => {
+        if (friend.uid === friendId) {
+          return { ...friend, unreadCount: 0 };
+        }
+        return friend;
+      });
+      
+      await updateDoc(doc(db, 'users', user.uid), {
+        friends: updatedFriends
+      });
+
+      return { success: true };
+    } catch (error) {
+      console.error('Mark messages as read error:', error);
+      return { success: false };
+    }
   }, [user, userData]);
 
   const getCircleData = useCallback(async (circleId) => {
@@ -1103,14 +1176,15 @@ const checkSubscriptionStatus = useCallback(async () => {
     sendDirectMessage,
     getDirectMessages,
     subscribeToDirectMessages,
+    markMessagesAsRead,
     sendCircleMessage,
     reactToCircleMessage,
     getCircleData,
     subscribeToCircle,
     createCheckoutSession,
     createPaymentIntent,  
-  openCustomerPortal,          
-  checkSubscriptionStatus
+    openCustomerPortal,          
+    checkSubscriptionStatus
   };
 
   return (

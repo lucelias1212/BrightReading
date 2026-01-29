@@ -23,6 +23,8 @@ const [activeTab, setActiveTab] = useState(location.state?.activeTab || 'home');
   const [tourStep, setTourStep] = useState(0);
   const [newCircleName, setNewCircleName] = useState('');
   const [newCircleDesc, setNewCircleDesc] = useState('');
+  const [unreadMessages, setUnreadMessages] = useState(0);
+  const [unreadCircleMessages, setUnreadCircleMessages] = useState(0);
 
   const userName = user?.email?.split('@')[0] || "Parent";
   
@@ -59,6 +61,31 @@ const [activeTab, setActiveTab] = useState(location.state?.activeTab || 'home');
     }
   }, [userData, isPageLoading]);
 
+  // Calculate unread messages
+  useEffect(() => {
+    if (!userData?.friends) return;
+    
+    let totalUnread = 0;
+    userData.friends.forEach(friend => {
+      const unread = friend.unreadCount || 0;
+      totalUnread += unread;
+    });
+    setUnreadMessages(totalUnread);
+  }, [userData?.friends]);
+
+  // Calculate unread circle messages
+  useEffect(() => {
+    if (!userData?.circles) return;
+    
+    let totalUnread = 0;
+    userData.circles.forEach(circleId => {
+      const lastViewed = userData.lastViewedCircles?.[circleId] || 0;
+      const unread = userData.unreadCircleMessages?.[circleId] || 0;
+      totalUnread += unread;
+    });
+    setUnreadCircleMessages(totalUnread);
+  }, [userData?.circles, userData?.lastViewedCircles, userData?.unreadCircleMessages]);
+
   const handleTabChange = (tab) => {
     setIsTransitioning(true);
     setTimeout(() => {
@@ -75,29 +102,6 @@ const [activeTab, setActiveTab] = useState(location.state?.activeTab || 'home');
 
   const handleSwitchPhase = async (phaseNum) => {
     await switchPhase(phaseNum);
-  };
-
-  const handleAddFriend = async (e) => {
-    e.preventDefault();
-    setAddFriendError('');
-    setAddFriendSuccess('');
-
-    if (!friendEmail.trim()) {
-      setAddFriendError('Please enter an email address');
-      return;
-    }
-
-    const result = await sendFriendRequest(friendEmail);
-    if (result.success) {
-      setAddFriendSuccess(`Friend request sent to ${friendEmail}!`);
-      setFriendEmail('');
-      setTimeout(() => {
-        setShowAddFriend(false);
-        setAddFriendSuccess('');
-      }, 2000);
-    } else {
-      setAddFriendError(result.error || 'Failed to send request');
-    }
   };
 
   const handleAcceptFriend = async (requesterId) => {
@@ -883,18 +887,22 @@ const CommunityTab = () => {
     sendDirectMessage,
     subscribeToDirectMessages,
     subscribeToCircle,
-    updateProfile
+    updateProfile,
+    markMessagesAsRead
   } = useUser();
   
   // Check subscription status
   const isPaid = userData?.subscription === 'paid';
   const subscriptionType = userData?.subscription || 'free';
 
+  const [showAddFriend, setShowAddFriend] = useState(false);
   const [friendUsername, setFriendUsername] = useState('');
   const [friendError, setFriendError] = useState('');
   const [friendSuccess, setFriendSuccess] = useState('');
-  const [showAddFriend, setShowAddFriend] = useState(false);
   const [showNewCircle, setShowNewCircle] = useState(false);
+  const [showConfirmRemoveFriend, setShowConfirmRemoveFriend] = useState(false);
+  const [friendToRemove, setFriendToRemove] = useState(null);
+  const [isRemovingFriend, setIsRemovingFriend] = useState(false);
   const [circleName, setCircleName] = useState('');
   const [circleDesc, setCircleDesc] = useState('');
   const [circleError, setCircleError] = useState('');
@@ -1095,6 +1103,10 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
     if (!result.success) {
       setFriendError(result.error || 'Failed to accept request');
       setTimeout(() => setFriendError(''), 3000);
+    } else {
+      // Show success notification
+      setFriendSuccess('Friend request accepted!');
+      setTimeout(() => setFriendSuccess(''), 3000);
     }
   };
 
@@ -1108,16 +1120,28 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
     }
   };
 
-  const handleRemoveFriend = async (friendId) => {
-    const result = await removeFriend(friendId);
-    if (!result.success) {
+  const handleRemoveFriend = async () => {
+    if (!friendToRemove) return;
+    
+    setIsRemovingFriend(true);
+    const result = await removeFriend(friendToRemove.uid);
+    setIsRemovingFriend(false);
+    
+    if (result.success) {
+      setShowConfirmRemoveFriend(false);
+      setFriendToRemove(null);
+    } else {
       setFriendError(result.error || 'Failed to remove friend');
       setTimeout(() => setFriendError(''), 3000);
     }
   };
 
-  const handleOpenFriendChat = (friend) => {
+  const handleOpenFriendChat = async (friend) => {
     setIsTransitioningCommunity(true);
+    
+    // Mark messages as read
+    await markMessagesAsRead(friend.uid);
+    
     setTimeout(() => {
       setSelectedFriend(friend);
       setLoadingMessages(true);
@@ -1131,12 +1155,13 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
     e.preventDefault();
     if (!messageText.trim() || !selectedFriend) return;
 
-    const result = await sendDirectMessage(selectedFriend.uid, messageText);
-    if (result.success) {
-      setMessageText('');
-      // Real-time listener will update messages automatically
-    } else {
+    const messageToSend = messageText.trim();
+    setMessageText(''); // Clear immediately for better UX
+    
+    const result = await sendDirectMessage(selectedFriend.uid, messageToSend);
+    if (!result.success) {
       setFriendError('Failed to send message');
+      setMessageText(messageToSend); // Restore message on failure
     }
   };
 
@@ -1144,12 +1169,13 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
     e.preventDefault();
     if (!circleMessageText.trim() || !selectedCircle) return;
 
-    const result = await sendCircleMessage(selectedCircle, circleMessageText);
-    if (result.success) {
-      setCircleMessageText('');
-      // Real-time listener will update messages automatically
-    } else {
+    const messageToSend = circleMessageText.trim();
+    setCircleMessageText(''); // Clear immediately for better UX
+    
+    const result = await sendCircleMessage(selectedCircle, messageToSend);
+    if (!result.success) {
       setFriendError('Failed to send message');
+      setCircleMessageText(messageToSend); // Restore message on failure
     }
   };
 
@@ -1722,10 +1748,20 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
       <div className="bg-white rounded-3xl shadow-lg p-8 border-4 border-purple-200">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
-            <img src="/assets/Friends.png" alt="friends" className="w-16 h-16 object-contain" />
+            <div className="relative">
+              <img src="/assets/Friends.png" alt="friends" className="w-16 h-16 object-contain" />
+              {unreadMessages > 0 && (
+                <div className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center text-xs font-black border-2 border-white animate-pulse">
+                  {unreadMessages > 9 ? '9+' : unreadMessages}
+                </div>
+              )}
+            </div>
             <div>
               <h3 className="text-3xl font-black text-gray-900">Your Friends</h3>
               <p className="text-sm text-gray-600 font-semibold">{localFriends.length} friend{localFriends.length !== 1 ? 's' : ''}</p>
+              {unreadMessages > 0 && (
+                <p className="text-xs text-red-600 font-black mt-1">{unreadMessages} unread message{unreadMessages !== 1 ? 's' : ''}</p>
+              )}
             </div>
           </div>
           <button
@@ -1758,18 +1794,35 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
     <div key={friend.uid} className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border-3 border-purple-300 hover:shadow-lg transition">
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
-          <h4 className="text-xl font-black text-gray-900">@{friend.username}</h4>
+          <div className="flex items-center gap-2">
+            <h4 className="text-xl font-black text-gray-900">@{friend.username}</h4>
+            {(friend.unreadCount || 0) > 0 && (
+              <div className="bg-red-500 text-white rounded-full px-2 py-0.5 text-xs font-black min-w-[20px] text-center animate-pulse">
+                {friend.unreadCount > 9 ? '9+' : friend.unreadCount}
+              </div>
+            )}
+          </div>
           <p className="text-sm text-gray-700 font-semibold">{friend.name}</p>
           {friend.childName && (
             <p className="text-xs text-gray-600 mt-2 font-semibold">👶 {friend.childName}</p>
           )}
         </div>
-        <div className="w-16 h-16 rounded-full overflow-hidden border-3 border-purple-400 bg-white flex items-center justify-center flex-shrink-0">
-          <img 
-            src={`/assets/${friend.profilePicture || 'profile1.png'}`}
-            alt={friend.username}
-            className="w-full h-full object-cover"
-          />
+        <div className="w-16 h-16 rounded-full overflow-hidden border-3 border-purple-400 bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center flex-shrink-0">
+          {friend.profilePicture ? (
+            <img 
+              src={friend.profilePicture}
+              alt={friend.username}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.style.display = 'none';
+              }}
+            />
+          ) : (
+            <span className="text-2xl font-black text-purple-600">
+              {friend.username?.charAt(0).toUpperCase()}
+            </span>
+          )}
         </div>
       </div>
 
@@ -1782,7 +1835,10 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
           Message
         </button>
         <button
-          onClick={() => handleRemoveFriend(friend.uid)}
+          onClick={() => {
+            setFriendToRemove(friend);
+            setShowConfirmRemoveFriend(true);
+          }}
           className="bg-red-100 hover:bg-red-200 text-red-600 font-black px-4 py-3 rounded-xl transition"
           title="Remove friend"
         >
@@ -1799,10 +1855,20 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
       <div className="bg-white rounded-3xl shadow-lg p-8 border-4 border-blue-200">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
-<img src="/assets/Circles.png" alt="circles" className="w-16 h-16 object-contain" />
+            <div className="relative">
+              <img src="/assets/Circles.png" alt="circles" className="w-16 h-16 object-contain" />
+              {unreadCircleMessages > 0 && (
+                <div className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center text-xs font-black border-2 border-white animate-pulse">
+                  {unreadCircleMessages > 9 ? '9+' : unreadCircleMessages}
+                </div>
+              )}
+            </div>
             <div>
               <h3 className="text-3xl font-black text-gray-900">Learning Circles</h3>
               <p className="text-sm text-gray-600 font-semibold">{localCircles.length} circle{localCircles.length !== 1 ? 's' : ''}</p>
+              {unreadCircleMessages > 0 && (
+                <p className="text-xs text-red-600 font-black mt-1">{unreadCircleMessages} unread message{unreadCircleMessages !== 1 ? 's' : ''}</p>
+              )}
             </div>
           </div>
           <button
@@ -1879,7 +1945,7 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
                 <p className="text-gray-600 font-semibold">{friendSuccess}</p>
               </div>
             ) : (
-              <form onSubmit={handleAddFriend} className="space-y-4">
+              <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-black text-gray-700 mb-3">Friend's Username</label>
                   <div className="flex items-center border-3 border-purple-200 rounded-2xl overflow-hidden focus-within:ring-4 focus-within:ring-purple-300">
@@ -1920,15 +1986,66 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
                     Cancel
                   </button>
                   <button
-                    type="submit"
-                    className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 hover:shadow-lg text-white font-black py-3 rounded-xl transition flex items-center justify-center gap-2 transform hover:scale-105"
+                    type="button"
+                    onClick={handleAddFriend}
+                    disabled={!friendUsername.trim()}
+                    className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 hover:shadow-lg text-white font-black py-3 rounded-xl transition flex items-center justify-center gap-2 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   >
                     <Send size={18} />
                     Send Request
                   </button>
                 </div>
-              </form>
+              </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Remove Friend Confirmation Modal */}
+      {showConfirmRemoveFriend && friendToRemove && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 backdrop-blur-sm animate-fadeIn">
+          <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 border-4 border-red-200">
+            <div className="text-center mb-6">
+              <div className="bg-red-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <X className="text-red-600" size={40} />
+              </div>
+              <h2 className="text-2xl font-black text-gray-900 mb-3">
+                Remove Friend?
+              </h2>
+              <p className="text-gray-700 font-semibold mb-2">
+                Are you sure you want to remove <span className="font-black">@{friendToRemove.username}</span> from your friends list?
+              </p>
+              <p className="text-sm text-gray-600">
+                You can always send them a new friend request later.
+              </p>
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setShowConfirmRemoveFriend(false);
+                  setFriendToRemove(null);
+                }}
+                disabled={isRemovingFriend}
+                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-black py-3 rounded-xl transition disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleRemoveFriend}
+                disabled={isRemovingFriend}
+                className="flex-1 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-black py-3 rounded-xl transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              >
+                {isRemovingFriend ? (
+                  <>Processing...</>
+                ) : (
+                  <>
+                    <X size={18} />
+                    Remove Friend
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -2098,77 +2215,6 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
         <p className="text-gray-700 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
           Your mainActivity book in {currentPhaseInfo?.name} is where the real magic happens. These enrichment activities are just for fun—use them when they fit, skip them when they don't. No pressure, no guilt!
         </p>
-      </div>
-    </div>
-  );
-
-  // MODALS
-  const AddFriendModal = () => (
-    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 border-4 border-purple-200">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">Invite a Friend</h2>
-          <button
-            onClick={() => {
-              setShowAddFriend(false);
-              setFriendEmail('');
-              setAddFriendError('');
-              setAddFriendSuccess('');
-            }}
-            className="text-gray-500 hover:text-gray-700"
-          >
-            <X size={28} />
-          </button>
-        </div>
-
-        {addFriendSuccess ? (
-          <div className="text-center py-8">
-            <div className="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Check className="text-green-600" size={40} />
-            </div>
-            <p className="text-lg font-bold text-gray-900 mb-2">Request Sent!</p>
-            <p className="text-gray-600">{addFriendSuccess}</p>
-          </div>
-        ) : (
-          <form onSubmit={handleAddFriend} className="space-y-4">
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Friend's Email</label>
-              <input
-                type="email"
-                value={friendEmail}
-                onChange={(e) => setFriendEmail(e.target.value)}
-                placeholder="their@email.com"
-                className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent"
-              />
-              {addFriendError && <p className="text-red-600 text-sm font-semibold mt-2">{addFriendError}</p>}
-            </div>
-
-            <p className="text-sm text-gray-600 bg-blue-50 rounded-lg p-3 border border-blue-200">
-              They'll receive a friend request and can accept or decline.
-            </p>
-
-            <div className="flex gap-3 pt-2">
-              <button
-                type="button"
-                onClick={() => {
-                  setShowAddFriend(false);
-                  setFriendEmail('');
-                  setAddFriendError('');
-                }}
-                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 rounded-lg transition"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:shadow-lg text-white font-bold py-3 rounded-lg transition flex items-center justify-center gap-2"
-              >
-                <Send size={18} />
-                Send Request
-              </button>
-            </div>
-          </form>
-        )}
       </div>
     </div>
   );
@@ -2599,21 +2645,34 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
       <div className="bg-white shadow-xl border-b-4 border-purple-200 sticky top-[64px] sm:top-[88px] z-30">
         <div className="max-w-6xl mx-auto px-2 sm:px-4">
           <div className="flex gap-1 sm:gap-2 overflow-x-auto scrollbar-hide">
-{tabs.map((tab) => (
+{tabs.map((tab) => {
+              const notificationCount = tab.id === 'community' 
+                ? (friendRequests?.length || 0) + unreadMessages + unreadCircleMessages 
+                : 0;
+              
+              return (
               <button
                 key={tab.id}
                 onClick={() => handleTabChange(tab.id)}
-                className={`flex flex-col sm:flex-row items-center gap-1 sm:gap-3 px-3 sm:px-6 py-2 sm:py-4 font-black transition-all whitespace-nowrap transform hover:scale-105 text-xs sm:text-base ${
+                className={`flex flex-col sm:flex-row items-center gap-1 sm:gap-3 px-3 sm:px-6 py-2 sm:py-4 font-black transition-all whitespace-nowrap transform hover:scale-105 text-xs sm:text-base relative ${
                   activeTab === tab.id
                     ? 'text-purple-600 border-b-4 border-purple-600 bg-gradient-to-t from-purple-100 to-pink-50'
                     : 'text-gray-600 hover:text-purple-600 hover:bg-gradient-to-t hover:from-purple-50 hover:to-transparent'
                 }`}
               >
-                <img src={tab.icon} alt={tab.label} className="w-8 h-8 sm:w-12 sm:h-12 drop-shadow-md" />
+                <div className="relative">
+                  <img src={tab.icon} alt={tab.label} className="w-8 h-8 sm:w-12 sm:h-12 drop-shadow-md" />
+                  {notificationCount > 0 && (
+                    <div className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center text-[10px] sm:text-xs font-black border-2 border-white animate-pulse">
+                      {notificationCount > 9 ? '9+' : notificationCount}
+                    </div>
+                  )}
+                </div>
                 <span className="hidden sm:inline">{tab.label}</span>
                 <span className="sm:hidden text-[10px]">{tab.label.split(' ')[0]}</span>
               </button>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
@@ -2629,8 +2688,6 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
         </div>
       </div>
 
-{/* Modals */}
-      {showAddFriend && <AddFriendModal />}
       {showNewCircle && <CreateCircleModal />}
       
 <style>{`
