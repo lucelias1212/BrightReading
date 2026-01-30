@@ -25,6 +25,8 @@ const [activeTab, setActiveTab] = useState(location.state?.activeTab || 'home');
   const [newCircleDesc, setNewCircleDesc] = useState('');
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [unreadCircleMessages, setUnreadCircleMessages] = useState(0);
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
+  const [successToastMessage, setSuccessToastMessage] = useState('');
 
   const userName = user?.email?.split('@')[0] || "Parent";
   
@@ -105,7 +107,11 @@ const [activeTab, setActiveTab] = useState(location.state?.activeTab || 'home');
   };
 
   const handleAcceptFriend = async (requesterId) => {
-    await acceptFriendRequest(requesterId);
+    const result = await acceptFriendRequest(requesterId);
+    if (result.success) {
+      setSuccessToastMessage('Friend request accepted! 🎉');
+      setShowSuccessToast(true);
+    }
   };
 
   const handleCreateCircle = async (e) => {
@@ -189,6 +195,35 @@ const [activeTab, setActiveTab] = useState(location.state?.activeTab || 'home');
   ];
 
   const currentPhaseInfo = phases.find(p => p.id === currentPhase);
+
+  // Success Toast Notification
+  const SuccessToast = ({ message, onClose }) => {
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        onClose();
+      }, 3000);
+      return () => clearTimeout(timer);
+    }, [onClose]);
+
+    return (
+      <div className="fixed top-24 right-4 sm:right-8 z-[200] animate-fadeIn">
+        <div className="bg-gradient-to-r from-green-500 to-teal-500 text-white px-6 py-4 rounded-2xl shadow-2xl border-3 border-white flex items-center gap-3 max-w-sm">
+          <div className="bg-white/30 p-2 rounded-full">
+            <Check size={24} />
+          </div>
+          <div>
+            <p className="font-black text-lg">{message}</p>
+          </div>
+          <button
+            onClick={onClose}
+            className="ml-2 text-white/80 hover:text-white transition"
+          >
+            <X size={20} />
+          </button>
+        </div>
+      </div>
+    );
+  };
 
 // HOME TAB
 const HomeTab = () => {
@@ -1074,27 +1109,33 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
   // ==================== FULL COMMUNITY TAB FOR PAID USERS ====================
 
   const handleAddFriend = async (e) => {
-    e.preventDefault();
-    setFriendError('');
-    setFriendSuccess('');
+  e.preventDefault();
+  setFriendError('');
+  setFriendSuccess('');
 
-    if (!friendUsername.trim()) {
-      setFriendError('Please enter a username');
-      return;
-    }
+  if (!friendUsername.trim()) {
+    setFriendError('Please enter a username');
+    return;
+  }
 
-    const result = await sendFriendRequest(friendUsername);
-    if (result.success) {
-      setFriendSuccess(`Friend request sent to @${friendUsername}!`);
-      setFriendUsername('');
-      setTimeout(() => {
-        setShowAddFriend(false);  
-        setFriendSuccess('');
-      }, 2000);
-    } else {
-      setFriendError(result.error || 'Failed to send request');
-    }
-  };
+  const result = await sendFriendRequest(friendUsername);
+  if (result.success) {
+    setFriendSuccess(`Friend request sent to @${friendUsername}!`);
+    setFriendUsername('');
+    
+    // Show toast notification
+    setSuccessToastMessage(`Friend request sent to @${friendUsername}!`);
+    setShowSuccessToast(true);
+    
+    // Close modal after a short delay
+    setTimeout(() => {
+      setShowAddFriend(false);
+      setFriendSuccess('');
+    }, 1500);
+  } else {
+    setFriendError(result.error || 'Failed to send request');
+  }
+};
 
   const handleAcceptFriend = async (requesterId) => {
     setAcceptingId(requesterId);
@@ -1104,9 +1145,9 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
       setFriendError(result.error || 'Failed to accept request');
       setTimeout(() => setFriendError(''), 3000);
     } else {
-      // Show success notification
-      setFriendSuccess('Friend request accepted!');
-      setTimeout(() => setFriendSuccess(''), 3000);
+      // Show success toast
+      setSuccessToastMessage('Friend request accepted! 🎉');
+      setShowSuccessToast(true);
     }
   };
 
@@ -1810,13 +1851,9 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
         <div className="w-16 h-16 rounded-full overflow-hidden border-3 border-purple-400 bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center flex-shrink-0">
           {friend.profilePicture ? (
             <img 
-              src={friend.profilePicture}
+              src={`/assets/${friend.profilePicture}`}
               alt={friend.username}
               className="w-full h-full object-cover"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.style.display = 'none';
-              }}
             />
           ) : (
             <span className="text-2xl font-black text-purple-600">
@@ -2620,6 +2657,14 @@ const [showShareAchievement, setShowShareAchievement] = useState(false);
 
       {/* Welcome Tour */}
       {showWelcomeTour && <WelcomeTour />}
+      
+      {/* Success Toast */}
+      {showSuccessToast && (
+        <SuccessToast 
+          message={successToastMessage}
+          onClose={() => setShowSuccessToast(false)}
+        />
+      )}
 
       {/* Navigation Bar */}
       <nav className="bg-white shadow-xl border-b-4 border-purple-200 p-3 sm:p-4 sticky top-0 z-20">

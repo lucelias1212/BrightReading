@@ -341,10 +341,24 @@ const defaultData = {
     }
 
     try {
+      // Check if blocked
       if (userData.blockedUsers?.includes(friendUsername.toLowerCase())) {
         return { success: false, error: 'You have blocked this user' };
       }
 
+      // FIRST: Check your own friends list and sent requests from current userData
+      const currentFriends = userData.friends || [];
+      const currentSentRequests = userData.sentFriendRequests || [];
+      
+      if (currentFriends.some(f => f.username?.toLowerCase() === friendUsername.toLowerCase())) {
+        return { success: false, error: 'Already friends' };
+      }
+      
+      if (currentSentRequests.some(r => r.username?.toLowerCase() === friendUsername.toLowerCase())) {
+        return { success: false, error: 'Request already sent' };
+      }
+
+      // THEN: Query Firebase for the friend
       const usersRef = collection(db, 'users');
       const q = query(usersRef, where('username', '==', friendUsername.toLowerCase()));
       const querySnapshot = await getDocs(q);
@@ -357,6 +371,7 @@ const defaultData = {
       const friendId = friendDoc.id;
       const friendData = friendDoc.data();
 
+      // Double-check from Firebase data
       if (friendData.friends?.some(f => f.uid === user.uid)) {
         return { success: false, error: 'Already friends' };
       }
@@ -369,6 +384,7 @@ const defaultData = {
         return { success: false, error: 'This user is not accepting requests from you' };
       }
       
+      // Add to recipient's friend requests
       await updateDoc(doc(db, 'users', friendId), {
         friendRequests: arrayUnion({
           from: user.uid,
@@ -376,14 +392,17 @@ const defaultData = {
           email: user.email,
           name: userData.parentName || userData.username,
           childName: userData.childName || null,
+          profilePicture: userData.profilePicture || null,
           sentAt: new Date().toISOString()
         })
       });
       
+      // Add to sender's sent requests
       await updateDoc(doc(db, 'users', user.uid), {
         sentFriendRequests: arrayUnion({
           to: friendId,
           username: friendUsername.toLowerCase(),
+          name: friendData.parentName || friendData.username,
           sentAt: new Date().toISOString()
         })
       });
@@ -399,12 +418,23 @@ const defaultData = {
     if (!user || !userData) return { success: false };
 
     try {
+      console.log('Starting acceptFriendRequest for requesterId:', requesterId);
+      console.log('Current user ID:', user.uid);
+      
       const requesterDoc = await getDoc(doc(db, 'users', requesterId));
-      if (!requesterDoc.exists()) return { success: false, error: 'User not found' };
+      if (!requesterDoc.exists()) {
+        console.error('Requester document does not exist');
+        return { success: false, error: 'User not found' };
+      }
       
       const requesterData = requesterDoc.data();
+      console.log('Requester data:', requesterData);
+      
       const requestToRemove = userData.friendRequests.find(r => r.from === requesterId);
+      console.log('Request to remove:', requestToRemove);
+      
       const sentRequestToRemove = requesterData.sentFriendRequests?.find(r => r.to === user.uid);
+      console.log('Sent request to remove:', sentRequestToRemove);
       
       // Add requester to current user's friends list
       const addRequesterFriend = {
@@ -412,7 +442,7 @@ const defaultData = {
         username: requesterData.username || '',
         email: requesterData.email || '',
         name: requesterData.parentName || requesterData.username || '',
-        profilePicture: requesterData.profilePicture || null,
+        profilePicture: requesterData.profilePicture || 'Bobby Bear.png',
         childName: requesterData.childName || null,
         addedAt: new Date().toISOString(),
         unreadCount: 0
@@ -424,26 +454,83 @@ const defaultData = {
         username: userData.username || '',
         email: userData.email || '',
         name: userData.parentName || userData.username || '',
-        profilePicture: userData.profilePicture || null,
+        profilePicture: userData.profilePicture || 'Bobby Bear.png',
         childName: userData.childName || null,
         addedAt: new Date().toISOString(),
         unreadCount: 0
       };
       
-      // Update both users' friend lists simultaneously
-      await updateDoc(doc(db, 'users', user.uid), {
-        friends: arrayUnion(addRequesterFriend),
-        friendRequests: arrayRemove(requestToRemove)
-      });
+      console.log('Adding to current user friends:', addRequesterFriend);
+      console.log('Adding to requester friends:', addCurrentUserFriend);
       
-      await updateDoc(doc(db, 'users', requesterId), {
-        friends: arrayUnion(addCurrentUserFriend),
-        sentFriendRequests: arrayRemove(sentRequestToRemove)
+      // OPTIMISTIC UPDATE - Update local state immediately
+      const optimisticUserData = {
+        ...userData,
+        friends: [...(userData.friends || []), addRequesterFriend],
+        friendRequests: (userData.friendRequests || []).filter(r => r.from !== requesterId)
+      };
+      setUserData(optimisticUserData);
+      console.log('✨ Optimistic update applied - friends list should update NOW');
+      
+      // Fetch current data to avoid conflicts
+      const currentUserDoc = await getDoc(doc(db, 'users', user.uid));
+      const currentUserData = currentUserDoc.data();
+      const currentFriends = currentUserData.friends || [];
+      const currentRequests = currentUserData.friendRequests || [];
+      
+      const requesterCurrentDoc = await getDoc(doc(db, 'users', requesterId));
+      const requesterCurrentData = requesterCurrentDoc.data();
+      const requesterFriends = requesterCurrentData.friends || [];
+      const requesterSentRequests = requesterCurrentData.sentFriendRequests || [];
+      
+      // Update current user (person accepting the request)
+      const updatedCurrentFriends = [...currentFriends, addRequesterFriend];
+      const updatedCurrentRequests = currentRequests.filter(r => r.from !== requesterId);
+      
+      await updateDoc(doc(db, 'users', user.uid), {
+        friends: updatedCurrentFriends,
+        friendRequests: updatedCurrentRequests
       });
+      console.log('Updated current user document');
+      
+      // Update requester (person who sent the request)
+      const updatedRequesterFriends = [...requesterFriends, addCurrentUserFriend];
+      const updatedRequesterSentRequests = requesterSentRequests.filter(r => r.to !== user.uid);
+      
+      try {
+        await updateDoc(doc(db, 'users', requesterId), {
+          friends: updatedRequesterFriends,
+          sentFriendRequests: updatedRequesterSentRequests
+        });
+        console.log('Updated requester document successfully');
+      } catch (requesterUpdateError) {
+        console.error('FAILED to update requester document:', requesterUpdateError);
+        console.error('Error code:', requesterUpdateError.code);
+        console.error('Error message:', requesterUpdateError.message);
+        
+        // Rollback optimistic update
+        setUserData(userData);
+        
+        return { success: false, error: 'Failed to complete friend connection: ' + requesterUpdateError.message };
+      }
+      
+      // Verify the updates
+      const verifyRequesterDoc = await getDoc(doc(db, 'users', requesterId));
+      const verifyRequesterData = verifyRequesterDoc.data();
+      console.log('Verified requester friends after update:', verifyRequesterData.friends);
+      
+      const verifyCurrentDoc = await getDoc(doc(db, 'users', user.uid));
+      const verifyCurrentData = verifyCurrentDoc.data();
+      console.log('Verified current user friends after update:', verifyCurrentData.friends);
       
       return { success: true };
     } catch (error) {
       console.error('Accept friend request error:', error);
+      console.error('Error details:', error.message);
+      
+      // Rollback optimistic update on error
+      setUserData(userData);
+      
       return { success: false, error: 'Failed to accept request' };
     }
   }, [user, userData]);
@@ -479,10 +566,20 @@ const defaultData = {
     if (!user || !userData) return { success: false };
 
     try {
+      // Re-fetch current user data to ensure we have latest friends list
+      const currentUserDoc = await getDoc(doc(db, 'users', user.uid));
+      if (!currentUserDoc.exists()) return { success: false };
+      
+      const currentUserData = currentUserDoc.data();
+      const friendToRemove = currentUserData.friends?.find(f => f.uid === friendId);
+      
+      if (!friendToRemove) {
+        return { success: false, error: 'Not in friends list' };
+      }
+
       const friendDoc = await getDoc(doc(db, 'users', friendId));
       if (!friendDoc.exists()) return { success: false };
 
-      const friendToRemove = userData.friends.find(f => f.uid === friendId);
       const friendsFromOtherSide = friendDoc.data().friends?.find(f => f.uid === user.uid);
 
       await updateDoc(doc(db, 'users', user.uid), {
@@ -719,7 +816,7 @@ const defaultData = {
               if (f.uid === user.uid) {
                 return {
                   ...f,
-                  profilePicture: profileData.profilePicture !== undefined ? profileData.profilePicture : f.profilePicture,
+                  profilePicture: profileData.profilePicture !== undefined ? profileData.profilePicture : (f.profilePicture || 'Bobby Bear.png'),
                   name: profileData.parentName || f.name
                 };
               }
